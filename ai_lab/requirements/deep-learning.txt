@@ -1,0 +1,2 @@
+-r lab.txt
+tensorflow-cpu==2.18.1

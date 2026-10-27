@@ -1,0 +1,9 @@
+{
+  "title": "AI Lab",
+  "subtitle": "Machine Learning e Deep Learning con Python",
+  "description": "Dai primi modelli al tuo progetto di intelligenza artificiale. Un laboratorio pratico, in italiano, per la scuola superiore.",
+  "teacher": "Prof. Davide Daffonchio",
+  "repository": "https://github.com/prof-davidaffo/kaggle-learntools",
+  "site_url": "https://prof-davidaffo.github.io/kaggle-learntools/",
+  "base_path": "/kaggle-learntools/"
+}

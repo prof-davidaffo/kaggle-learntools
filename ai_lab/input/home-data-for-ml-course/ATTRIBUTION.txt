@@ -1,0 +1,5 @@
+Ames Housing dataset compiled by Dean De Cock; Kaggle Learn competition by Dan Becker.
+https://www.kaggle.com/competitions/home-data-for-ml-course/data
+License: not embedded in the downloaded ZIP; consult the original source
+https://www.kaggle.com/competitions/home-data-for-ml-course/data
+Dataset terms are separate from the Apache-2.0 code license.

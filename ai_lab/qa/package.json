@@ -1,0 +1,6 @@
+{
+  "name": "ai-lab-ui-checks",
+  "private": true,
+  "scripts": {"check": "node check-ui.cjs"},
+  "devDependencies": {"jsdom": "30.1.1"}
+}

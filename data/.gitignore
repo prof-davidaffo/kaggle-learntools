@@ -1,0 +1,2 @@
+# Preserve downloaded source archives locally; version only the required extracted CSVs.
+*.zip

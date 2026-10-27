@@ -1,0 +1,544 @@
+@@ tut1:0
+# Benvenuti nel deep learning
+In questo corso Kaggle imparerai a costruire le prime reti neurali profonde con Keras e TensorFlow:
+
+* Definire un'architettura **fully connected**, completamente connessa.
+* Affrontare **regressione** e **classificazione**.
+* Addestrare con la **discesa stocastica del gradiente**, o SGD.
+* Migliorare il modello con **dropout**, **batch normalization** e altre tecniche.
+
+I tutorial presentano esempi svolti; negli esercizi applicherai i concetti a dataset reali.
+
+# Che cos'è il deep learning?
+Traduzione automatica, riconoscimento delle immagini e gioco sono ambiti nei quali il deep learning ha raggiunto risultati notevoli, talvolta paragonabili o superiori a quelli umani in compiti specifici.
+
+Il **deep learning** è un approccio al machine learning basato su sequenze profonde di trasformazioni. Questa profondità consente di rappresentare relazioni complesse e gerarchiche nei dati. Le **reti neurali** sono il modello più comune: ogni neurone esegue un calcolo semplice; la capacità complessiva nasce dalle connessioni fra molti neuroni.
+
+# L'unità lineare
+Partiamo da un neurone, o **unità**, con un solo ingresso.
+
+![Unità lineare con peso e bias](https://storage.googleapis.com/kaggle-media/learn/images/mfOlDR6.png)
+
+L'ingresso è `x`, il **peso** della connessione è `w`: il contributo ricevuto è `w * x`. La rete apprende modificando i pesi.
+
+Il **bias**, `b`, è un parametro senza un dato di ingresso associato. Nel disegno è collegato a un valore costante 1, perché `1 * b = b`. Permette di spostare l'uscita indipendentemente dall'ingresso.
+
+Sommando i contributi otteniamo l'uscita **\(y=wx+b\)**. Riconosci la formula? È l'equazione di una retta: `w` è il coefficiente angolare e `b` l'intercetta.
+@@ tut1:1
+# Esempio: un neurone come modello
+Un singolo neurone può fornire una **baseline**, un modello semplice di riferimento. È un modello lineare.
+
+Nel dataset [80 Cereals](https://www.kaggle.com/crawford/80-cereals), immaginiamo di prevedere `calories` dalle quantità di zucchero `sugars`. Con `b=90` e `w=2.5`, per una porzione con 5 grammi di zucchero otteniamo:
+
+\[
+calories = 2.5 \times 5 + 90 = 102.5
+\]
+
+![Calcolo dell'uscita](https://storage.googleapis.com/kaggle-media/learn/images/yjsfFvY.png)
+
+# Più ingressi
+Possiamo aggiungere fibre e proteine creando una connessione per ciascuna feature. Moltiplichiamo ogni ingresso per il suo peso, poi sommiamo tutto insieme al bias.
+
+![Unità con tre ingressi e bias](https://storage.googleapis.com/kaggle-media/learn/images/vyXSnlZ.png)
+
+\[
+y=w_0x_0+w_1x_1+w_2x_2+b
+\]
+
+Con due ingressi il modello rappresenta un piano; con più ingressi, un iperpiano.
+
+# Unità lineari in Keras
+**`keras.Sequential`** costruisce una rete come sequenza di layer, cioè strati. Un layer **Dense**, che approfondiremo nella prossima lezione, permette di definire un modello con tre ingressi (`sugars`, `fiber`, `protein`) e un'uscita (`calories`):
+@@ tut1:3
+**`units`** indica il numero di uscite: qui `units=1` perché prevediamo soltanto le calorie. **`input_shape=[3]`** indica tre feature per esempio. Il modello è pronto per l'addestramento.
+
+Perché una lista per `input_shape`? Con dati tabellari la forma di un esempio è `[num_columns]`. Per dati più complessi servono più dimensioni: un'immagine può avere forma `[height, width, channels]`.
+
+Ora **[definisci un modello lineare](#$NEXT_NOTEBOOK_URL$)** per *Red Wine Quality*.
+@@ tut2:0
+# Introduzione
+Come si costruisce una rete capace di apprendere relazioni complesse? La chiave è la **modularità**: combinare unità semplici per ottenere una trasformazione complessa.
+
+# Layer
+I neuroni sono organizzati in **strati**. Un gruppo di unità lineari che riceve gli stessi ingressi forma un layer **Dense**, completamente connesso.
+
+![Due unità dense collegate agli ingressi e al bias](https://storage.googleapis.com/kaggle-media/learn/images/2MA4iMV.png)
+
+Ogni strato esegue una trasformazione relativamente semplice. Una sequenza profonda combina le trasformazioni, avvicinando progressivamente gli ingressi all'uscita desiderata.
+
+In Keras un layer può rappresentare molte operazioni: connessioni [convoluzionali](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D) o [ricorrenti](https://www.tensorflow.org/api_docs/python/tf/keras/layers/RNN), trasformazioni delle feature come [Embedding](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Embedding), oppure [semplici somme](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Add). Esplora il [catalogo dei layer](https://www.tensorflow.org/api_docs/python/tf/keras/layers).
+
+# Funzioni di attivazione
+Due layer lineari consecutivi restano equivalenti a una trasformazione lineare: non bastano a rappresentare curve. Serve una **non linearità**, introdotta dalla funzione di attivazione applicata alle uscite del layer.
+
+![Relazioni lineari e non lineari](https://storage.googleapis.com/kaggle-media/learn/images/OLSUEYT.png)
+
+Una funzione molto comune è il rettificatore **\(\max(0,x)\)**: lascia invariati i valori positivi e porta a zero quelli negativi.
+
+![Grafico del rettificatore](https://storage.googleapis.com/kaggle-media/learn/images/aeIyAlF.png)
+
+Applicato a un'unità lineare produce una **ReLU**, *Rectified Linear Unit*: l'uscita è **`max(0, w * x + b)`**. La «piega» del grafico permette di uscire dal mondo delle sole rette.
+
+![Unità ReLU](https://storage.googleapis.com/kaggle-media/learn/images/eFry7Yu.png)
+@@ tut2:1
+# Sovrapporre layer Dense
+Con le attivazioni non lineari possiamo costruire trasformazioni complesse.
+
+![Ingressi, layer nascosti e uscita](https://storage.googleapis.com/kaggle-media/learn/images/Y5iwFQZ.png)
+
+Gli strati prima dell'uscita si chiamano **hidden layer**, o strati nascosti, perché le loro uscite non sono direttamente il risultato finale.
+
+Qui l'ultimo layer è lineare, senza attivazione: è adatto alla regressione, nella quale prevediamo un valore numerico. La classificazione può richiedere un'attivazione diversa in uscita.
+
+## Modelli Sequential
+`Sequential` collega i layer nell'ordine della lista: il primo riceve i dati e l'ultimo produce l'uscita. Il codice seguente costruisce la rete della figura.
+@@ tut2:3
+Passa i layer come un'unica lista, **`[layer, layer, ...]`**, non come argomenti separati. Specifica il nome dell'attivazione nell'argomento **`activation`**.
+
+Ora **[costruisci una rete profonda](#$NEXT_NOTEBOOK_URL$)** per il dataset *Concrete*.
+@@ tut3:0
+# Introduzione
+Hai imparato a costruire reti dense. All'inizio i pesi sono casuali: la rete non ha ancora appreso relazioni. **Addestrarla** significa modificarli per trasformare le feature nei target attesi.
+
+Nel dataset dei cereali, per esempio, vogliamo prevedere le calorie da zuccheri, fibre e proteine. Dopo un buon addestramento i pesi rappresentano una relazione ricavata dai dati. Oltre agli esempi di training servono:
+
+* Una **loss function**, che misura l'errore.
+* Un **optimizer**, che decide come aggiornare i pesi.
+
+# La funzione di perdita
+L'architettura stabilisce come calcolare l'uscita; la **loss** indica quale problema risolvere, confrontando previsione e target reale.
+
+Per problemi di **regressione**, come calorie, qualità del vino, prezzo di una casa o consumo di un'auto, una scelta comune è il **MAE**: per ogni esempio calcoliamo `abs(y_true - y_pred)` e poi facciamo la media.
+
+![Distanze fra punti e previsione](https://storage.googleapis.com/kaggle-media/learn/images/VDcvkZN.png)
+
+Altre loss per la regressione sono **MSE**, errore quadratico medio, e **Huber**. Durante l'addestramento cerchiamo pesi che riducano la loss: essa definisce l'obiettivo della rete.
+
+# L'ottimizzatore: discesa stocastica del gradiente
+L'**optimizer** è l'algoritmo che aggiorna i pesi per minimizzare la loss. Molti algoritmi di deep learning appartengono alla famiglia della **stochastic gradient descent**, SGD. Ogni passo:
+
+1. Seleziona un gruppo di esempi e calcola le previsioni.
+2. Misura la loss rispetto ai target.
+3. Aggiorna i pesi in una direzione che tende a ridurre la loss.
+
+Ripetiamo finché il risultato è soddisfacente o non migliora più.
+
+![Addestramento batch dopo batch](https://storage.googleapis.com/kaggle-media/learn/images/rFI1tIk.gif)
+
+Il gruppo di esempi è un **minibatch**, spesso chiamato semplicemente *batch*. Un passaggio completo sui dati è un'**epoca**, o *epoch*. Nell'animazione i punti chiari rappresentano tutti i dati e quelli scuri il batch corrente. SGD aggiorna la pendenza `w` e l'intercetta `b`; progressivamente la retta si adatta e la loss diminuisce.
+
+## Learning rate e batch size
+Il **learning rate** controlla l'ampiezza degli aggiornamenti. Un valore piccolo richiede in genere più passi per convergere. Il learning rate e il numero di esempi per batch influenzano tempi, oscillazioni e risultato del training; la loro interazione va esplorata.
+
+**Adam** è un ottimizzatore della famiglia SGD con adattamento del passo, spesso una buona scelta iniziale senza una ricerca estesa dei parametri.
+
+## Aggiungere loss e optimizer
+Dopo la definizione del modello usiamo `compile`:
+
+```python
+model.compile(optimizer="adam", loss="mae")
+```
+
+Le stringhe identificano implementazioni Keras. Per regolare i parametri puoi anche creare gli oggetti dell'API; qui bastano i valori predefiniti.
+
+Il **gradiente** è il vettore delle derivate e indica la direzione di aumento più rapido della loss. La **discesa** procede in senso opposto verso un minimo. **Stocastica** richiama la casualità nel campionamento dei minibatch.
+@@ tut3:1
+# Esempio: qualità del vino rosso
+Il dataset **Red Wine Quality** contiene misure fisico-chimiche di circa 1.600 vini portoghesi e valutazioni ottenute con degustazioni alla cieca. Quanto possiamo prevedere la qualità percepita dalle misure?
+
+La cella seguente prepara i dati. Nell'esempio originale le feature vengono riportate nell'intervallo **\([0,1]\)**: le reti tendono a funzionare meglio con ingressi su scale confrontabili. Approfondiremo nella lezione 5.
+@@ tut3:3
+Quanti ingressi servono? Conta le colonne della matrice delle feature, **escludendo il target `quality`**.
+@@ tut3:5
+Undici colonne significano undici ingressi. La rete proposta ha tre strati nascosti e più di 1.500 neuroni: può apprendere relazioni articolate.
+@@ tut3:7
+L'architettura va scelta con un processo di confronto: parti semplice e usa la **validation loss** come guida. Dopo aver definito il modello aggiungiamo optimizer e loss con `compile`.
+@@ tut3:9
+Il training usa **256 righe per batch** e **10 epoche**, cioè dieci passaggi completi sul dataset.
+@@ tut3:11
+Keras mostra la loss durante l'esecuzione. Per interpretarla è utile un grafico. `fit` restituisce un oggetto **History**, che conserva le misure: convertiamole in un DataFrame pandas per disegnarle.
+@@ tut3:13
+La loss tende ad appiattirsi. Una curva quasi orizzontale indica che, con la configurazione corrente, ulteriori epoche potrebbero offrire pochi benefici: valuta anche il comportamento sui dati di validazione.
+@@ tut3:14
+Ora **[addestra una rete con SGD](#$NEXT_NOTEBOOK_URL$)**.
+@@ tut4:0
+# Introduzione
+Keras registra loss di training e validazione durante le epoche. Impareremo a interpretare queste **learning curve**, riconoscere underfitting e overfitting e correggerli.
+
+# Interpretare le curve
+Possiamo distinguere nei dati **segnale** e **rumore**. Il segnale comprende relazioni che si ripetono e aiutano a generalizzare; il rumore comprende fluttuazioni e associazioni occasionali specifiche del campione.
+
+L'addestramento minimizza la loss sul training set. Per valutare il modello servono dati nuovi: ripassa la [validazione](https://www.kaggle.com/dansbecker/model-validation) se necessario. Disegniamo quindi entrambe le curve, epoca per epoca.
+
+![Loss di training e validazione](https://storage.googleapis.com/kaggle-media/learn/images/tHiVFnM.png)
+
+La training loss può diminuire sia apprendendo segnale sia memorizzando rumore. La validation loss tende invece a migliorare quando il modello apprende relazioni trasferibili. Un divario crescente fra le curve può segnalare overfitting.
+
+Vorremmo apprendere tutto il segnale senza rumore, ma nella pratica cerchiamo un compromesso. Finché i benefici prevalgono, la validation loss scende; quando il rumore domina può risalire.
+
+![Underfitting e overfitting](https://storage.googleapis.com/kaggle-media/learn/images/eUF6mfo.png)
+
+**Underfitting** significa non aver appreso abbastanza relazioni utili; **overfitting** significa essersi adattati troppo a particolarità del training. Conta la capacità di generalizzare, non soltanto una bassa training loss.
+
+# Capacità del modello
+La **capacity** indica quanto complesse siano le relazioni rappresentabili. Dipende dal numero di neuroni e dalle connessioni. Se il modello è troppo semplice, prova ad aumentarla:
+
+* Più **largo**: più unità per strato.
+* Più **profondo**: più strati.
+
+La scelta dipende dai dati. Il tutorial associa maggiore larghezza a relazioni più lineari e maggiore profondità a composizioni non lineari; non è una regola universale.
+
+```python
+model = keras.Sequential([
+    layers.Dense(16, activation='relu'),
+    layers.Dense(1),
+])
+wider = keras.Sequential([
+    layers.Dense(32, activation='relu'),
+    layers.Dense(1),
+])
+deeper = keras.Sequential([
+    layers.Dense(16, activation='relu'),
+    layers.Dense(16, activation='relu'),
+    layers.Dense(1),
+])
+```
+
+# Early stopping
+Possiamo interrompere il training quando la validation loss smette di migliorare. È l'**early stopping**.
+
+![Arresto vicino al minimo della validation loss](https://storage.googleapis.com/kaggle-media/learn/images/eP0gppr.png)
+
+Ripristinare i pesi del miglior risultato evita di conservare quelli delle ultime epoche, potenzialmente sovradattati. Possiamo impostare molte epoche e lasciare che il controllo fermi il training; riduciamo così anche il rischio di interromperlo troppo presto.
+
+## Callback in Keras
+Una **callback** viene eseguita in momenti prestabiliti del training. `EarlyStopping` controlla le misure alla fine di ogni epoca. Keras offre [callback già definite](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks) e permette [callback personalizzate](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LambdaCallback).
+@@ tut4:2
+I parametri significano: «Se per 20 epoche la validation loss non migliora di almeno 0,001, ferma il training e ripristina i pesi migliori». La tolleranza aiuta a non confondere normali oscillazioni dei batch con un peggioramento stabile.
+
+La callback si passa a **`fit`**. Continuiamo l'esempio sul vino: aumentiamo la capacità e aggiungiamo l'early stopping. Prima ripetiamo la preparazione dei dati.
+@@ tut4:4
+Aumentiamo la capacità con una rete piuttosto grande; la callback fermerà il training quando la validazione non migliorerà più.
+@@ tut4:6
+Passa la callback a **`fit`** dentro una lista: puoi usarne più di una. Imposta un massimo di epoche sufficientemente alto.
+@@ tut4:8
+Nell'esempio Keras termina prima delle 500 epoche previste.
+
+Ora **[prevedi la popolarità di un brano](#$NEXT_NOTEBOOK_URL$)** con il dataset *Spotify*.
+@@ tut5:0
+# Introduzione
+Il deep learning comprende molti layer oltre a Dense: alcuni collegano neuroni, altri trasformano o preparano i dati. Esplora il [catalogo Keras](https://www.tensorflow.org/api_docs/python/tf/keras/layers/). Qui studiamo due layer speciali: **Dropout** e **BatchNormalization**.
+
+# Dropout
+L'overfitting può dipendere da combinazioni molto specifiche di pesi che riconoscono particolarità del campione. Il **dropout** disattiva casualmente una frazione degli ingressi di un layer a ogni passo di training, rendendo più difficile affidarsi a queste combinazioni fragili.
+
+![Dropout casuale del 50% fra due layer](https://storage.googleapis.com/kaggle-media/learn/images/a86utxY.gif)
+
+La rete è spinta a trovare relazioni più robuste. Un'intuizione utile è considerarlo simile a un **ensemble** di reti più piccole: combinare modelli con errori diversi può migliorare la generalizzazione, come nelle random forest.
+
+## Aggiungerlo in Keras
+**`rate`** è la frazione disattivata. Posiziona Dropout prima del layer al quale vuoi fornire ingressi con dropout:
+
+```python
+keras.Sequential([
+    layers.Dropout(rate=0.3),
+    layers.Dense(16),
+])
+```
+
+# Batch normalization
+La **batch normalization**, o *batchnorm*, può rendere l'ottimizzazione più stabile e rapida. In generale conviene mettere le feature su scale confrontabili, per esempio con [StandardScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) o [MinMaxScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html). Attivazioni di grandezze molto diverse possono rendere instabili gli aggiornamenti.
+
+BatchNormalization normalizza le attivazioni di ciascun batch usando media e deviazione standard, poi applica uno spostamento e un riscalamento con parametri apprendibili. Agisce quindi dentro la rete. Spesso riduce le epoche necessarie e può aiutare un training che si blocca; talvolta migliora anche le previsioni.
+
+## Dove inserirla
+Puoi aggiungerla dopo un layer:
+
+```python
+layers.Dense(16, activation='relu'),
+layers.BatchNormalization(),
+```
+
+Oppure tra Dense e attivazione:
+
+```python
+layers.Dense(16),
+layers.BatchNormalization(),
+layers.Activation('relu'),
+```
+
+Come primo layer può svolgere una funzione di preprocessing adattivo. **Nota AI Lab:** non sostituisce automaticamente ogni trasformazione dei dati; durante la previsione usa statistiche accumulate nel training.
+
+# Esempio sul vino
+Aumentiamo ancora la capacità, con dropout per contenere l'overfitting e batchnorm per facilitare l'ottimizzazione. L'esempio non standardizza i dati in anticipo, per mostrare l'effetto stabilizzante di batchnorm.
+@@ tut5:2
+Quando aggiungi dropout, potrebbe essere necessario aumentare il numero di unità nei layer **Dense**.
+@@ tut5:4
+La procedura di configurazione dell'addestramento resta la stessa.
+@@ tut5:6
+Normalmente è comunque opportuno standardizzare gli ingressi. Il fatto che l'esempio possa usare dati grezzi mostra l'utilità della batch normalization in situazioni difficili.
+
+Ora **[migliora le previsioni su Spotify](#$NEXT_NOTEBOOK_URL$)** con dropout e sperimenta batch normalization.
+@@ tut6:0
+# Introduzione
+Le reti possono risolvere anche problemi di **classificazione**. Gran parte di quanto hai studiato resta valido; cambiano soprattutto loss e uscita finale.
+
+# Classificazione binaria
+Acquisto sì/no, frode sì/no, presenza o assenza di un segnale sono esempi di classificazione in due classi. Le etichette testuali, come `Yes`/`No` o `Dog`/`Cat`, vengono codificate con **0** e **1**.
+
+# Accuracy e cross-entropy
+L'**accuracy** è la frazione di previsioni corrette:
+
+```text
+accuracy = number_correct / total
+```
+
+Vale 1 se tutte le risposte sono corrette. È particolarmente interpretabile quando le classi hanno frequenze simili. Cambia però a salti quando cambia una decisione; SGD richiede una loss sulla quale calcolare gradienti utili.
+
+Usiamo quindi la **cross-entropy**, che confronta le probabilità previste con le etichette reali. Il testo originale la presenta come una distanza fra distribuzioni: è un'intuizione, non una distanza matematica simmetrica.
+
+![Accuracy e cross-entropy](https://storage.googleapis.com/kaggle-media/learn/images/DwVV9bR.png)
+
+Vorremmo assegnare probabilità alta alla classe corretta. Più bassa è tale probabilità, maggiore è la penalità. Per la classificazione useremo cross-entropy come loss e potremo monitorare anche accuracy. Migliorare la loss non garantisce a ogni epoca un aumento dell'accuracy.
+
+# Probabilità con la sigmoid
+Per trasformare un'uscita reale in un valore fra 0 e 1 aggiungiamo l'attivazione **sigmoid**.
+
+![Funzione sigmoid](https://storage.googleapis.com/kaggle-media/learn/images/FYbRvJo.png)
+
+Una **soglia** trasforma la probabilità in una classe: nel caso usuale 0,5, valori inferiori indicano classe 0 e quelli superiori classe 1. La [BinaryAccuracy di Keras](https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryAccuracy) usa una soglia configurabile, predefinita a 0,5; il comportamento esatto sul punto di soglia dipende dalla convenzione usata.
+
+# Esempio: ionosfera
+Il dataset [Ionosphere](https://archive.ics.uci.edu/ml/datasets/Ionosphere) descrive segnali radar diretti verso l'ionosfera. Il compito è distinguere segnali che mostrano una struttura da quelli che non la mostrano.
+@@ tut6:2
+Definiamo il modello come nella regressione, ma con **`activation='sigmoid'`** nell'ultimo layer, per ottenere una probabilità.
+@@ tut6:4
+Con **`compile`** aggiungi **`binary_crossentropy`**, **`binary_accuracy`** e l'ottimizzatore **Adam**. Le versioni binarie sono adatte a due classi; il caso multiclasse richiede altre scelte.
+@@ tut6:6
+Il problema può richiedere molte epoche: aggiungiamo una callback di early stopping.
+@@ tut6:8
+Esaminiamo le curve e i migliori valori di loss e accuracy sul validation set. Ricorda che l'early stopping ripristina i pesi migliori rispetto alla misura monitorata.
+@@ tut6:10
+Ora **[prevedi le cancellazioni alberghiere](#$NEXT_NOTEBOOK_URL$)** con il dataset *Hotel Cancellations*.
+@@ tut_tpus:0
+# Alla ricerca del bosone di Higgs
+Il Modello Standard descrive particelle e interazioni fondamentali. Il bosone di Higgs, collegato al meccanismo che dà massa alle particelle, fu ipotizzato nel 1964 e osservato nel 2012 al Large Hadron Collider, dopo decenni di ricerca. Gli esperimenti producono enormi quantità di dati.
+
+Qui il tutorial costruisce una rete **Wide and Deep** per classificare collisioni che possono aver prodotto un bosone di Higgs.
+
+# Dati delle collisioni
+Le collisioni ad alta energia possono creare particelle che decadono quasi subito. Se ne ricostruisce la presenza studiando i prodotti del decadimento. Il dataset *Higgs* contiene **21 feature di basso livello** e **7 feature derivate**.
+
+# Reti Wide and Deep
+Una rete di questo tipo affianca un ramo lineare a uno profondo di layer densi; può essere efficace sui dati tabellari.[^1] Dati e modello sono molto più grandi degli esempi precedenti: l'originale usa le [TPU di Kaggle](https://www.kaggle.com/docs/tpu).
+
+Gli iperparametri sono raccolti all'inizio per facilitare gli esperimenti. È conservato il [riferimento al notebook originale](https://www.kaggle.com/kernels/fork/12171965), senza dichiararne verificata l'esecuzione attuale.
+@@ tut_tpus:2
+Le sezioni seguenti configurano acceleratori, pipeline dei dati e modello. Se vuoi studiare solo i risultati, puoi andare alla parte finale.
+
+# Configurazione
+Oltre alle importazioni, viene creata una **distribution strategy** per dividere il lavoro sui core della TPU. Il tutorial si riferisce a una configurazione con otto core indipendenti.
+@@ tut_tpus:4
+Nella configurazione originale TensorFlow rileva otto acceleratori: il calcolo viene distribuito in modo simile a un sistema con più GPU.
+
+# Caricare i dati
+I dati sono codificati in **TFRecord**, un formato binario. Le funzioni seguenti decodificano i record e costruiscono un **`tf.data.Dataset`** utilizzabile nel training.
+@@ tut_tpus:8
+# Modello
+Il ramo profondo usa la **Functional API di Keras**, più flessibile di Sequential quando il modello ha più rami e collegamenti.
+@@ tut_tpus:10
+# Addestramento
+Usiamo **EarlyStopping** e una pianificazione del **learning rate**. Ridurre gradualmente il passo può aiutare i pesi ad assestarsi vicino a un minimo. La callback proposta moltiplica il learning rate per **0,2** quando la validation loss non migliora dopo un'epoca.
+@@ tut_tpus:14
+# Riferimenti
+
+* Baldi, P. e altri, *Searching for Exotic Particles in High-Energy Physics with Deep Learning* (2014), [articolo](https://arxiv.org/abs/1402.4735).
+* Cheng, H. e altri, *Wide & Deep Learning for Recommender Systems* (2016), [articolo](https://arxiv.org/abs/1606.07792).
+* *What Exactly is the Higgs Boson?*, Scientific American (1999), [articolo](https://www.scientificamerican.com/article/what-exactly-is-the-higgs/).
+
+[^1]: Nell'implementazione citata, le categorie erano codificate one-hot e incrociate per costruire interazioni nel ramo lineare; il ramo profondo usava rappresentazioni embedding.
+@@ ex1:0
+# Introduzione
+Le **unità lineari** sono i mattoni delle reti. Un modello con una sola unità rappresenta una funzione lineare, equivalente a una regressione lineare. In questo esercizio costruirai il modello e prenderai confidenza con Keras. Esegui la cella iniziale per configurare l'ambiente originale.
+@@ ex1:2
+Il dataset *Red Wine Quality* contiene misure fisico-chimiche di circa 1.600 vini rossi portoghesi e valutazioni di qualità ottenute alla cieca. Esegui la cella per vedere le prime righe.
+@@ ex1:4
+L'attributo **`shape`** restituisce numero di righe e colonne di un DataFrame o di un array NumPy.
+@@ ex1:6
+# 1. Forma dell'ingresso
+Quanto possiamo prevedere la qualità dalle misure? Il target è **`quality`**; le altre colonne sono feature. Quale valore assegneresti a **`input_shape`**?
+@@ ex1:12
+# 2. Definire un modello lineare
+Crea un modello adatto al problema. Controlla il numero di ingressi e di uscite.
+@@ ex1:18
+# 3. Esaminare i pesi
+Keras rappresenta i pesi con **tensori**, strutture simili agli array NumPy e adatte al calcolo con [GPU](https://www.kaggle.com/docs/efficient-gpu-usage) e [TPU](https://www.kaggle.com/docs/tpu). Le TPU sono progettate per operazioni sui tensori.
+
+I pesi si trovano nell'attributo **`weights`**, una lista di tensori. Recuperali dal modello. Per visualizzarli puoi usare:
+
+```python
+print("Weights\n{}\n\nBias\n{}".format(w, b))
+```
+@@ ex1:24
+Anche i dati sono rappresentati da tensori. **`input_shape=[3]`** indica un vettore di tre valori per esempio, come `[0.2, 0.4, 0.6]`.
+
+# Facoltativo: uscita di un modello non addestrato
+Fino alla lezione 5 affronteremo regressioni: cerchiamo una funzione che si adatti a target numerici. Con un'unità lineare questa funzione è una retta.
+
+I pesi iniziali sono casuali. Esegui più volte la cella seguente per vedere rette diverse. Non devi completare codice: è una dimostrazione.
+@@ ex1:26
+Aggiungi strati nascosti e **[rendi profondo il modello](#$NEXT_NOTEBOOK_URL$)** nella lezione 2.
+@@ ex2:0
+# Introduzione
+Abbiamo combinato layer in un modello **Sequential** e introdotto attivazioni non lineari. Costruirai una rete con più strati nascosti ed esplorerai attivazioni diverse da ReLU. Esegui la cella iniziale.
+@@ ex2:2
+Nel dataset **Concrete** devi prevedere la resistenza alla compressione del calcestruzzo a partire dalla composizione della miscela. Esegui la cella senza modificarla per caricare i dati.
+@@ ex2:4
+# 1. Forma dell'ingresso
+Il target è **`CompressiveStrength`**. Le altre colonne sono le feature: qual è la forma dell'ingresso?
+@@ ex2:10
+# 2. Modello con strati nascosti
+Crea tre strati nascosti con **512 unità** e attivazione **ReLU** ciascuno. Aggiungi un'uscita con una sola unità e nessuna attivazione. Nel codice originale la forma dell'ingresso si specifica nel primo layer.
+@@ ex2:18
+# 3. Layer di attivazione
+Di solito `activation` viene passato a Dense. Se vuoi inserire un altro layer fra Dense e l'attivazione, puoi separarle:
+
+```python
+layers.Dense(units=8),
+layers.Activation('relu'),
+```
+
+È equivalente a `layers.Dense(units=8, activation='relu')`. Riscrivi il modello proposto usando layer **Activation** separati. Vedrai un caso utile con batch normalization nella lezione 5.
+@@ ex2:25
+# Facoltativo: alternative a ReLU
+Keras offre `elu`, `selu`, `swish` e altre attivazioni. Su alcuni problemi una variante può funzionare meglio; ReLU resta un buon punto di partenza. Cambia il nome dell'attivazione nella cella seguente e osserva il grafico. Consulta la [documentazione](https://www.tensorflow.org/api_docs/python/tf/keras/activations) per altre opzioni.
+@@ ex2:27
+Passa alla lezione 3 e **[addestra le reti con SGD](#$NEXT_NOTEBOOK_URL$)**.
+@@ ex3:0
+# Introduzione
+Addestrerai una rete sul dataset **Fuel Economy** ed esplorerai gli effetti di learning rate e batch size. Esegui la cella di configurazione.
+@@ ex3:2
+Il compito è prevedere l'efficienza nei consumi di un'automobile da caratteristiche come motore e anno di produzione. Carica i dati con la cella seguente.
+@@ ex3:4
+Esamina i dati. Il target è **`FE`**; le altre colonne sono le feature.
+@@ ex3:6
+Esegui la cella per definire la rete proposta.
+@@ ex3:8
+# 1. Loss e optimizer
+Usa **`compile`** per aggiungere **Adam** e la loss **MAE**.
+@@ ex3:17
+# 2. Addestrare il modello
+Dopo la compilazione, addestra la rete per **200 epoche**, con **batch size 128**. Gli ingressi sono **`X`**, il target **`y`**.
+@@ ex3:22
+Esegui la cella seguente per disegnare la curva della training loss e valutare l'addestramento.
+@@ ex3:24
+# 3. Valutare il training
+Ti aspetti che aumentando ancora le epoche la loss diminuisca? Motiva leggendo la curva.
+@@ ex3:26
+Learning rate e batch size influenzano durata del training, oscillazioni delle curve e loss raggiunta. Per studiarli usiamo un modello con un peso e un bias, più facile da interpretare.
+
+La cella genera un'animazione simile a quella del tutorial. Modifica **`learning_rate`**, **`batch_size`** e **`num_examples`**, poi esegui. Potrebbe richiedere un po' di tempo. Prova queste combinazioni o scegline altre:
+
+| learning_rate | batch_size | num_examples |
+| --- | --- | --- |
+| 0.05 | 32 | 256 |
+| 0.05 | 2 | 256 |
+| 0.05 | 128 | 256 |
+| 0.02 | 32 | 256 |
+| 0.2 | 32 | 256 |
+| 1.0 | 32 | 256 |
+| 0.9 | 4096 | 8192 |
+| 0.99 | 4096 | 8192 |
+@@ ex3:28
+# 4. Learning rate e batch size
+Quali effetti hai osservato? Ragiona prima di leggere il commento proposto dalla cella successiva.
+@@ ex3:30
+Impara a **[migliorare le prestazioni](#$NEXT_NOTEBOOK_URL$)** modificando la capacità e aggiungendo early stopping.
+@@ ex4:0
+# Introduzione
+Migliorerai il training con una callback di **early stopping** per limitare l'overfitting. Esegui la cella iniziale.
+@@ ex4:2
+Carica il dataset **Spotify**. Il target è la popolarità di un brano, da prevedere usando feature audio come **`tempo`**, **`danceability`** e **`mode`**.
+@@ ex4:4
+Partiamo dalla rete più semplice, un modello lineare con capacità limitata. Esegui la cella senza modifiche per addestrarlo.
+@@ ex4:6
+Le curve possono scendere rapidamente all'inizio e poi appiattirsi, nascondendo le variazioni finali. Ridisegniamole a partire dall'epoca 10.
+@@ ex4:8
+# 1. Valutare la baseline
+Il modello mostra underfitting, overfitting o un equilibrio ragionevole? Usa entrambe le curve per rispondere.
+@@ ex4:10
+Aumentiamo la capacità con **tre layer nascosti da 128 unità**. Esegui la cella e osserva le curve.
+@@ ex4:12
+# 2. Aumentare la capacità
+Come interpreti ora le curve? Il modello è troppo semplice, si sovradatta oppure generalizza ragionevolmente?
+@@ ex4:14
+# 3. Definire EarlyStopping
+Crea una callback con **`patience=5`**, **`min_delta=0.001`** e **`restore_best_weights=True`**: deve aspettare cinque epoche senza miglioramenti sufficienti e recuperare i pesi migliori.
+@@ ex4:21
+Addestra il modello e disegna le curve. Osserva come la callback viene passata a **`model.fit`**.
+@@ ex4:23
+# 4. Addestrare e interpretare
+L'early stopping ha migliorato il risultato rispetto all'esecuzione senza arresto anticipato?
+@@ ex4:25
+Sperimenta con **`patience`** e **`min_delta`** e descrivi le differenze. Poi studia **[dropout e batch normalization](#$NEXT_NOTEBOOK_URL$)**.
+@@ ex5:0
+# Introduzione
+Aggiungerai dropout al modello Spotify e vedrai come batch normalization può facilitare il training su dati difficili. Esegui la cella iniziale.
+@@ ex5:2
+Carica il dataset **Spotify**.
+@@ ex5:4
+# 1. Aggiungere dropout
+Parti dal modello dell'esercizio 4. Inserisci un layer **Dropout** dopo Dense da **128 unità** e un altro dopo Dense da **64 unità**. Imposta **`rate=0.3`** in entrambi.
+@@ ex5:10
+Esegui il training per osservare l'effetto del dropout.
+@@ ex5:12
+# 2. Valutare il dropout
+Nell'esercizio 4 il modello tendeva a sovradattarsi intorno all'epoca 5. Il dropout sembra aver limitato il problema?
+@@ ex5:14
+Ora studiamo la batch normalization. Carica **Concrete** senza standardizzare: le differenze di scala renderanno più evidente l'effetto.
+@@ ex5:16
+Addestra la rete sui dati Concrete non standardizzati.
+@@ ex5:18
+Il grafico è vuoto o la loss molto alta? Nell'esempio questa configurazione spesso non converge; anche un'inizializzazione fortunata può dare risultati scarsi.
+
+# 3. Aggiungere batch normalization
+Inserisci **quattro layer BatchNormalization**, uno prima di ogni Dense. Sposta la forma dell'ingresso sul nuovo primo layer.
+@@ ex5:23
+Esegui la cella per verificare se ora il modello riesce ad addestrarsi.
+@@ ex5:25
+# 4. Valutare batch normalization
+Ha migliorato l'addestramento? Confronta i risultati e motiva la risposta.
+@@ ex5:27
+Prosegui con le **[reti per la classificazione binaria](#$NEXT_NOTEBOOK_URL$)**.
+@@ ex6:0
+# Introduzione
+Costruirai un classificatore binario per prevedere le cancellazioni di prenotazioni alberghiere.
+@@ ex6:2
+Carica il dataset **Hotel Cancellations**.
+@@ ex6:4
+# 1. Definire il modello
+Il modello usa batch normalization e dropout. Il disegno è diviso in blocchi per leggibilità; puoi definire i layer uno dopo l'altro.
+
+![Architettura: BatchNorm, Dense, BatchNorm, Dropout, Dense, BatchNorm, Dropout, Dense](https://storage.googleapis.com/kaggle-media/learn/images/V04o59Z.png)
+
+Riproduci l'architettura indicata.
+@@ ex6:9
+# 2. Optimizer, loss e metrica
+Compila il modello con **Adam**, **binary cross-entropy** e **binary accuracy**.
+@@ ex6:18
+Esegui il training e osserva le curve. Nell'ambiente originale potevano servire circa 60–70 epoche e uno o due minuti; la durata dipende dall'ambiente.
+@@ ex6:20
+# 3. Addestrare e valutare
+Le curve indicano underfitting oppure overfitting? La riduzione della cross-entropy è accompagnata da un miglioramento dell'accuracy?
+@@ ex6:22
+# Conclusione
+Hai completato il percorso introduttivo di Kaggle sul deep learning. Puoi approfondire computer vision e classificazione del sentiment.
+
+Il testo originale suggerisce queste competizioni introduttive:
+
+* [Petals to the Metal](https://www.kaggle.com/c/tpu-getting-started): immagini con TPU.
+* [I'm Something of a Painter Myself](https://www.kaggle.com/c/gan-getting-started): immagini con GAN.
+* [Real or Not? NLP with Disaster Tweets](https://www.kaggle.com/c/nlp-getting-started): classificazione di tweet.
+* [Contradictory, My Dear Watson](https://www.kaggle.com/c/contradictory-my-dear-watson): relazioni fra frasi.
+
+In AI Lab puoi invece proseguire con un progetto scolastico, dimensionato per risorse gratuite.

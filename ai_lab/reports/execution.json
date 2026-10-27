@@ -1,0 +1,103 @@
+{
+  "python": "3.14.8",
+  "mode": "python_cells",
+  "note": "python_cells executes every code cell in order with a fresh namespace per notebook; it does not test Jupyter UI or kernel integration.",
+  "results": [
+    {
+      "notebook": "01-primi-modelli.ipynb",
+      "mode": "python_cells",
+      "dependencies": [],
+      "status": "passed",
+      "output": "Training / validation / test: 144 48 48\nValidation MAE: 19811.545172296304\nPrediction for area=90, rooms=3: 257499.8547324489",
+      "seconds": 0.013
+    },
+    {
+      "notebook": "02-validazione.ipynb",
+      "mode": "python_cells",
+      "dependencies": [],
+      "status": "passed",
+      "output": "Training / validation / test: 144 48 48\nBaseline validation MAE: 67565.91904702067\n1 Training MAE: 37923.957710686125 Validation MAE: 36637.19920928426\n2 Training MAE: 25723.388046027103 Validation MAE: 25754.172384524973\n3 Training MAE: 19971.093919465795 Validation MAE: 19811.545172296304\n5 Training MAE: 11645.758564327647 Validation MAE: 15253.08700781083\n8 Training MAE: 10102.106700854958 Validation MAE: 15907.636888883157\nFinal test MAE: 19453.651122795047",
+      "seconds": 0.058
+    },
+    {
+      "notebook": "03-confronto-modelli.ipynb",
+      "mode": "python_cells",
+      "dependencies": [],
+      "status": "passed",
+      "output": "Training / validation / test: 144 48 48\nBaseline MAE: 67565.91904702067\nTree MAE: 15253.08700781083\nEnsemble MAE: 14256.80407738404",
+      "seconds": 0.197
+    },
+    {
+      "notebook": "04-reti-neurali.ipynb",
+      "mode": "python_cells",
+      "dependencies": [
+        "numpy"
+      ],
+      "status": "passed",
+      "output": "Training shape: (480, 2) Target shape: (480, 1)\nEpochs: 174 Test accuracy: 0.975\nInitial / final training loss: 0.6881753473669664 0.029406401544731516\nSaved learning-curve.svg",
+      "seconds": 0.247
+    },
+    {
+      "notebook": "05-tensorflow.ipynb",
+      "mode": "python_cells",
+      "dependencies": [
+        "numpy",
+        "tensorflow"
+      ],
+      "status": "not_run",
+      "reason": "Missing dependencies: tensorflow"
+    },
+    {
+      "notebook": "06-preparare-progetto.ipynb",
+      "mode": "python_cells",
+      "dependencies": [],
+      "status": "passed",
+      "output": "Synthetic examples: 600 Features: ['length', 'width']\ntrain Count: 360 Positive fraction: 0.5027777777777778\nvalidation Count: 120 Positive fraction: 0.55\ntest Count: 120 Positive fraction: 0.44166666666666665\nScaler fitted on training only: [4.797334189036791, 1.7316773205045655] [2.049018616268131, 0.953159605798614]",
+      "seconds": 0.003
+    },
+    {
+      "notebook": "07-progetto-riferimento.ipynb",
+      "mode": "python_cells",
+      "dependencies": [],
+      "status": "passed",
+      "output": "Synthetic examples: 600 Features: ['length', 'width']\nCross-entropy: 0.6931 -> 0.0662\nValidation accuracy: 0.9833333333333333\nValidation confusion matrix: [[53, 1], [1, 65]]\nBaseline test accuracy: 0.44166666666666665\nModel test accuracy: 0.9666666666666667\nTest confusion matrix (rows=true, columns=predicted): [[67, 0], [4, 49]]\nSaved reference-model.json and synthetic-flowers.csv\nNew example probability: 0.7045370869511655",
+      "seconds": 0.236
+    },
+    {
+      "notebook": "08-presentazione.ipynb",
+      "mode": "python_cells",
+      "dependencies": [],
+      "status": "passed",
+      "output": "Model: logistic_regression\nRecorded test accuracy: 0.9666666666666667",
+      "seconds": 0.0
+    },
+    {
+      "notebook": "progetto-cifre.ipynb",
+      "mode": "python_cells",
+      "dependencies": [
+        "sklearn"
+      ],
+      "status": "not_run",
+      "reason": "Missing dependencies: sklearn"
+    },
+    {
+      "notebook": "progetto-immagini.ipynb",
+      "mode": "python_cells",
+      "dependencies": [
+        "numpy",
+        "tensorflow"
+      ],
+      "status": "not_run",
+      "reason": "Missing dependencies: tensorflow"
+    },
+    {
+      "notebook": "progetto-sentiment.ipynb",
+      "mode": "python_cells",
+      "dependencies": [
+        "sklearn"
+      ],
+      "status": "not_run",
+      "reason": "Missing dependencies: sklearn"
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+[
+  {
+    "source": "notebooks/machine_learning/raw/tut1.ipynb",
+    "page": "corsi/machine_learning/tut1.html",
+    "notebook": "machine_learning-tut1.ipynb",
+    "markdown_cells": 1,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut2.ipynb",
+    "page": "corsi/machine_learning/tut2.html",
+    "notebook": "machine_learning-tut2.ipynb",
+    "markdown_cells": 3,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/ex2.ipynb",
+    "page": "corsi/machine_learning/ex2.html",
+    "notebook": "machine_learning-ex2.ipynb",
+    "markdown_cells": 4,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut3.ipynb",
+    "page": "corsi/machine_learning/tut3.html",
+    "notebook": "machine_learning-tut3.ipynb",
+    "markdown_cells": 9,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/ex3.ipynb",
+    "page": "corsi/machine_learning/ex3.html",
+    "notebook": "machine_learning-ex3.ipynb",
+    "markdown_cells": 8,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut4.ipynb",
+    "page": "corsi/machine_learning/tut4.html",
+    "notebook": "machine_learning-tut4.ipynb",
+    "markdown_cells": 5,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/ex4.ipynb",
+    "page": "corsi/machine_learning/ex4.html",
+    "notebook": "machine_learning-ex4.ipynb",
+    "markdown_cells": 7,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut5.ipynb",
+    "page": "corsi/machine_learning/tut5.html",
+    "notebook": "machine_learning-tut5.ipynb",
+    "markdown_cells": 4,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/ex5.ipynb",
+    "page": "corsi/machine_learning/ex5.html",
+    "notebook": "machine_learning-ex5.ipynb",
+    "markdown_cells": 5,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut6.ipynb",
+    "page": "corsi/machine_learning/tut6.html",
+    "notebook": "machine_learning-tut6.ipynb",
+    "markdown_cells": 3,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/ex6.ipynb",
+    "page": "corsi/machine_learning/ex6.html",
+    "notebook": "machine_learning-ex6.ipynb",
+    "markdown_cells": 4,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut7.ipynb",
+    "page": "corsi/machine_learning/tut7.html",
+    "notebook": "machine_learning-tut7.ipynb",
+    "markdown_cells": 1,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/ex7.ipynb",
+    "page": "corsi/machine_learning/ex7.html",
+    "notebook": "machine_learning-ex7.ipynb",
+    "markdown_cells": 7,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut_automl.ipynb",
+    "page": "corsi/machine_learning/tut_automl.html",
+    "notebook": "machine_learning-tut_automl.ipynb",
+    "markdown_cells": 7,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/ex_automl.ipynb",
+    "page": "corsi/machine_learning/ex_automl.html",
+    "notebook": "machine_learning-ex_automl.ipynb",
+    "markdown_cells": 4,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut_titanic.ipynb",
+    "page": "corsi/machine_learning/tut_titanic.html",
+    "notebook": "machine_learning-tut_titanic.ipynb",
+    "markdown_cells": 9,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/tut8.ipynb",
+    "page": "corsi/machine_learning/tut8.html",
+    "notebook": "machine_learning-tut8.ipynb",
+    "markdown_cells": 10,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/machine_learning/raw/ex8.ipynb",
+    "page": "corsi/machine_learning/ex8.html",
+    "notebook": "machine_learning-ex8.ipynb",
+    "markdown_cells": 8,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/tut1.ipynb",
+    "page": "corsi/deep_learning_intro/tut1.html",
+    "notebook": "deep_learning_intro-tut1.ipynb",
+    "markdown_cells": 3,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/ex1.ipynb",
+    "page": "corsi/deep_learning_intro/ex1.html",
+    "notebook": "deep_learning_intro-ex1.ipynb",
+    "markdown_cells": 8,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/tut2.ipynb",
+    "page": "corsi/deep_learning_intro/tut2.html",
+    "notebook": "deep_learning_intro-tut2.ipynb",
+    "markdown_cells": 3,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/ex2.ipynb",
+    "page": "corsi/deep_learning_intro/ex2.html",
+    "notebook": "deep_learning_intro-ex2.ipynb",
+    "markdown_cells": 7,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/tut3.ipynb",
+    "page": "corsi/deep_learning_intro/tut3.html",
+    "notebook": "deep_learning_intro-tut3.ipynb",
+    "markdown_cells": 9,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/ex3.ipynb",
+    "page": "corsi/deep_learning_intro/ex3.html",
+    "notebook": "deep_learning_intro-ex3.ipynb",
+    "markdown_cells": 11,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/tut4.ipynb",
+    "page": "corsi/deep_learning_intro/tut4.html",
+    "notebook": "deep_learning_intro-tut4.ipynb",
+    "markdown_cells": 5,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/ex4.ipynb",
+    "page": "corsi/deep_learning_intro/ex4.html",
+    "notebook": "deep_learning_intro-ex4.ipynb",
+    "markdown_cells": 11,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/tut5.ipynb",
+    "page": "corsi/deep_learning_intro/tut5.html",
+    "notebook": "deep_learning_intro-tut5.ipynb",
+    "markdown_cells": 4,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/ex5.ipynb",
+    "page": "corsi/deep_learning_intro/ex5.html",
+    "notebook": "deep_learning_intro-ex5.ipynb",
+    "markdown_cells": 11,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/tut6.ipynb",
+    "page": "corsi/deep_learning_intro/tut6.html",
+    "notebook": "deep_learning_intro-tut6.ipynb",
+    "markdown_cells": 6,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/ex6.ipynb",
+    "page": "corsi/deep_learning_intro/ex6.html",
+    "notebook": "deep_learning_intro-ex6.ipynb",
+    "markdown_cells": 7,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning_intro/raw/tut_tpus.ipynb",
+    "page": "corsi/deep_learning_intro/tut_tpus.html",
+    "notebook": "deep_learning_intro-tut_tpus.ipynb",
+    "markdown_cells": 6,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut1_intro.ipynb",
+    "page": "corsi/deep_learning/tut1_intro.html",
+    "notebook": "deep_learning-tut1_intro.ipynb",
+    "markdown_cells": 2,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/ex1_convolutions.ipynb",
+    "page": "corsi/deep_learning/ex1_convolutions.html",
+    "notebook": "deep_learning-ex1_convolutions.ipynb",
+    "markdown_cells": 6,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut2_building_models_from_convolutions.ipynb",
+    "page": "corsi/deep_learning/tut2_building_models_from_convolutions.html",
+    "notebook": "deep_learning-tut2_building_models_from_convolutions.ipynb",
+    "markdown_cells": 2,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut3_programming_tf_and_keras.ipynb",
+    "page": "corsi/deep_learning/tut3_programming_tf_and_keras.html",
+    "notebook": "deep_learning-tut3_programming_tf_and_keras.ipynb",
+    "markdown_cells": 6,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/ex3_programming_tf_and_keras.ipynb",
+    "page": "corsi/deep_learning/ex3_programming_tf_and_keras.html",
+    "notebook": "deep_learning-ex3_programming_tf_and_keras.ipynb",
+    "markdown_cells": 13,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut4_transfer_learning.ipynb",
+    "page": "corsi/deep_learning/tut4_transfer_learning.html",
+    "notebook": "deep_learning-tut4_transfer_learning.ipynb",
+    "markdown_cells": 6,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/ex4_transfer_learning.ipynb",
+    "page": "corsi/deep_learning/ex4_transfer_learning.html",
+    "notebook": "deep_learning-ex4_transfer_learning.ipynb",
+    "markdown_cells": 7,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut5_data_augmentation.ipynb",
+    "page": "corsi/deep_learning/tut5_data_augmentation.html",
+    "notebook": "deep_learning-tut5_data_augmentation.ipynb",
+    "markdown_cells": 4,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/ex5_data_augmentation.ipynb",
+    "page": "corsi/deep_learning/ex5_data_augmentation.html",
+    "notebook": "deep_learning-ex5_data_augmentation.ipynb",
+    "markdown_cells": 7,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut6_deep_understanding.ipynb",
+    "page": "corsi/deep_learning/tut6_deep_understanding.html",
+    "notebook": "deep_learning-tut6_deep_understanding.ipynb",
+    "markdown_cells": 2,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut7_dl_from_scratch.ipynb",
+    "page": "corsi/deep_learning/tut7_dl_from_scratch.html",
+    "notebook": "deep_learning-tut7_dl_from_scratch.ipynb",
+    "markdown_cells": 3,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/ex7_from_scratch.ipynb",
+    "page": "corsi/deep_learning/ex7_from_scratch.html",
+    "notebook": "deep_learning-ex7_from_scratch.ipynb",
+    "markdown_cells": 9,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut8_dropout_and_strides.ipynb",
+    "page": "corsi/deep_learning/tut8_dropout_and_strides.html",
+    "notebook": "deep_learning-tut8_dropout_and_strides.ipynb",
+    "markdown_cells": 3,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/ex8_dropout_strides.ipynb",
+    "page": "corsi/deep_learning/ex8_dropout_strides.html",
+    "notebook": "deep_learning-ex8_dropout_strides.ipynb",
+    "markdown_cells": 6,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/tut_tpus.ipynb",
+    "page": "corsi/deep_learning/tut_tpus.html",
+    "notebook": "deep_learning-tut_tpus.ipynb",
+    "markdown_cells": 26,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  },
+  {
+    "source": "notebooks/deep_learning/raw/ex_tpus.ipynb",
+    "page": "corsi/deep_learning/ex_tpus.html",
+    "notebook": "deep_learning-ex_tpus.ipynb",
+    "markdown_cells": 15,
+    "status": "translated_adaptation",
+    "execution": "not_verified"
+  }
+]

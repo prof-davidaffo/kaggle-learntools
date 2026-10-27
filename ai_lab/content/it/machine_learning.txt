@@ -1,0 +1,629 @@
+@@ tut1:0
+# Introduzione
+Cominciamo da come funzionano i modelli di machine learning e da come si usano. Se hai già esperienza di statistica o machine learning, alcuni passaggi ti sembreranno semplici: presto costruiremo modelli più potenti.
+
+Immagina questa situazione: tuo cugino ha guadagnato molto nel mercato immobiliare e ti propone di collaborare. Lui mette il capitale, tu costruisci modelli per prevedere il valore delle case. Dice di basarsi sull'intuito, ma interrogandolo scopri che riconosce schemi nei prezzi delle case già viste e li applica ai nuovi immobili.
+
+Il machine learning funziona in modo simile. Partiamo dal **decision tree**, l'albero decisionale. Esistono modelli più sofisticati, ma gli alberi sono comprensibili e costituiscono la base di tecniche molto efficaci.
+
+![Primo albero decisionale](https://storage.googleapis.com/kaggle-media/learn/images/7tsb5b1.png)
+
+L'albero più semplice divide le case in due categorie. Per una casa nuova, il prezzo previsto è il prezzo medio storico delle case della sua categoria. I dati determinano sia la divisione in gruppi sia il prezzo assegnato a ogni gruppo. Apprendere questi schemi significa **addestrare il modello**, in inglese *training* o *fitting*. I dati impiegati sono i **training data**.
+
+Rimandiamo i dettagli dell'algoritmo che sceglie le divisioni. Una volta addestrato, il modello può prevedere il prezzo di case nuove.
+
+# Migliorare l'albero
+Quale dei seguenti alberi potrebbe derivare più probabilmente da dati immobiliari reali?
+
+![Due alberi a confronto](https://storage.googleapis.com/kaggle-media/learn/images/prAjgku.png)
+
+Quello a sinistra è più plausibile: le case con più camere tendono a costare di più. Tuttavia ignora bagni, superficie del terreno, posizione e molti altri fattori.
+
+Possiamo considerare più caratteristiche con un albero **più profondo**, che effettua più divisioni, dette *split*. Aggiungendo la superficie del terreno potremmo ottenere questo albero:
+
+![Albero di profondità due](https://storage.googleapis.com/kaggle-media/learn/images/R3ywQsR.png)
+
+Per fare una previsione segui il percorso corrispondente alle caratteristiche della casa. Il nodo finale, che contiene la previsione, è una **foglia**, o *leaf*. Sia le divisioni sia i valori nelle foglie dipendono dai dati: ora è il momento di esaminarli.
+
+Prosegui con **[l'esplorazione dei dati](#$NEXT_NOTEBOOK_URL$)**.
+@@ tut2:0
+# Conoscere i dati con pandas
+Il primo passo di un progetto di machine learning è conoscere i dati. Useremo **pandas**, una libreria molto usata per esplorare e manipolare dati. Nel codice si abbrevia normalmente in `pd`, con questa importazione:
+@@ tut2:2
+La struttura principale di pandas è il **DataFrame**: una tabella simile a un foglio Excel o a una tabella SQL. pandas offre metodi per molte operazioni su questi dati.
+
+Studieremo i [prezzi delle case di Melbourne](https://www.kaggle.com/dansbecker/melbourne-housing-snapshot), in Australia. Negli esercizi applicherai lo stesso metodo ai prezzi delle case dell'Iowa.
+
+Il file dell'esempio è **`../input/melbourne-housing-snapshot/melb_data.csv`** nell'ambiente Kaggle. Carichiamolo ed esploriamolo:
+@@ tut2:4
+# Interpretare le statistiche descrittive
+Il risultato mostra otto statistiche per ogni colonna numerica. **count** conta le righe con un valore presente. I valori mancanti possono avere varie cause: per una casa con una sola camera, per esempio, la superficie della seconda camera non esiste. Torneremo sul problema.
+
+**mean** è la media; **std** è la deviazione standard e misura quanto i valori sono dispersi.
+
+Per capire **min**, **25%**, **50%**, **75%** e **max**, immagina di ordinare i valori dal più piccolo al più grande. `min` e `max` sono gli estremi. Il **25° percentile** si trova a un quarto della distribuzione: circa il 25% dei valori è inferiore e il 75% è superiore. Analogamente si interpretano il 50° percentile, cioè la mediana, e il 75° percentile.
+
+Passa al **[primo esercizio di programmazione](#$NEXT_NOTEBOOK_URL$)**.
+@@ tut3:0
+# Scegliere i dati per il modello
+Il dataset contiene troppe variabili per analizzarle tutte insieme o stamparle comodamente. Come ridurle a un insieme comprensibile?
+
+Per ora scegliamo poche variabili usando il ragionamento sul problema. In seguito potrai studiare tecniche statistiche per selezionarle automaticamente. Prima dobbiamo conoscere i nomi delle colonne: la proprietà **`columns`** del DataFrame li elenca nell'ultima riga del codice seguente.
+@@ tut3:3
+Esistono molti modi per selezionare dati; il [corso pandas](https://www.kaggle.com/learn/pandas) li approfondisce. Qui useremo:
+
+1. La notazione con il punto per selezionare il valore da prevedere.
+2. Una lista di colonne per selezionare le caratteristiche di ingresso.
+
+## Scegliere il target
+La notazione con il punto estrae una colonna come **Series**, una struttura simile a un DataFrame con una sola colonna. Il valore da prevedere è il **prediction target**, o semplicemente *target*. Per convenzione lo chiamiamo **`y`**. Selezioniamo i prezzi delle case di Melbourne:
+@@ tut3:5
+# Scegliere le feature
+Le colonne date in ingresso al modello sono le **feature**, cioè le caratteristiche utilizzate per prevedere il target. Qui sono i fattori che aiutano a stimare il prezzo di una casa. Talvolta si usano tutte le colonne tranne il target; in altri casi conviene usarne meno.
+
+Partiamo con poche feature. Più avanti confronteremo modelli con insiemi diversi. Per selezionare più colonne passiamo una lista di nomi tra parentesi quadre. Ogni nome è una stringa, quindi richiede le virgolette:
+@@ tut3:7
+Per convenzione chiamiamo questi dati **`X`**.
+@@ tut3:9
+Controlliamo i dati con `describe` e con `head`, che mostra le prime righe.
+@@ tut3:12
+L'ispezione dei dati è una parte importante del lavoro: spesso fa emergere anomalie da approfondire.
+@@ tut3:13
+# Costruire il modello
+Useremo **scikit-learn**, importata nel codice come **`sklearn`**, una libreria molto diffusa per modellare dati tabellari.
+
+Il procedimento è:
+
+* **Definire** il tipo di modello, per esempio un albero, e i suoi parametri.
+* **Addestrare**, con `fit`, per apprendere gli schemi dai dati.
+* **Prevedere**, con `predict`.
+* **Valutare** la qualità delle previsioni.
+
+Ecco come definire un albero e addestrarlo sulle feature e sul target:
+@@ tut3:15
+Molti algoritmi usano casualità durante l'addestramento. Impostare **`random_state`** rende riproducibile l'esecuzione: è una buona abitudine. Puoi scegliere un numero qualsiasi; non è una scelta che determina sistematicamente la qualità del modello.
+
+Ora abbiamo un modello addestrato. In pratica vorremmo usarlo su case nuove, delle quali non conosciamo il prezzo. Per capire come funziona `predict`, iniziamo dalle prime righe dei dati di training.
+@@ tut3:17
+Prova nell'**[esercizio sul primo modello](#$NEXT_NOTEBOOK_URL$)**.
+@@ tut4:0
+Hai costruito un modello. Ma quanto è valido? La **validazione** misura la qualità e permette di migliorare il modello attraverso esperimenti successivi.
+
+# Che cos'è la validazione?
+Quasi ogni modello va valutato. In molte applicazioni conta quanto le previsioni si avvicinano ai valori reali. Un errore frequente è confrontare previsioni e target sugli stessi dati usati per addestrare il modello. Tra poco vedremo perché è problematico.
+
+Prima serve una misura sintetica: confrontare a mano 10.000 prezzi previsti e reali sarebbe poco utile. Useremo il **Mean Absolute Error**, **MAE**, cioè l'errore assoluto medio. Per ogni casa:
+
+```text
+error = actual - predicted
+```
+
+Se il prezzo reale è 150.000 dollari e quello previsto è 100.000, l'errore è 50.000. Prendiamo il valore assoluto di ogni errore e poi la media. Il MAE si interpreta così:
+
+> Le nostre previsioni si discostano in media di circa X dal valore reale.
+
+Prima di calcolarlo ricostruiamo il modello nel codice seguente, nascosto nell'interfaccia originale di Kaggle.
+@@ tut4:2
+Con il modello pronto, calcoliamo l'errore assoluto medio:
+@@ tut4:4
+# Il problema dei risultati sui dati di training
+Il punteggio appena calcolato è **in-sample**: le stesse case servono per addestramento e valutazione.
+
+Immagina che nel mercato immobiliare il colore della porta non abbia alcun rapporto con il prezzo. Per caso, però, nel nostro campione tutte le case con una porta verde sono costose. Il modello individua questa associazione e assegna prezzi elevati alle case con porte verdi. Sui dati di training sembra accurato, ma su case nuove potrebbe sbagliare molto se l'associazione non si ripete.
+
+Il valore pratico di un modello dipende dalle previsioni su dati nuovi. Per misurarlo escludiamo una parte dei dati dall'addestramento e la usiamo per la valutazione. È il **validation set**, l'insieme di validazione.
+
+# Il codice
+La funzione `train_test_split` di scikit-learn divide i dati. Una parte serve per addestrare il modello, l'altra per calcolare `mean_absolute_error` su esempi mai visti durante il training:
+@@ tut4:6
+# Una differenza notevole
+Nell'esempio originale il MAE passa da circa 500 dollari sui dati di training a oltre 250.000 sui dati nuovi. È la differenza tra un modello apparentemente quasi perfetto e uno poco utile nella pratica. Il prezzo medio nel validation set è circa 1,1 milioni: l'errore è circa un quarto del prezzo medio.
+
+Possiamo migliorare il modello provando feature e algoritmi diversi. I risultati numerici dipendono dal dataset e dalla versione delle librerie.
+@@ tut4:7
+Prima di migliorare il modello, svolgi l'**[esercizio sulla validazione](#$NEXT_NOTEBOOK_URL$)**.
+@@ tut5:0
+In questa lezione imparerai a riconoscere **underfitting** e **overfitting** e a usare questi concetti per migliorare le previsioni.
+
+# Confrontare modelli diversi
+Ora che sai misurare la qualità, puoi sperimentare. La [documentazione di DecisionTreeRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html) elenca molti parametri. Fra i più importanti ci sono quelli che controllano la profondità, cioè il numero di divisioni lungo un percorso verso una foglia.
+
+![Albero poco profondo](https://storage.googleapis.com/kaggle-media/learn/images/R3ywQsR.png)
+
+Un albero può arrivare a dieci divisioni tra radice e foglia. Ogni livello può raddoppiare i gruppi: 2, 4, 8, fino a \(2^{10}=1024\) foglie. Più foglie significa meno case in ciascuna foglia.
+
+Con pochissime case per foglia, le previsioni possono essere molto vicine ai prezzi del training, ma poco affidabili sui dati nuovi. Questo è **overfitting**: il modello si adatta quasi perfettamente ai dati di addestramento, comprese particolarità che non si ripetono.
+
+Un albero troppo semplice, invece, distingue solo pochi gruppi molto eterogenei. Se divide tutte le case in due o quattro gruppi, può sbagliare anche sui dati di training. Questo è **underfitting**: non riesce a cogliere le relazioni importanti.
+
+Cerchiamo quindi la complessità che minimizza l'errore di validazione, il minimo della curva rossa:
+
+![Underfitting e overfitting](https://storage.googleapis.com/kaggle-media/learn/images/AXSEOfI.png)
+
+# Esempio
+Ci sono vari modi di controllare la profondità, anche consentendo percorsi diversi. **`max_leaf_nodes`** limita il numero di foglie. Aumentandolo ci spostiamo da modelli troppo semplici verso modelli che possono sovradattarsi. Usiamo una funzione per confrontare i MAE:
+@@ tut5:2
+Carichiamo i dati nelle variabili **`train_X`**, **`val_X`**, **`train_y`** e **`val_y`** con il procedimento già visto.
+@@ tut5:4
+Un ciclo `for` confronta i modelli con diversi valori di **`max_leaf_nodes`**.
+@@ tut5:6
+Fra i valori provati nell'esempio, il migliore è 500 foglie.
+
+# Riepilogo
+Un modello può soffrire di:
+
+* **Overfitting:** apprende associazioni occasionali che non si ripetono nei dati futuri.
+* **Underfitting:** non riesce a rappresentare relazioni rilevanti.
+
+La validazione usa dati esclusi dal training per confrontare più modelli e scegliere quello migliore.
+
+Ora prova a **[ottimizzare il modello costruito in precedenza](#$NEXT_NOTEBOOK_URL$)**.
+@@ tut6:0
+# Introduzione
+Gli alberi richiedono un compromesso: un albero profondo con tante foglie può sovradattarsi perché ogni previsione dipende da poche case; uno troppo semplice ignora differenze importanti.
+
+Anche tecniche più sofisticate affrontano questo problema. Una soluzione efficace è la **random forest**, una foresta di alberi casuali. Nella regressione la previsione è la media delle previsioni degli alberi. Spesso funziona meglio di un albero singolo anche con i parametri predefiniti. Esistono altri modelli molto efficaci, ma alcuni richiedono una regolazione più attenta.
+
+# Esempio
+Dopo il caricamento e la divisione dei dati disponiamo di:
+
+* `train_X`
+* `val_X`
+* `train_y`
+* `val_y`
+@@ tut6:2
+La costruzione è simile a quella dell'albero, ma usiamo **`RandomForestRegressor`** al posto di `DecisionTreeRegressor`.
+@@ tut6:4
+# Riepilogo
+Nell'esempio la random forest migliora sensibilmente rispetto al MAE di circa 250.000 dell'albero. Possiamo modificarne i parametri come abbiamo fatto per il numero di foglie, ma un vantaggio è che spesso funziona già bene senza una lunga ricerca.
+
+Prova una **[random forest nell'esercizio](#$NEXT_NOTEBOOK_URL$)** e confronta i risultati.
+@@ tut7:0
+Le competizioni di machine learning permettono di esercitarti, provare idee e misurare i progressi.
+
+Nel prossimo esercizio creerai previsioni per la [competizione sui prezzi delle case dedicata a Kaggle Learn](https://www.kaggle.com/c/home-data-for-ml-course).
+
+![Iscrizione alla competizione nell'interfaccia originale](https://storage.googleapis.com/kaggle-media/learn/images/axBzctl.png)
+
+Usa ciò che hai imparato per **[preparare un file di previsioni](#$NEXT_NOTEBOOK_URL$)**. L'invio richiede un account e l'accettazione delle regole della competizione.
+@@ tut8:0
+# Classificazione
+Finora hai previsto valori numerici: questa attività si chiama **regressione**, da cui il nome `RandomForestRegressor`.
+
+Un altro problema comune è scegliere fra esiti che si escludono a vicenda. Un filtro antispam, per esempio, decide se un messaggio è spam oppure no a partire dal contenuto. È un problema di **classificazione**.
+
+La classificazione può essere:
+
+* **Binaria**, con due classi.
+* **Multiclasse**, con più di due classi.
+
+Alcuni metodi differiscono tra i due casi, ma molti classificatori multiclasse funzionano anche con due classi. In scikit-learn possiamo usare **`RandomForestClassifier`** al posto del regressore.
+
+Nell'esempio prevediamo la fascia di prezzo di uno smartphone:
+
+* 0: economico.
+* 1: fascia media.
+* 2: costoso.
+* 3: molto costoso.
+
+Le feature includono `battery_power` (capacità della batteria in mAh), `blue` (Bluetooth), `clock_speed` (velocità del processore), `dual_sim`, `fc` (megapixel della fotocamera anteriore) e `four_g` (supporto 4G). Esaminiamo i dati:
+@@ tut8:3
+Prepariamo feature e target e dividiamo i dati con `train_test_split`, come abbiamo già fatto.
+@@ tut8:5
+Creazione e addestramento sono simili ai precedenti, ma qui usiamo `RandomForestClassifier`.
+@@ tut8:7
+La misura più semplice è l'**accuracy**, la frazione di previsioni corrette. Si calcola con `metrics.accuracy_score`.
+@@ tut8:9
+## Matrice di confusione
+Nell'esempio il modello indovina circa l'86% delle fasce di prezzo. Per capire gli errori usiamo la **confusion matrix**, che confronta classi reali e previste.
+@@ tut8:11
+Una rappresentazione grafica facilita la lettura:
+
+<img src="https://storage.googleapis.com/kaggle-media/learn/images/idD0k8y.png" alt="Matrice di confusione dell'esempio" width="400">
+
+Le righe corrispondono alle classi reali, le colonne a quelle previste. La diagonale conta le risposte corrette; le altre celle mostrano dove il modello si confonde.
+@@ tut8:12
+Nella seconda riga e prima colonna, quattro telefoni di fascia media, classe reale 1, sono stati classificati come economici, classe prevista 0. Le classi 0 e 3 superano il 90% di risposte corrette; il modello è meno efficace sulle fasce intermedie. Gli errori riguardano fasce adiacenti: non confonde telefoni economici con quelli più costosi.
+@@ tut8:13
+## Probabilità delle classi
+Molti classificatori stimano una distribuzione di probabilità sulle classi. `predict` restituisce la classe con probabilità più alta. A seconda delle conseguenze della decisione, però, questa scelta potrebbe non massimizzare il risultato utile. Per ottenere le probabilità usa **`predict_proba`**.
+@@ tut8:15
+Il risultato indica la probabilità assegnata a ogni classe. Se le decisioni hanno rendimenti diversi, il valore atteso dipende da probabilità e rendimento.
+
+Considera `[0.05, 0.17, 0.42, 0.36]`. Se la terza scelta rende 100 dollari e la quarta 150, i valori attesi sono rispettivamente \(0.42\times100=42\) e \(0.36\times150=54\) dollari. La terza scelta è più probabile, ma nel confronto proposto la quarta ha rendimento atteso maggiore.
+@@ tut8:16
+Prova l'**[esercizio sulla classificazione](#$NEXT_NOTEBOOK_URL$)**. Riutilizzerai gran parte di ciò che conosci per affrontare nuovi problemi.
+@@ ex2:0
+Questo esercizio verifica la capacità di leggere un file e interpretarne le statistiche. Nei prossimi esercizi filtrerai dati, costruirai un modello e lo migliorerai.
+
+Gli esempi usano Melbourne; tu applicherai gli stessi strumenti a un nuovo dataset sui prezzi delle case dell'Iowa.
+
+# Esercizi
+Esegui la cella seguente per inizializzare i controlli del tuo lavoro nell'ambiente Kaggle originale.
+@@ ex2:2
+## 1. Caricare i dati
+Leggi il file dell'Iowa in un DataFrame pandas chiamato **`home_data`**.
+@@ ex2:7
+## 2. Esaminare i dati
+Visualizza le statistiche descrittive con il comando studiato. Poi completa le variabili per rispondere alle domande riportate nel codice.
+@@ ex2:11
+## Ragionare sui dati
+La casa più recente del dataset non è molto nuova. Due possibili spiegazioni:
+
+1. Nella zona non sono state costruite case nuove.
+2. I dati sono stati raccolti molto tempo fa, quindi le case successive non compaiono.
+
+In che modo ciascuna spiegazione modifica la fiducia nel modello? Come potresti indagare quale sia più plausibile? Puoi confrontare le idee nella [discussione originale](https://www.kaggle.com/learn-forum/60581).
+
+#$KEEP_GOING$
+@@ ex3:0
+## Riprendiamo il lavoro
+Hai caricato ed esaminato i dati. Esegui la cella seguente per ricostruire l'ambiente al punto in cui eri arrivato.
+@@ ex3:2
+# Esercizi
+## 1. Scegliere il target
+Seleziona la colonna del prezzo di vendita e salvala in **`y`**. Stampa i nomi delle colonne per individuare quella corretta.
+@@ ex3:7
+## 2. Creare X
+Crea un DataFrame **`X`** con le feature. Prima prepara una lista con i nomi delle colonne, ricordando le virgolette:
+
+* `LotArea`
+* `YearBuilt`
+* `1stFlrSF`
+* `2ndFlrSF`
+* `FullBath`
+* `BedroomAbvGr`
+* `TotRmsAbvGrd`
+
+Usa la lista per selezionare il DataFrame da fornire al modello.
+@@ ex3:11
+## Controllare i dati
+Prima di costruire il modello, esamina **`X`** e verifica che il contenuto sia ragionevole.
+@@ ex3:13
+## 3. Definire e addestrare il modello
+Importa `DecisionTreeRegressor` da scikit-learn, crea un modello chiamato **`iowa_model`** e addestralo con **`X`** e **`y`**.
+@@ ex3:19
+## 4. Fare previsioni
+Chiama `predict` con **`X`** e salva il risultato in **`predictions`**.
+@@ ex3:23
+## Interpretare il risultato
+Usa `head` per confrontare le prime previsioni con i prezzi reali delle stesse case in **`y`**. Noti qualcosa di sorprendente?
+@@ ex3:25
+Quanto saranno affidabili queste previsioni su case nuove? Come possiamo migliorarle? Lo vedremo nel prossimo passaggio.
+
+#$KEEP_GOING$
+@@ ex4:0
+## Riprendiamo il lavoro
+Hai un modello: ora misurerai quanto funziona. Esegui la cella seguente per ripristinare l'ambiente dell'esercizio precedente.
+@@ ex4:2
+# Esercizi
+## 1. Dividere i dati
+Usa **`train_test_split`** con **`random_state=1`**, così i controlli originali possono verificare un risultato riproducibile. Le feature sono in **`X`** e il target in **`y`**.
+@@ ex4:7
+## 2. Definire e addestrare il modello
+Crea un **`DecisionTreeRegressor`** e addestralo sui dati di training. Anche nel modello imposta **`random_state=1`**.
+@@ ex4:11
+## 3. Prevedere sui dati di validazione
+@@ ex4:14
+Esamina le previsioni e i valori reali del validation set.
+@@ ex4:17
+Che differenza noti rispetto alle previsioni sui dati di training stampate nella prima cella? Ricordi perché i risultati possono differire? È un concetto fondamentale della lezione precedente.
+
+## 4. Calcolare il MAE sul validation set
+@@ ex4:21
+Il MAE ottenuto è buono? Non esiste una soglia valida per tutte le applicazioni. Vedrai come usarlo e migliorarlo nel passaggio successivo.
+
+#$KEEP_GOING$
+@@ ex5:0
+## Riprendiamo il lavoro
+Ora ottimizzerai la dimensione dell'albero per migliorare le previsioni. Esegui la cella seguente per ripristinare l'ambiente.
+@@ ex5:2
+# Esercizi
+Potresti scrivere da solo **`get_mae`**. Qui trovi già la funzione studiata nella lezione: esegui la cella.
+@@ ex5:4
+## 1. Confrontare dimensioni diverse
+Scrivi un ciclo sui valori proposti di **`max_leaf_nodes`**. Chiama `get_mae` per ciascun valore e conserva i risultati in modo da individuare il numero di foglie con il MAE più basso.
+@@ ex5:9
+## 2. Addestrare su tutti i dati
+Scelta la dimensione migliore, puoi addestrare il modello finale su tutti i dati disponibili mantenendo quel parametro. Nel procedimento originale, dopo aver concluso le scelte di modellazione, i dati di validazione vengono reintegrati nel training.
+
+**Nota didattica AI Lab:** per stimare in modo indipendente la prestazione finale, conserva anche un test set mai usato per scegliere i parametri.
+@@ ex5:13
+Hai migliorato il risultato, ma stai ancora usando un singolo albero. Nella prossima lezione proverai le random forest.
+
+#$KEEP_GOING$
+@@ ex6:0
+## Riprendiamo il lavoro
+Ecco il codice costruito finora.
+@@ ex6:2
+# Esercizi
+La data science non è sempre così immediata, ma in questo caso sostituire l'albero con una random forest è semplice e può migliorare il risultato.
+@@ ex6:3
+## 1. Usare una random forest
+@@ ex6:7
+Finora hai seguito istruzioni precise per imparare i concetti e costruire il primo modello. Ora puoi iniziare a sperimentare autonomamente. Le competizioni offrono occasioni per provare idee e affrontare un progetto completo.
+
+#$KEEP_GOING$
+@@ ex7:0
+# Introduzione
+Creerai previsioni per una competizione Kaggle. Poi potrai migliorare il modello, per esempio aggiungendo feature, e confrontare i risultati nella classifica.
+
+Esegui la cella seguente per impostare controlli e percorsi dei dataset nell'ambiente originale.
+@@ ex7:2
+Questo codice riprende il lavoro precedente: eseguilo nuovamente.
+@@ ex7:4
+# Addestrare un modello per la competizione
+La cella precedente usa **`train_X`** e **`train_y`**. Ora crea una random forest e addestrala su tutti i dati **`X`** e **`y`**, dopo aver concluso la scelta del modello.
+@@ ex7:6
+Leggi il file di test e usa il modello per generare le previsioni.
+@@ ex7:8
+Prima dell'invio verifica che **`test_preds`** abbia il formato previsto.
+@@ ex7:11
+# Generare il file di invio
+La cella seguente crea un CSV con le previsioni, nel formato richiesto dalla competizione.
+@@ ex7:13
+# Inviare le previsioni
+Apri la [competizione](https://www.kaggle.com/c/home-data-for-ml-course), iscriviti con **Join Competition** e accettane le regole.
+
+![Iscrizione nell'interfaccia originale](https://storage.googleapis.com/kaggle-media/learn/images/axBzctl.png)
+
+#$SUBMIT_TO_COMP$
+
+# Continuare a migliorare
+Sperimentare è un ottimo modo per imparare. Un possibile intervento è aggiungere feature modificando questa lista:
+
+```python
+features = ['LotArea', 'YearBuilt', '1stFlrSF', '2ndFlrSF', 'FullBath', 'BedroomAbvGr', 'TotRmsAbvGrd']
+```
+
+Alcune colonne provocano errori per valori mancanti o tipi non numerici. Nell'esempio originale puoi considerare queste colonne numeriche:
+
+`MSSubClass`, `LotArea`, `OverallQual`, `OverallCond`, `YearBuilt`, `YearRemodAdd`, `1stFlrSF`, `2ndFlrSF`, `LowQualFinSF`, `GrLivArea`, `FullBath`, `HalfBath`, `BedroomAbvGr`, `KitchenAbvGr`, `TotRmsAbvGrd`, `Fireplaces`, `WoodDeckSF`, `OpenPorchSF`, `EnclosedPorch`, `3SsnPorch`, `ScreenPorch`, `PoolArea`, `MiscVal`, `MoSold`, `YrSold`.
+
+Quali potrebbero influenzare il prezzo? Consulta la [descrizione dei dati](https://www.kaggle.com/c/home-data-for-ml-course/data). Dopo ogni modifica riesegui il codice, valuta il modello e genera un nuovo file.
+
+# Come proseguire
+Il corso [Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning) affronta dati mancanti, categorie e XGBoost. Il corso [pandas](https://www.kaggle.com/learn/pandas) approfondisce la manipolazione dei dati. Puoi anche passare a [Intro to Deep Learning](https://www.kaggle.com/learn/intro-to-deep-learning), dedicato alle reti neurali.
+@@ ex8:0
+# Esercizio: classificazione
+Addestrerai un classificatore per riconoscere segnali radio provenienti da una **pulsar**, una rara stella di neutroni. La rotazione porta periodicamente il fascio radio verso la Terra e poi altrove: questa periodicità aiuta a distinguere una pulsar dal rumore.
+
+Il dataset contiene otto misure del segnale e **`target_class`**, che vale 0 per il rumore e 1 per una pulsar. Userai queste misure per prevedere la classe.
+@@ ex8:2
+Carica i dati ed esamina le prime righe per conoscere le feature.
+@@ ex8:4
+Dividi i dati in training e validazione, come nei precedenti esercizi.
+@@ ex8:6
+## 1. Addestrare il classificatore
+Crea un **`RandomForestClassifier`** e addestralo sui dati di training.
+@@ ex8:10
+## 2. Fare previsioni
+Usa il modello sulle feature di validazione. Calcola l'accuracy confrontando le previsioni con i target mediante **`metrics.accuracy_score`**.
+@@ ex8:14
+## 3. Interpretare i risultati
+Calcola la matrice di confusione e la sua versione normalizzata per leggere proporzioni invece di soli conteggi.
+@@ ex8:17
+Il modello riconosce bene le pulsar? Scambia soprattutto rumore per pulsar oppure perde pulsar classificandole come rumore? Motiva la risposta con la matrice.
+@@ ex8:19
+## Classi sbilanciate
+Circa il 91% dei segnali è rumore. Se il rumore fosse il 99%, un'accuracy del 98% sarebbe ancora un buon risultato? Confrontala con la strategia che risponde sempre «rumore».
+@@ tut_automl:0
+# Introduzione
+Il machine learning comprende diversi passaggi. Lo schema seguente riprende i [sette passaggi descritti da Yufeng Guo](https://towardsdatascience.com/the-7-steps-of-machine-learning-2877d7e5548e):
+
+![Le fasi del machine learning](https://storage.googleapis.com/kaggle-media/learn/images/mqTCqBR.png)
+
+1. **Raccogliere i dati.** Nella pratica bisogna evitare problemi come il [target leakage](https://www.kaggle.com/alexisbcook/data-leakage); nelle competizioni i dati sono già forniti.
+2. **Preparare i dati.** Gestire [valori mancanti](https://www.kaggle.com/alexisbcook/missing-values) e [categorie](https://www.kaggle.com/alexisbcook/categorical-variables). Il [feature engineering](https://www.kaggle.com/learn/feature-engineering) ha un corso dedicato.
+3. **Scegliere un modello.** Le alternative sono molte; all'inizio conviene provare e costruire esperienza. Non esiste una regola universale. Puoi studiare anche [esempi di altri autori](https://www.kaggle.com/vbmokin/data-science-for-tabular-data-advanced-techniques).
+4. **Addestrare il modello.** Per esempio un [albero](https://www.kaggle.com/dansbecker/your-first-machine-learning-model) o una [random forest](https://www.kaggle.com/dansbecker/random-forests).
+5. **Valutarlo.** Usare un [validation set](https://www.kaggle.com/dansbecker/model-validation) per stimare il comportamento su dati nuovi.
+6. **Regolare i parametri.** Per esempio quelli di [XGBoost](https://www.kaggle.com/alexisbcook/xgboost).
+7. **Generare previsioni.** Utilizzare il modello ed eventualmente [inviare un risultato](https://www.kaggle.com/kernels/fork/1259198).
+
+I corsi introduttivo e intermedio approfondiscono queste attività. Per padroneggiarle servono tempo e pratica; gli strumenti di **automated machine learning**, o **AutoML**, possono automatizzarne una parte.
+@@ tut_automl:1
+# Machine learning automatizzato
+Il tutorial originale usa [Google Cloud AutoML Tables](https://cloud.google.com/automl-tables/docs/beginners-guide) per automatizzare i passaggi successivi alla raccolta dei dati già svolta da Kaggle.
+
+![Automazione del processo](https://storage.googleapis.com/kaggle-media/learn/images/5SekA3O.png)
+@@ tut_automl:2
+AutoML Tables era presentato come **servizio a pagamento**, con una proposta di crediti promozionali di 300 dollari. Questa informazione appartiene al tutorial storico e non costituisce un'offerta attuale verificata.
+
+La lezione era **facoltativa** anche nel corso originale. In AI Lab è conservata come documento storico ed è esclusa dalle attività gratuite: non attivare servizi o fatturazione per svolgere il percorso scolastico.
+@@ tut_automl:3
+# Codice
+L'esempio usa la competizione [New York City Taxi Fare Prediction](https://www.kaggle.com/c/new-york-city-taxi-fare-prediction): prevedere la tariffa, pedaggi inclusi, a partire da partenza, destinazione, numero di passeggeri, data e ora.
+
+Una [classe Python esterna](https://www.kaggle.com/alexisbcook/automl-tables-wrapper) richiama AutoML Tables. Le variabili richieste sono:
+
+* `PROJECT_ID`: identificatore del [progetto Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+* `BUCKET_NAME`: nome del [bucket Cloud Storage](https://cloud.google.com/storage/docs/creating-buckets) nel quale caricare i dati.
+* `DATASET_DISPLAY_NAME`: nome del dataset.
+* `TRAIN_FILEPATH` e `TEST_FILEPATH`: percorsi dei CSV della competizione.
+* `TARGET_COLUMN`: colonna da prevedere.
+* `ID_COLUMN`: colonna identificativa.
+* `MODEL_DISPLAY_NAME`: nome del modello.
+* `TRAIN_BUDGET`: budget temporale, nell'interfaccia storica 1000 per un'ora e 2000 per due ore.
+
+L'esercizio mostra dove inserire questi valori. Le API e il servizio richiedono una nuova verifica prima di qualsiasi uso reale.
+@@ tut_automl:6
+Successivamente il codice originale addestra un modello e genera previsioni sui dati di test.
+@@ tut_automl:8
+Al termine viene prodotto un file da inviare alla competizione. La cella seguente lo carica e ne mostra le prime righe.
+@@ tut_automl:10
+Il tutorial confrontava il risultato con un [modello lineare iniziale](https://www.kaggle.com/dster/nyc-taxi-fare-starter-kernel-simple-linear-model), basato sulla distanza del viaggio. All'epoca l'approccio AutoML superava quel riferimento e circa metà degli invii. È un risultato storico, non una misura attuale.
+
+L'**[esercizio associato](#$NEXT_NOTEBOOK_URL$)** conserva il procedimento originale per prepararne un invio.
+@@ ex_automl:0
+# Introduzione
+Il notebook originale usa **Google Cloud AutoML Tables** nella competizione [House Prices: Advanced Regression Techniques](https://www.kaggle.com/c/house-prices-advanced-regression-techniques). Il target è il prezzo di una casa e le 79 variabili descrivono, per esempio, tetto, camere e bagni.
+
+## Avvertenza sul materiale storico
+Il servizio è descritto come **a pagamento**. Il testo originale indicava 19,32 dollari per ora di training e 1,16 per ora di previsione batch: sono prezzi storici, non verificati oggi. Il [riferimento originale ai prezzi](https://cloud.google.com/automl-tables/pricing) viene conservato per attribuzione. L'esercizio è facoltativo e non fa parte del laboratorio gratuito AI Lab.
+
+## Configurazione originale del notebook
+Nelle impostazioni Kaggle il tutorial chiedeva di abilitare Internet. Se compariva **Requires phone verification**, bisognava completare la verifica dell'account; quindi passare da **Off** a **On** e confermare con **Accept**.
+
+![Impostazioni Internet originali](https://storage.googleapis.com/kaggle-media/learn/images/kR1az0y.png)
+
+![Conferma originale](https://storage.googleapis.com/kaggle-media/learn/images/gOVh6Aa.png)
+
+Queste schermate documentano l'interfaccia dell'epoca; non sono istruzioni verificate per l'interfaccia corrente.
+@@ ex_automl:1
+# Configurare Google Cloud: procedura storica
+La [guida originale](https://www.kaggle.com/alexisbcook/get-started-with-google-cloud-platform) proponeva di creare un account e richiedere crediti promozionali. Il collegamento al notebook avveniva da **Add-ons > Google Cloud Services**.
+
+![Menu originale](https://storage.googleapis.com/kaggle-media/learn/images/UHB4P5o.png)
+
+Si selezionavano **Cloud Storage** e **AutoML (beta)**, poi **Link Account**.
+
+![Collegamento originale](https://storage.googleapis.com/kaggle-media/learn/images/IlbdbHD.png)
+
+Dopo aver letto i prezzi, si premeva **ENABLE** e si effettuava l'accesso con l'account associato a Google Cloud. Terminato il collegamento si chiudeva la finestra.
+
+## Variabili del codice
+Il notebook forniva già:
+
+* `DATASET_DISPLAY_NAME`: nome del dataset, al massimo 32 caratteri fra lettere ASCII, cifre e underscore.
+* `TRAIN_FILEPATH` e `TEST_FILEPATH`: CSV di training e test.
+* `TARGET_COLUMN`: colonna da prevedere.
+* `ID_COLUMN`: identificatore.
+* `MODEL_DISPLAY_NAME`: nome del modello con gli stessi vincoli del nome del dataset.
+* `TRAIN_BUDGET`: 1000 per un'ora, 2000 per due ore nel servizio storico. Il valore 2000 poteva comportare due ore di fatturazione. [Riferimento sul budget](https://cloud.google.com/automl-tables/docs/train).
+
+Restavano da compilare `PROJECT_ID` e `BUCKET_NAME`. Il codice creava il bucket per caricare i dati. Il nome del bucket doveva contenere da 3 a 63 caratteri, soltanto minuscole, numeri, trattini e underscore, senza spazi, iniziando e terminando con lettera o cifra. [Riferimento Cloud Storage](https://cloud.google.com/storage/docs/creating-buckets).
+
+**AI Lab:** non eseguire questa configurazione per il percorso gratuito.
+@@ ex_automl:3
+La procedura originale proseguiva dopo il messaggio `Ready to train model.`. Chiedeva di salvare una versione del notebook anziché eseguire manualmente la successiva cella: l'esecuzione avveniva durante il salvataggio.
+
+#$SUBMIT_TO_COMP$
+@@ ex_automl:5
+# Come proseguire
+Il flusso automatizzava le operazioni fino alle previsioni per la competizione. Il [riferimento AutoML originale](https://cloud.google.com/automl-tables) e il [wrapper](https://www.kaggle.com/alexisbcook/automl-tables-wrapper) sono conservati per lo studio storico. Il wrapper era pensato per la regressione; il testo rinviava alla [documentazione batch](https://cloud.google.com/automl-tables/docs/predict-batch) per adattarlo alla classificazione. Non viene dichiarato funzionante con le API attuali.
+@@ tut_titanic:0
+Nell'ultimo esercizio di Intro to Machine Learning hai preparato un invio con codice parzialmente fornito. Qui seguirai un flusso completo, dall'inizio, usando la [competizione Titanic](https://www.kaggle.com/c/titanic).
+
+# Parte 1: iniziare
+## Iscriversi
+Apri la pagina della competizione e seleziona **Join Competition**. Se trovi **Submit Predictions**, sei già iscritto.
+
+![Iscrizione originale](https://storage.googleapis.com/kaggle-media/learn/images/rRFchA8.png)
+
+Leggi e accetta le regole con **I Understand and Accept**. Le regole definiscono, fra l'altro, numero di invii giornalieri e dimensione delle squadre. Le schermate riportate appartengono alla versione originale del tutorial.
+
+## Il problema
+Usare i dati dei passeggeri, come nome, età e prezzo del biglietto, per prevedere chi sia sopravvissuto al naufragio.
+
+## I dati
+Apri la [scheda Data](https://www.kaggle.com/c/titanic/data) e cerca i file.
+
+![File originali](https://storage.googleapis.com/kaggle-media/learn/images/LiM3JA7.png)
+
+Sono disponibili **`train.csv`**, **`test.csv`** e **`gender_submission.csv`**.
+
+### train.csv
+Contiene 891 passeggeri, una riga ciascuno. Nell'interfaccia originale selezionando il file in **Data Sources** si vedono nomi e descrizioni delle colonne in **Columns**.
+
+![Descrizione colonne](https://storage.googleapis.com/kaggle-media/learn/images/w5HFxp8.png)
+
+Puoi anche visualizzare i dati:
+
+![Anteprima](https://storage.googleapis.com/kaggle-media/learn/images/CEPZi6z.png)
+
+La colonna **`Survived`** vale 1 per i sopravvissuti e 0 per chi è morto. Il primo passeggero mostrato, Owen Harris Braund, aveva 22 anni e non sopravvisse.
+
+### test.csv
+Contiene altri 418 passeggeri dei quali devi prevedere l'esito. La colonna `Survived` è nascosta: le previsioni saranno confrontate con quei valori per assegnare il punteggio.
+
+### gender_submission.csv
+È un esempio di formato, basato sull'ipotesi che tutte le donne siano sopravvissute e tutti gli uomini siano morti. Il tuo modello può produrre risultati diversi, ma il file deve contenere **`PassengerId`**, con gli ID del test, e **`Survived`**, con valori 0 o 1.
+
+## Primo invio
+Come riferimento iniziale, il tutorial propone di scaricare e inviare `gender_submission.csv`.
+
+![Download originale](https://storage.googleapis.com/kaggle-media/learn/images/Pl1DIA8.png)
+
+Nella procedura originale si selezionavano **Submit Predictions**, poi **Step 1: Upload submission file** e **Make Submission**. Il file riceveva un punteggio e una posizione in classifica. Vedremo come migliorare questo riferimento.
+@@ tut_titanic:1
+# Parte 2: ambiente di programmazione
+Ora addestrerai un modello per migliorare le previsioni.
+
+## Il notebook
+Kaggle Notebooks permette di programmare senza installare software. Il tutorial originale menziona anche acceleratori GPU e TPU; disponibilità e condizioni non sono verificate qui.
+
+Dalla [scheda Notebooks](https://www.kaggle.com/c/titanic/kernels), seleziona **New Notebook**.
+
+![Nuovo notebook](https://storage.googleapis.com/kaggle-media/learn/images/DHPyh7s.png)
+
+La procedura originale usa **Create**, lasciando **Python** e **Notebook** come impostazioni.
+
+![Creazione](https://storage.googleapis.com/kaggle-media/learn/images/qUVvr8k.png)
+
+Dopo il caricamento compare un nome automatico, per esempio `kernel2daed3cd79`.
+
+![Nome iniziale](https://storage.googleapis.com/kaggle-media/learn/images/64ZFT1L.png)
+
+Rinominalo in modo descrittivo, per esempio `Getting Started with Titanic`.
+
+![Rinomina](https://storage.googleapis.com/kaggle-media/learn/images/uwyvzXq.png)
+
+## Prime righe di codice
+Le caselle grigie sono **celle di codice**.
+
+![Celle](https://storage.googleapis.com/kaggle-media/learn/images/q9mwkZM.png)
+
+Posiziona il cursore nella prima cella e premi il pulsante di esecuzione oppure **Maiusc + Invio**. Nell'interfaccia originale una barra blu identifica la cella attiva. Il codice iniziale elenca i file disponibili: confronta il risultato con i percorsi attesi.
+@@ tut_titanic:3
+I percorsi mostrano dove si trovano i dati della competizione.
+
+## Caricare i dati
+Usa la seconda cella per leggere il CSV. Scrivi le due righe seguenti ed eseguile con il pulsante o con **Maiusc + Invio**.
+
+![Seconda cella](https://storage.googleapis.com/kaggle-media/learn/images/OQBax9n.png)
+@@ tut_titanic:5
+Verifica di vedere le prime cinque righe di **`train.csv`** prima di continuare. Se non compaiono, controlla che il codice sia identico e che il cursore sia nella cella corretta al momento dell'esecuzione.
+
+Il codice usa il modulo Python **pandas**, abbreviato in `pd`, per caricare la tabella da **`/kaggle/input/titanic/train.csv`**. Se non conosci ancora bene pandas, concentrati inizialmente sul procedimento: alla fine trovi risorse per approfondire.
+
+Ora aggiungi una terza cella per caricare **`test.csv`** e ricordati di eseguirla.
+
+![Aggiungere celle](https://storage.googleapis.com/kaggle-media/learn/images/ReLhYca.png)
+@@ tut_titanic:7
+Verifica il risultato prima di continuare. Anche se `head` mostra solo cinque righe, sono stati caricati tutti gli 891 esempi di training e i 418 di test.
+
+# Parte 3: migliorare il punteggio
+Cerchiamo relazioni in `train.csv` utili a prevedere i valori nascosti di `test.csv`. Cominciamo da un'ipotesi semplice.
+
+## Esplorare una relazione
+Il file di esempio assume che tutte le donne siano sopravvissute e tutti gli uomini siano morti. È una prima ipotesi ragionevole? Verifichiamola sui dati di training. Copia il codice seguente in una nuova cella ed eseguilo.
+@@ tut_titanic:9
+Il codice calcola la percentuale di passeggere sopravvissute nel training set. Controlla il risultato, poi esegui la cella successiva per gli uomini.
+@@ tut_titanic:11
+Il secondo calcolo riguarda i passeggeri uomini. Nel dataset sopravvive circa il 75% delle donne e il 19% degli uomini: il file iniziale coglie dunque una relazione forte.
+
+La previsione usa però una sola colonna. Considerarne più di una permette di trovare relazioni più articolate. Esplorare manualmente tutte le combinazioni richiederebbe molto tempo: il machine learning ci aiuta ad automatizzarlo.
+
+## Primo modello
+Costruiremo una [random forest](https://www.kaggle.com/dansbecker/random-forests). Ogni albero vota sulla sopravvivenza; vince la classe con più voti. La figura ne mostra tre, ma il modello ne userà 100.
+
+![Voto degli alberi](https://storage.googleapis.com/kaggle-media/learn/images/AC9Bq63.png)
+
+Il codice usa **`Pclass`**, **`Sex`**, **`SibSp`** e **`Parch`**. Impara dai dati di training, prevede sui passeggeri del test e salva le risposte in **`my_submission.csv`**. Copialo in una nuova cella ed eseguilo.
+@@ tut_titanic:13
+Prima di procedere verifica il messaggio `Your submission was successfully saved!`. Per ora puoi concentrarti sul flusso anche senza comprendere ogni istruzione.
+
+La procedura originale di invio era:
+
+1. **Save Version**, poi **Save and Run All** e **Save**.
+2. Attendere l'esecuzione e aprire l'elenco delle versioni dal numero accanto a **Save Version**.
+3. Selezionare **…** sulla versione recente e **Open in Viewer**.
+4. Nella scheda **Output**, scegliere **Submit to Competition**.
+
+![Invio originale](https://storage.googleapis.com/kaggle-media/learn/images/kKKnHpx.png)
+
+Dopo l'invio il risultato viene valutato e inserito in classifica. L'interfaccia attuale può differire da queste schermate storiche.
+@@ tut_titanic:14
+# Parte 4: continuare a imparare
+Prova ad applicare ciò che hai studiato sulle random forest per migliorare le previsioni. Il corso [Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning) propone tecniche più avanzate.

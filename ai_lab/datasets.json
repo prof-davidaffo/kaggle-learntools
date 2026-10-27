@@ -1,0 +1,137 @@
+{
+  "melbourne": {
+    "kind": "dataset",
+    "slug": "dansbecker/melbourne-housing-snapshot",
+    "directory": "melbourne-housing-snapshot",
+    "files": [
+      "melb_data.csv"
+    ],
+    "url": "https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot",
+    "use": "Esempi Intro to Machine Learning",
+    "license": "CC-BY-NC-SA-4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "attribution": "Melbourne Housing Snapshot by Dan Becker, based on the Melbourne Housing Market dataset by Tony Pino.",
+    "redistribution_status": "verified-noncommercial",
+    "columns": {
+      "melb_data.csv": [
+        "Price",
+        "Rooms",
+        "Bathroom",
+        "Landsize"
+      ]
+    }
+  },
+  "iowa": {
+    "kind": "competition",
+    "slug": "home-data-for-ml-course",
+    "directory": "home-data-for-ml-course",
+    "files": [
+      "train.csv",
+      "test.csv"
+    ],
+    "aliases": [
+      "train.csv",
+      "test.csv"
+    ],
+    "url": "https://www.kaggle.com/competitions/home-data-for-ml-course/data",
+    "use": "Esercizi ML 2–7; richiede accettazione delle regole",
+    "redistribution_status": "not-verified",
+    "columns": {
+      "train.csv": [
+        "Id",
+        "SalePrice",
+        "LotArea",
+        "YearBuilt"
+      ],
+      "test.csv": [
+        "Id",
+        "LotArea",
+        "YearBuilt"
+      ]
+    },
+    "attribution": "Ames Housing dataset compiled by Dean De Cock; Kaggle Learn competition by Dan Becker."
+  },
+  "deep-learning": {
+    "kind": "dataset",
+    "slug": "ryanholbrook/dl-course-data",
+    "directory": "dl-course-data",
+    "files": [
+      "red-wine.csv",
+      "concrete.csv",
+      "fuel.csv",
+      "spotify.csv",
+      "hotel.csv",
+      "ion.csv"
+    ],
+    "url": "https://www.kaggle.com/datasets/ryanholbrook/dl-course-data",
+    "use": "Tutti i sei moduli Intro to Deep Learning",
+    "redistribution_status": "not-verified",
+    "columns": {
+      "red-wine.csv": [
+        "quality"
+      ],
+      "concrete.csv": [
+        "CompressiveStrength"
+      ],
+      "fuel.csv": [
+        "FE"
+      ],
+      "spotify.csv": [
+        "track_popularity",
+        "track_artist"
+      ],
+      "hotel.csv": [
+        "is_canceled"
+      ],
+      "ion.csv": [
+        "Class"
+      ]
+    },
+    "attribution": "DL Course Data prepared by Ryan Holbrook for Kaggle Learn; underlying datasets retain their own terms."
+  },
+  "phones": {
+    "kind": "dataset",
+    "slug": "iabhishekofficial/mobile-price-classification",
+    "directory": "mobile-price-classification",
+    "files": [
+      "train.csv"
+    ],
+    "url": "https://www.kaggle.com/datasets/iabhishekofficial/mobile-price-classification",
+    "use": "Approfondimento ML: classificazione, tut8",
+    "redistribution_status": "not-verified",
+    "columns": {
+      "train.csv": [
+        "price_range",
+        "battery_power"
+      ]
+    }
+  },
+  "titanic": {
+    "kind": "competition",
+    "slug": "titanic",
+    "directory": "titanic",
+    "files": [
+      "train.csv",
+      "test.csv",
+      "gender_submission.csv"
+    ],
+    "url": "https://www.kaggle.com/competitions/titanic/data",
+    "use": "Tutorial completo Titanic; richiede regole della competizione",
+    "redistribution_status": "not-verified",
+    "columns": {
+      "train.csv": [
+        "PassengerId",
+        "Survived",
+        "Pclass"
+      ],
+      "test.csv": [
+        "PassengerId",
+        "Pclass"
+      ],
+      "gender_submission.csv": [
+        "PassengerId",
+        "Survived"
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "origin": "User-supplied original Kaggle ZIP archives in data/",
+  "datasets": {
+    "melbourne": {
+      "archive": "data/melb_data.csv.zip",
+      "archive_sha256": "b9c371fbd676c95e7cf428412758d1971b984ab2c5804a6f160d0398db00a858",
+      "source": "https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot",
+      "license_review": "verified-noncommercial",
+      "omitted_archive_members": [],
+      "files": [
+        {
+          "name": "melb_data.csv",
+          "path": "ai_lab/input/melbourne-housing-snapshot/melb_data.csv",
+          "rows": 13580,
+          "columns": 21,
+          "bytes": 2091239,
+          "sha256": "3e449c3e95088da8a3a6b10331a5703f2c951d0740f317f97ed9baf0db1fd9f8"
+        }
+      ]
+    },
+    "iowa": {
+      "archive": "data/home-data-for-ml-course.zip",
+      "archive_sha256": "4997130a117640e50aecf72b23ff5ba92e8921f39d72fde01f211fa9786b5931",
+      "source": "https://www.kaggle.com/competitions/home-data-for-ml-course/data",
+      "license_review": "not-verified",
+      "omitted_archive_members": [
+        "sample_submission.csv.gz",
+        "test.csv.gz",
+        "train.csv.gz"
+      ],
+      "files": [
+        {
+          "name": "train.csv",
+          "path": "ai_lab/input/home-data-for-ml-course/train.csv",
+          "rows": 1460,
+          "columns": 81,
+          "bytes": 460676,
+          "sha256": "1e18addf81e5e4d347cc17ee6075bbe4a42b7fa26b9e5b063e8f692a5f929d41"
+        },
+        {
+          "name": "test.csv",
+          "path": "ai_lab/input/home-data-for-ml-course/test.csv",
+          "rows": 1459,
+          "columns": 80,
+          "bytes": 451405,
+          "sha256": "8fdd3d829d4d986b58f845c9553b225e67dd8383624d90fb6ca1d4bed5798c1e"
+        }
+      ]
+    },
+    "deep-learning": {
+      "archive": "data/archive.zip",
+      "archive_sha256": "2574380208839ca08c0a44923681ffbb0aa47f1f67cc9eaa5d2fdddf923f2fa7",
+      "source": "https://www.kaggle.com/datasets/ryanholbrook/dl-course-data",
+      "license_review": "not-verified",
+      "omitted_archive_members": [
+        "abalone.csv",
+        "candy.csv",
+        "cereal.csv",
+        "diamonds.csv",
+        "forestfires.csv",
+        "housing.csv",
+        "songs.csv"
+      ],
+      "files": [
+        {
+          "name": "red-wine.csv",
+          "path": "ai_lab/input/dl-course-data/red-wine.csv",
+          "rows": 1599,
+          "columns": 12,
+          "bytes": 100951,
+          "sha256": "d6a0d9bd24806944818795f22500c46cb6424cbff517aacda36595d3ed9b2daa"
+        },
+        {
+          "name": "concrete.csv",
+          "path": "ai_lab/input/dl-course-data/concrete.csv",
+          "rows": 1030,
+          "columns": 9,
+          "bytes": 48486,
+          "sha256": "901749b7e40a90657777fb0a88489638f2d9f80546e72b28cf720a2fdd778a76"
+        },
+        {
+          "name": "fuel.csv",
+          "path": "ai_lab/input/dl-course-data/fuel.csv",
+          "rows": 1107,
+          "columns": 14,
+          "bytes": 92128,
+          "sha256": "0b030fa9d256830c7d99313e76c4084eaf73d6b40200358a989d5cdfbc03d736"
+        },
+        {
+          "name": "spotify.csv",
+          "path": "ai_lab/input/dl-course-data/spotify.csv",
+          "rows": 32833,
+          "columns": 23,
+          "bytes": 7971379,
+          "sha256": "9902920cfe4940f0914ebb6716801a42f7f19ac88fbd6693eaae7e2822b16845"
+        },
+        {
+          "name": "hotel.csv",
+          "path": "ai_lab/input/dl-course-data/hotel.csv",
+          "rows": 119390,
+          "columns": 32,
+          "bytes": 16855599,
+          "sha256": "7c2ae42a7353905ea136e5c2287f17c92c5435826598bfbb8491c6f0c7b1fc06"
+        },
+        {
+          "name": "ion.csv",
+          "path": "ai_lab/input/dl-course-data/ion.csv",
+          "rows": 351,
+          "columns": 36,
+          "bytes": 80563,
+          "sha256": "b4d79463764f2eea7b77228100a5b687577717fc35aacf2e72575bcfd4cddec7"
+        }
+      ]
+    }
+  }
+}

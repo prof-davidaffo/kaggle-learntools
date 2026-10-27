@@ -1,0 +1,41 @@
+{
+  "model_type": "logistic_regression",
+  "dataset": "AI Lab synthetic flowers, seed 27, 600 samples",
+  "features": [
+    "length",
+    "width"
+  ],
+  "classes": [
+    "alpha",
+    "beta"
+  ],
+  "mean": [
+    4.797334189036791,
+    1.7316773205045655
+  ],
+  "scale": [
+    2.049018616268131,
+    0.953159605798614
+  ],
+  "weights": [
+    3.2730156296115815,
+    1.799572376341368
+  ],
+  "bias": 0.038672658551154065,
+  "threshold": 0.5,
+  "test_accuracy": 0.9666666666666667,
+  "baseline_accuracy": 0.44166666666666665,
+  "test_confusion_matrix": [
+    [
+      67,
+      0
+    ],
+    [
+      4,
+      49
+    ]
+  ],
+  "train_size": 360,
+  "validation_size": 120,
+  "test_size": 120
+}

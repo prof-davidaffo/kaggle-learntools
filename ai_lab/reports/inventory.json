@@ -1,0 +1,925 @@
+{
+  "upstream_commit": "e9ba66dc899d3e17b80d3a1b9a5d29f430d310cb",
+  "tracks": {
+    "machine_learning": [
+      {
+        "source": "notebooks/machine_learning/raw/ex2.ipynb",
+        "sha256": "49af5ef2d1b9b27c1b3eec6b766677e982d4f897290205e509f3854b8c47cf92",
+        "registered": true,
+        "topic": "Basic Data Exploration",
+        "metadata": {
+          "filename": "ex2.ipynb",
+          "lesson_idx": 1,
+          "type": "exercise",
+          "scriptid": 1258954,
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 12,
+        "markdown_cells": 4
+      },
+      {
+        "source": "notebooks/machine_learning/raw/ex3.ipynb",
+        "sha256": "26676d995dc0026fb45a08459baa46ced1a545a78585ac6836b92301a5fb3c1c",
+        "registered": true,
+        "topic": "Your First Machine Learning Model",
+        "metadata": {
+          "filename": "ex3.ipynb",
+          "lesson_idx": 2,
+          "type": "exercise",
+          "scriptid": 1404276,
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 26,
+        "markdown_cells": 8
+      },
+      {
+        "source": "notebooks/machine_learning/raw/ex4.ipynb",
+        "sha256": "f247b9c2a4f7d115672022b220cc7f953f8afdadb51105baa0b30bd4472ee65b",
+        "registered": true,
+        "topic": "Model Validation",
+        "metadata": {
+          "filename": "ex4.ipynb",
+          "lesson_idx": 3,
+          "type": "exercise",
+          "scriptid": 1259097,
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 22,
+        "markdown_cells": 7
+      },
+      {
+        "source": "notebooks/machine_learning/raw/ex5.ipynb",
+        "sha256": "974bae7740d595b898ce521563f1ddcb36f36553f486e772de9c5df55a8d414f",
+        "registered": true,
+        "topic": "Underfitting and Overfitting",
+        "metadata": {
+          "filename": "ex5.ipynb",
+          "lesson_idx": 4,
+          "type": "exercise",
+          "scriptid": 1259126,
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 14,
+        "markdown_cells": 5
+      },
+      {
+        "source": "notebooks/machine_learning/raw/ex6.ipynb",
+        "sha256": "6f4ed8092e93b70501acd58c9969697c157296a1341abb15e0734d26a8023098",
+        "registered": true,
+        "topic": "Random Forests",
+        "metadata": {
+          "filename": "ex6.ipynb",
+          "lesson_idx": 5,
+          "type": "exercise",
+          "scriptid": 1259186,
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 8,
+        "markdown_cells": 4
+      },
+      {
+        "source": "notebooks/machine_learning/raw/ex7.ipynb",
+        "sha256": "04297ced04db407cdeaac38886bd2ee987c48631b268c7216978c439c0ea1479",
+        "registered": true,
+        "topic": "Machine Learning Competitions",
+        "metadata": {
+          "filename": "ex7.ipynb",
+          "lesson_idx": 6,
+          "type": "exercise",
+          "scriptid": 1259198,
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": []
+        },
+        "cells": 14,
+        "markdown_cells": 7
+      },
+      {
+        "source": "notebooks/machine_learning/raw/ex8.ipynb",
+        "sha256": "c5a5716f64881a169389d391e7fccb876f61bdd5c6f484216acc7357966b7952",
+        "registered": false,
+        "topic": "Unregistered historical material",
+        "metadata": null,
+        "cells": 21,
+        "markdown_cells": 8
+      },
+      {
+        "source": "notebooks/machine_learning/raw/ex_automl.ipynb",
+        "sha256": "e59e5b04d6a1567bd7abadbc9d00d5f0c548207d9d188ebe23d9cbde70f9d98d",
+        "registered": true,
+        "topic": "Intro to AutoML",
+        "metadata": {
+          "filename": "ex_automl.ipynb",
+          "lesson_idx": 7,
+          "type": "exercise",
+          "scriptid": 10027938,
+          "author": "alexisbcook",
+          "competition_sources": [
+            "house-prices-advanced-regression-techniques"
+          ],
+          "dataset_sources": [],
+          "kernel_sources": [
+            "alexisbcook/automl-tables-wrapper"
+          ]
+        },
+        "cells": 6,
+        "markdown_cells": 4
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut1.ipynb",
+        "sha256": "9372eeef447f3e981a86111cee65cd910331c9316ba59f298c15f2a60c787525",
+        "registered": true,
+        "topic": "How Models Work",
+        "metadata": {
+          "filename": "tut1.ipynb",
+          "lesson_idx": 0,
+          "type": "tutorial",
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 1,
+        "markdown_cells": 1
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut2.ipynb",
+        "sha256": "ddd2f094ec401ff132527cea5c98ce075be0edb3df95918d06406895032960b7",
+        "registered": true,
+        "topic": "Basic Data Exploration",
+        "metadata": {
+          "filename": "tut2.ipynb",
+          "lesson_idx": 1,
+          "type": "tutorial",
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 5,
+        "markdown_cells": 3
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut3.ipynb",
+        "sha256": "76c1c17e6d9113e21839f4264233aab8b8e97f93d7c26679a75855383306483a",
+        "registered": true,
+        "topic": "Your First Machine Learning Model",
+        "metadata": {
+          "filename": "tut3.ipynb",
+          "lesson_idx": 2,
+          "type": "tutorial",
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 18,
+        "markdown_cells": 9
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut4.ipynb",
+        "sha256": "97b465ea2f664520b62a3c88d2f5bca368d7616995162ce0440c42e0c17f2427",
+        "registered": true,
+        "topic": "Model Validation",
+        "metadata": {
+          "filename": "tut4.ipynb",
+          "lesson_idx": 3,
+          "type": "tutorial",
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 8,
+        "markdown_cells": 5
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut5.ipynb",
+        "sha256": "df9a66ebab5ec46ea6fbaed7530126c181b2873acef630a42901b5148de9e6f9",
+        "registered": true,
+        "topic": "Underfitting and Overfitting",
+        "metadata": {
+          "filename": "tut5.ipynb",
+          "lesson_idx": 4,
+          "type": "tutorial",
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 7,
+        "markdown_cells": 4
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut6.ipynb",
+        "sha256": "07c35dfd77168bf2d6653424261610b578cb0dd704ebc180866afdc3e003dbff",
+        "registered": true,
+        "topic": "Random Forests",
+        "metadata": {
+          "filename": "tut6.ipynb",
+          "lesson_idx": 5,
+          "type": "tutorial",
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 5,
+        "markdown_cells": 3
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut7.ipynb",
+        "sha256": "5c63f992307a1805d9e2915d9b16e771a36a7b31051a78290301ade45586e738",
+        "registered": true,
+        "topic": "Machine Learning Competitions",
+        "metadata": {
+          "filename": "tut7.ipynb",
+          "lesson_idx": 6,
+          "type": "tutorial",
+          "author": "alexisbcook",
+          "competition_sources": [
+            "home-data-for-ml-course"
+          ],
+          "dataset_sources": [
+            "dansbecker/melbourne-housing-snapshot",
+            "iabhishekofficial/mobile-price-classification"
+          ]
+        },
+        "cells": 1,
+        "markdown_cells": 1
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut8.ipynb",
+        "sha256": "bd03b8b3d5130223b05201ef773c055d78988e090d3c001dff28639867cea2f9",
+        "registered": false,
+        "topic": "Unregistered historical material",
+        "metadata": null,
+        "cells": 17,
+        "markdown_cells": 10
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut_automl.ipynb",
+        "sha256": "8c8f58b33fad0aef87dc44ad619445d6a6772770c85f656b56dd0a697ff8dc55",
+        "registered": true,
+        "topic": "Intro to AutoML",
+        "metadata": {
+          "filename": "tut_automl.ipynb",
+          "lesson_idx": 7,
+          "type": "tutorial",
+          "enable_internet": true,
+          "author": "alexisbcook",
+          "competition_sources": [
+            "new-york-city-taxi-fare-prediction"
+          ],
+          "dataset_sources": [],
+          "kernel_sources": [
+            "alexisbcook/automl-tables-wrapper"
+          ]
+        },
+        "cells": 11,
+        "markdown_cells": 7
+      },
+      {
+        "source": "notebooks/machine_learning/raw/tut_titanic.ipynb",
+        "sha256": "1e9c3350ee1463d62a3426782093e36c54c5a81f14b947f2c00d2560ff34bb33",
+        "registered": true,
+        "topic": "Getting Started with Titanic",
+        "metadata": {
+          "filename": "tut_titanic.ipynb",
+          "lesson_idx": 8,
+          "type": "tutorial",
+          "author": "alexisbcook",
+          "competition_sources": [
+            "titanic"
+          ],
+          "dataset_sources": []
+        },
+        "cells": 15,
+        "markdown_cells": 9
+      }
+    ],
+    "deep_learning_intro": [
+      {
+        "source": "notebooks/deep_learning_intro/raw/ex1.ipynb",
+        "sha256": "0b15fae045486203637f906faa8a75914354bbb1bbb9a46d1cb44e2d0f69299e",
+        "registered": true,
+        "topic": "A Single Neuron",
+        "metadata": {
+          "filename": "ex1.ipynb",
+          "lesson_idx": 0,
+          "type": "exercise",
+          "scriptid": 11887334,
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 27,
+        "markdown_cells": 8
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/ex2.ipynb",
+        "sha256": "614e6339a6de2a4293ac6c6b7a1ec93b9ab83deffd772fb4406e8b43faa71f44",
+        "registered": true,
+        "topic": "Deep Neural Networks",
+        "metadata": {
+          "filename": "ex2.ipynb",
+          "lesson_idx": 1,
+          "type": "exercise",
+          "scriptid": 11887344,
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 28,
+        "markdown_cells": 7
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/ex3.ipynb",
+        "sha256": "3ea6b089aacbdc9f48365608062831ca7bcda8bea345949c38b4c4f233ea0a59",
+        "registered": true,
+        "topic": "Stochastic Gradient Descent",
+        "metadata": {
+          "filename": "ex3.ipynb",
+          "lesson_idx": 2,
+          "type": "exercise",
+          "scriptid": 11887330,
+          "enable_gpu": true,
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 31,
+        "markdown_cells": 11
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/ex4.ipynb",
+        "sha256": "9369e4423667fe84a0a3d197fe027e487460979f37666cae87b4969dce8200c7",
+        "registered": true,
+        "topic": "Overfitting and Underfitting",
+        "metadata": {
+          "filename": "ex4.ipynb",
+          "lesson_idx": 3,
+          "type": "exercise",
+          "scriptid": 11906770,
+          "enable_gpu": true,
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 26,
+        "markdown_cells": 11
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/ex5.ipynb",
+        "sha256": "77bcffd822f951923671258209ae70e28d08f91086c36a13a2fc43eaf618000e",
+        "registered": true,
+        "topic": "Dropout and Batch Normalization",
+        "metadata": {
+          "filename": "ex5.ipynb",
+          "lesson_idx": 4,
+          "type": "exercise",
+          "scriptid": 11887342,
+          "enable_gpu": true,
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 28,
+        "markdown_cells": 11
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/ex6.ipynb",
+        "sha256": "7ce5f6512a669eedc4d07ccb089048bb5dc30ab2753e1813adfcdbc3d13fe54a",
+        "registered": true,
+        "topic": "Binary Classification",
+        "metadata": {
+          "filename": "ex6.ipynb",
+          "lesson_idx": 5,
+          "type": "exercise",
+          "scriptid": 11887335,
+          "enable_gpu": true,
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 23,
+        "markdown_cells": 7
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/tut1.ipynb",
+        "sha256": "4ac7328ce47cd4d9ade8a8f712083ea4fb1a5c94364d0c3208f9d538d0595c3b",
+        "registered": true,
+        "topic": "A Single Neuron",
+        "metadata": {
+          "filename": "tut1.ipynb",
+          "lesson_idx": 0,
+          "type": "tutorial",
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 4,
+        "markdown_cells": 3
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/tut2.ipynb",
+        "sha256": "33ac56898a6d6e6c7cd9f50e945395c1f5babe0fbfe14cd12b7e89299c7dc9f3",
+        "registered": true,
+        "topic": "Deep Neural Networks",
+        "metadata": {
+          "filename": "tut2.ipynb",
+          "lesson_idx": 1,
+          "type": "tutorial",
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 4,
+        "markdown_cells": 3
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/tut3.ipynb",
+        "sha256": "ae8dadcd3b58b40d48f2afb4292c0ef03d4964e577e1c3c7f44dfc2c2af71e19",
+        "registered": true,
+        "topic": "Stochastic Gradient Descent",
+        "metadata": {
+          "filename": "tut3.ipynb",
+          "lesson_idx": 2,
+          "type": "tutorial",
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 15,
+        "markdown_cells": 9
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/tut4.ipynb",
+        "sha256": "505b37f834969cd815cebdea9843643b83721ca9537e4ddaf8244db3fbb268e9",
+        "registered": true,
+        "topic": "Overfitting and Underfitting",
+        "metadata": {
+          "filename": "tut4.ipynb",
+          "lesson_idx": 3,
+          "type": "tutorial",
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 9,
+        "markdown_cells": 5
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/tut5.ipynb",
+        "sha256": "73f89e9b38bf3df9be74ec5d43e4bbdb43d6d6d09e6da1868a70cfc2d0065bc1",
+        "registered": true,
+        "topic": "Dropout and Batch Normalization",
+        "metadata": {
+          "filename": "tut5.ipynb",
+          "lesson_idx": 4,
+          "type": "tutorial",
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 7,
+        "markdown_cells": 4
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/tut6.ipynb",
+        "sha256": "e24ba758f4004a885aeceabdba87b0e89e6eaedf97ceea3d5e1440cf3ec2b797",
+        "registered": true,
+        "topic": "Binary Classification",
+        "metadata": {
+          "filename": "tut6.ipynb",
+          "lesson_idx": 5,
+          "type": "tutorial",
+          "dataset_sources": [
+            "ryanholbrook/dl-course-data"
+          ]
+        },
+        "cells": 11,
+        "markdown_cells": 6
+      },
+      {
+        "source": "notebooks/deep_learning_intro/raw/tut_tpus.ipynb",
+        "sha256": "80f8730b38eaff0745e324b3545749643a5a6352f1e49849657b8efb7d3a5e2e",
+        "registered": true,
+        "topic": "Detecting the Higgs Boson with TPUs",
+        "metadata": {
+          "filename": "tut_tpus.ipynb",
+          "lesson_idx": 6,
+          "type": "tutorial",
+          "dataset_sources": [
+            "ryanholbrook/higgs-boson"
+          ]
+        },
+        "cells": 15,
+        "markdown_cells": 6
+      }
+    ],
+    "deep_learning": [
+      {
+        "source": "notebooks/deep_learning/raw/ex1_convolutions.ipynb",
+        "sha256": "1c7ac60c3859d3fbc3517a17b2f38b46e8e69cfd2619f7f421dd361741410a3c",
+        "registered": true,
+        "topic": "Intro to Deep Learning and Computer Vision",
+        "metadata": {
+          "filename": "ex1_convolutions.ipynb",
+          "lesson_idx": 0,
+          "type": "exercise",
+          "scriptid": 499266,
+          "dataset_sources": [
+            "keras/resnet50"
+          ],
+          "competition_sources": [
+            "dog-breed-identification"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 12,
+        "markdown_cells": 6
+      },
+      {
+        "source": "notebooks/deep_learning/raw/ex3_programming_tf_and_keras.ipynb",
+        "sha256": "4c93502175dd556fdaf4464e8bbb2a15966a4328abb189e605b33e5302bb163d",
+        "registered": true,
+        "topic": "TensorFlow programming",
+        "metadata": {
+          "filename": "ex3_programming_tf_and_keras.ipynb",
+          "lesson_idx": 2,
+          "type": "exercise",
+          "enable_gpu": true,
+          "scriptid": 521452,
+          "dataset_sources": [
+            "alexisbcook/resnet50",
+            "alexisbcook/vgg16",
+            "dansbecker/hot-dog-not-hot-dog"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 26,
+        "markdown_cells": 13
+      },
+      {
+        "source": "notebooks/deep_learning/raw/ex4_transfer_learning.ipynb",
+        "sha256": "d607f9e795d08d60547fd36406ebc622afdd5c1918f261fc81f155c876fbd764",
+        "registered": true,
+        "topic": "Transfer Learning",
+        "metadata": {
+          "filename": "ex4_transfer_learning.ipynb",
+          "lesson_idx": 3,
+          "type": "exercise",
+          "scriptid": 532365,
+          "dataset_sources": [
+            "alexisbcook/resnet50",
+            "dansbecker/dogs-gone-sideways"
+          ],
+          "enable_gpu": true,
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 17,
+        "markdown_cells": 7
+      },
+      {
+        "source": "notebooks/deep_learning/raw/ex5_data_augmentation.ipynb",
+        "sha256": "93a72782f17a347e2a693daf4c9d8ba9264242aba4d03e40fc0db47e76cd6889",
+        "registered": true,
+        "topic": "Data Augmentation",
+        "metadata": {
+          "filename": "ex5_data_augmentation.ipynb",
+          "lesson_idx": 4,
+          "type": "exercise",
+          "enable_gpu": true,
+          "scriptid": 536195,
+          "dataset_sources": [
+            "alexisbcook/resnet50",
+            "dansbecker/dogs-gone-sideways"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 15,
+        "markdown_cells": 7
+      },
+      {
+        "source": "notebooks/deep_learning/raw/ex7_from_scratch.ipynb",
+        "sha256": "5ca8e4b85b02900cea41e2fd9c970989053a451427cf043c40a7cd856c56f775",
+        "registered": true,
+        "topic": "Deep Learning from Scratch",
+        "metadata": {
+          "filename": "ex7_from_scratch.ipynb",
+          "lesson_idx": 6,
+          "enable_gpu": true,
+          "type": "exercise",
+          "scriptid": 574269,
+          "competition_sources": [
+            "digit-recognizer"
+          ],
+          "dataset_sources": [
+            "zalando-research/fashionmnist"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 23,
+        "markdown_cells": 9
+      },
+      {
+        "source": "notebooks/deep_learning/raw/ex8_dropout_strides.ipynb",
+        "sha256": "9da9b066c8741af82ae05fda705990a99d2dd8a41feb9f6c209104247f2a1bd4",
+        "registered": true,
+        "topic": "Dropout and Strides for Larger Models",
+        "metadata": {
+          "filename": "ex8_dropout_strides.ipynb",
+          "lesson_idx": 7,
+          "enable_gpu": true,
+          "type": "exercise",
+          "scriptid": 663261,
+          "competition_sources": [
+            "digit-recognizer"
+          ],
+          "dataset_sources": [
+            "zalando-research/fashionmnist"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 10,
+        "markdown_cells": 6
+      },
+      {
+        "source": "notebooks/deep_learning/raw/ex_tpus.ipynb",
+        "sha256": "fef14cf18cffaddb09c60b42970a4c0c26ed60dba878979f1aed5ee075e364b3",
+        "registered": true,
+        "topic": "Create Your First Submission",
+        "metadata": {
+          "filename": "ex_tpus.ipynb",
+          "lesson_idx": 8,
+          "type": "exercise",
+          "scriptid": 10204702,
+          "competition_sources": [
+            "tpu-getting-started"
+          ],
+          "enable_internet": true,
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 31,
+        "markdown_cells": 15
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut1_intro.ipynb",
+        "sha256": "a534801874279627302ced211f3e96d824f9e3e52f6fd89eee96f26929e01ea3",
+        "registered": true,
+        "topic": "Intro to Deep Learning and Computer Vision",
+        "metadata": {
+          "filename": "tut1_intro.ipynb",
+          "lesson_idx": 0,
+          "type": "tutorial",
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 3,
+        "markdown_cells": 2
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut2_building_models_from_convolutions.ipynb",
+        "sha256": "4710493ac777371ce17a9e55644fb5ce73b71e439a7df3fd7ae923c8da80cd92",
+        "registered": true,
+        "topic": "Building Models from Convolutions",
+        "metadata": {
+          "filename": "tut2_building_models_from_convolutions.ipynb",
+          "lesson_idx": 1,
+          "type": "tutorial",
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 3,
+        "markdown_cells": 2
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut3_programming_tf_and_keras.ipynb",
+        "sha256": "230470697203ec24fb8bceede64a57f20d0602cacf06bd9886c19095fab85681",
+        "registered": true,
+        "topic": "TensorFlow programming",
+        "metadata": {
+          "filename": "tut3_programming_tf_and_keras.ipynb",
+          "lesson_idx": 2,
+          "type": "tutorial",
+          "dataset_sources": [
+            "keras/resnet50"
+          ],
+          "competition_sources": [
+            "dog-breed-identification"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 11,
+        "markdown_cells": 6
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut4_transfer_learning.ipynb",
+        "sha256": "4e79a0f6ea204075d1955c176c607f324661661df174b48f4655282e988c7caa",
+        "registered": true,
+        "topic": "Transfer Learning",
+        "metadata": {
+          "filename": "tut4_transfer_learning.ipynb",
+          "lesson_idx": 3,
+          "type": "tutorial",
+          "dataset_sources": [
+            "keras/resnet50",
+            "dansbecker/urban-and-rural-photos"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 10,
+        "markdown_cells": 6
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut5_data_augmentation.ipynb",
+        "sha256": "667b7e0ee69e5ae4e5260a763ac4032d249aeaf54ba6df29cff3dc775f09ab6a",
+        "registered": true,
+        "topic": "Data Augmentation",
+        "metadata": {
+          "filename": "tut5_data_augmentation.ipynb",
+          "lesson_idx": 4,
+          "type": "tutorial",
+          "dataset_sources": [
+            "keras/resnet50",
+            "dansbecker/urban-and-rural-photos"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 7,
+        "markdown_cells": 4
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut6_deep_understanding.ipynb",
+        "sha256": "07e83be04ca7c9198a0a59941af7645e137de850a60bfb03ad22937e4a8747ce",
+        "registered": true,
+        "topic": "A Deeper Understanding of Deep Learning",
+        "metadata": {
+          "filename": "tut6_deep_understanding.ipynb",
+          "lesson_idx": 5,
+          "type": "tutorial",
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 3,
+        "markdown_cells": 2
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut7_dl_from_scratch.ipynb",
+        "sha256": "6b9eec3addaf8cae3aceb013d46960a30dfcfeeb2ddb716461689708f2b80c73",
+        "registered": true,
+        "topic": "Deep Learning from Scratch",
+        "metadata": {
+          "filename": "tut7_dl_from_scratch.ipynb",
+          "lesson_idx": 6,
+          "type": "tutorial",
+          "dataset_sources": [
+            "zalando-research/fashionmnist"
+          ],
+          "competition_sources": [
+            "digit-recognizer"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 5,
+        "markdown_cells": 3
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut8_dropout_and_strides.ipynb",
+        "sha256": "564d272ab713283e458343234014b7f0876aab20afdcce68b88e3d1d4e4326eb",
+        "registered": true,
+        "topic": "Dropout and Strides for Larger Models",
+        "metadata": {
+          "filename": "tut8_dropout_and_strides.ipynb",
+          "lesson_idx": 7,
+          "type": "tutorial",
+          "competition_sources": [
+            "digit-recognizer"
+          ],
+          "dataset_sources": [
+            "zalando-research/fashionmnist"
+          ],
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 5,
+        "markdown_cells": 3
+      },
+      {
+        "source": "notebooks/deep_learning/raw/tut_tpus.ipynb",
+        "sha256": "e92a87154b0dc536887b7e2ee4ecd714890a1829437b54b8e60456718401c607",
+        "registered": true,
+        "topic": "Create Your First Submission",
+        "metadata": {
+          "filename": "tut_tpus.ipynb",
+          "lesson_idx": 8,
+          "type": "tutorial",
+          "competition_sources": [
+            "tpu-getting-started"
+          ],
+          "enable_internet": true,
+          "docker_image_pinning_type": "original"
+        },
+        "cells": 49,
+        "markdown_cells": 26
+      }
+    ]
+  },
+  "support_hashes": {
+    "notebooks/machine_learning/track_meta.py": "abe6ad67c7e6983d4be32fd7195018f7fe6912ada0f7ff1f95da7532c1a27444",
+    "notebooks/deep_learning_intro/track_meta.py": "2102902ef02d9e7998af172f677aa4028f124a38d3824d7fb1465407bd1b5206",
+    "notebooks/deep_learning/track_meta.py": "d4dd0c9948a79385e3616d6330a4f97c4a3dcf5a971af302acfbe89213e52b61",
+    "notebooks/nb_utils/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "notebooks/nb_utils/lesson_preprocessor.py": "d4b1e6aa06f3a3c91b280a22d355592bf304c9fd012b5c44207c35a259610adb",
+    "notebooks/nb_utils/line_macros.py": "aa7647e3243b59f20f40d68efe27c7d209c3ef6b05d58891f294310bc2df1add",
+    "notebooks/nb_utils/macro_processing.py": "d7a1f13a6baf306c5364dc00fd48195996e182206217da6ab6d8d0972a5cd4f2",
+    "notebooks/nb_utils/track_meta_template.py": "ae5b96d9383a52acab9172fd2780aec684e62d4eb1ec5721bf0e8ca51be3cb2c",
+    "notebooks/nb_utils/track_metadata.py": "2568e722786ff24669d1cf574bd9cc0f2e24399b8a836f07e1f1db0a4d29cb48",
+    "notebooks/nb_utils/utils.py": "145430cb19153e6e214712036e26e1ec92a676ff37794fedd724897cca1f4ab2",
+    "learntools/core/__init__.py": "8c6f73203d6c48ec3cb38557222070a8fde2718b83e42b1159a9ddaeb2e80eaf",
+    "learntools/core/asserts.py": "fbbbc926bdb8d06070f1ce5ca4b00f582c7ecc1855d11b4d3de577a062b0bfc2",
+    "learntools/core/colors.py": "5956fe93f927b223aa595425d572e2a031c933c8022b343776acf082df89d27c",
+    "learntools/core/constants.py": "b5b6c06b8c7732bd501f36b7af49fe076f05b8607616fecb2518aaeaf93090b4",
+    "learntools/core/exceptions.py": "2c05bf35791952d2f2af8685fed3909bd0111fd8a1242031167ac9ae2679a587",
+    "learntools/core/globals_binder.py": "449b88062c464dfc29fc1497cc8407499ddef6eea3e061e5b6dff335f7164bbe",
+    "learntools/core/multiproblem.py": "78f7d8799ec58e5924270fd371a5f3a07406aa0f0d16bf3a6f633d0a1ee0901c",
+    "learntools/core/problem.py": "4ae5bbc0c07d0faed4c4b5643ebe1bc1a2aa9ed6d7980fad9a63e3587e91159e",
+    "learntools/core/problem_view.py": "4afbc3654ff3e536782e9b413a9aceb4bdb83a99d41c20e0ef9a31c643a72fdd",
+    "learntools/core/richtext.py": "439713c47729d8b31691b17ef91bff7c6d76933d8e0e7f4450e211e13a83bdb3",
+    "learntools/core/tracking.py": "3c5c6babb28e999a94f4863692c84796e951c9f232529ebc54ce2988b19a5e87",
+    "learntools/core/utils.py": "2c61629d23f237269c8835e873eb06acc7a9141236671bb5c7c0ed7a92a07bd1",
+    "learntools/machine_learning/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "learntools/machine_learning/ex2.py": "b91e1d800cbb54f7cfb3fedcce26233bca5623912a388fbe6b27341864a3c9e9",
+    "learntools/machine_learning/ex3.py": "7dd3444428ce345e71ae67fc84645aff23b82857ddf59b89f6513e52b42c5db4",
+    "learntools/machine_learning/ex4.py": "a34913f57434c55a33896515eb98e1a381e4d0b8782e9900a88d45214641fde6",
+    "learntools/machine_learning/ex5.py": "11941969f2d573480fc84ca436de0e6b724979cef686a6d7dd6e8a6c857ab341",
+    "learntools/machine_learning/ex6.py": "9fa6706543ff7754b2fa7e102ad094e596374eb92d3f3c03571767be0e29d336",
+    "learntools/machine_learning/ex7.py": "b8b06262052f595cb6fcafe61f26380a433692029d41f7323527516b62799e99",
+    "learntools/machine_learning/ex8.py": "9219b18744b5d26450fba790c87c00ef073eac420f3bcb1d93ba3e110a6f3b50",
+    "learntools/machine_learning/ex_automl.py": "9d9dfbacf3bd6a91f0e8cbdf470cfc32134065a4e6eab8e3dc5f1500919b8d2f",
+    "learntools/deep_learning_intro/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "learntools/deep_learning_intro/dltools.py": "3a6672e649ec3cfff726c3af1551e1c4de8e2c53c761f02403ca8ecd1a115a65",
+    "learntools/deep_learning_intro/ex1.py": "ada557ddf1040f0e45859a317984d34e620b37b3e3a8c4799fef950c92384d96",
+    "learntools/deep_learning_intro/ex2.py": "460a5813ed6197abffb6c36bfc75a6251a27c179aec87b4aa9ec312b62126a3f",
+    "learntools/deep_learning_intro/ex3.py": "096e6b5478d79b8f33cf3e75c85806a1005a4f7b3932debd5f3d3b6a364854ea",
+    "learntools/deep_learning_intro/ex4.py": "c47bb54201f59b656b010776f0ee3b050678ce7e8da94b7952fb13267afc69f5",
+    "learntools/deep_learning_intro/ex5.py": "8c2495c4d0aa266f0c1278c2beeccc92e747970470685acd88c27c6876411f75",
+    "learntools/deep_learning_intro/ex6.py": "2ffaaed6e20e0d7469c2ca90f61607c49349b7cdc6048f0f52e7cd7b68e78e42",
+    "learntools/deep_learning/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "learntools/deep_learning/decode_predictions.py": "50dd33147cb3bad4068c9e9283342990f416c694d545ab9b875f2fef6932a82c",
+    "learntools/deep_learning/ex_tpu.py": "9d9dfbacf3bd6a91f0e8cbdf470cfc32134065a4e6eab8e3dc5f1500919b8d2f",
+    "learntools/deep_learning/exercise_1.py": "e905b37344c795e65edde16d3bacf4b67707be3010f61ed27b0dfe2a892c22e7",
+    "learntools/deep_learning/exercise_2.py": "be17c7f3da4e2cc6c2a9b50772dd37e559cd7d026e3555ce4afb846c754eb537",
+    "learntools/deep_learning/exercise_3.py": "2106da3af12f971ceaa15fd51594441b99afa7550e15d6e4863eedbbfeffe048",
+    "learntools/deep_learning/exercise_4.py": "304af48dec530d6f9572f6c083eb3c4acf7fefe0e135dafdae646881a817260f",
+    "learntools/deep_learning/exercise_5.py": "89a00d7ff58fe21fbb3dd4521d5358cd3b189e594200a9d90861d01000f7788f",
+    "learntools/deep_learning/exercise_7.py": "c83573f078349c3706e764cb19f33a344e9a941aa5f0dcfadf1668e20422e052",
+    "learntools/deep_learning/exercise_8.py": "5e288f16076596b17468d4862200da0a221a25b6c49b8f2757ffc3a9d48b18e0"
+  }
+}

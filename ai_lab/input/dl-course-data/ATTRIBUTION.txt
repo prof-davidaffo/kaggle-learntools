@@ -1,0 +1,5 @@
+DL Course Data prepared by Ryan Holbrook for Kaggle Learn; underlying datasets retain their own terms.
+https://www.kaggle.com/datasets/ryanholbrook/dl-course-data
+License: not embedded in the downloaded ZIP; consult the original source
+https://www.kaggle.com/datasets/ryanholbrook/dl-course-data
+Dataset terms are separate from the Apache-2.0 code license.

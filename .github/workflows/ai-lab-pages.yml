@@ -1,0 +1,92 @@
+name: AI Lab — build e GitHub Pages
+
+on:
+  push:
+    paths:
+      - 'ai_lab/**'
+      - 'notebooks/machine_learning/**'
+      - 'notebooks/deep_learning_intro/**'
+      - 'notebooks/deep_learning/**'
+      - 'notebooks/nb_utils/**'
+      - 'learntools/**'
+      - 'LICENSE'
+      - '.github/workflows/ai-lab-pages.yml'
+  pull_request:
+    paths:
+      - 'ai_lab/**'
+      - 'notebooks/**'
+      - 'learntools/**'
+      - 'LICENSE'
+      - '.github/workflows/ai-lab-pages.yml'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Pubblicare su GitHub Pages (autorizzazione esplicita)'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-lab-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: ai_lab/requirements/site.txt
+      - name: Install site dependencies
+        run: python -m pip install -r ai_lab/requirements/site.txt
+      - name: Generate school material
+        run: |
+          python ai_lab/tools/school_notebooks.py
+          python ai_lab/tools/programme.py
+      - name: Generate translated notebooks and build static site
+        run: python ai_lab/tools/build.py
+      - name: Check pages, internal links and notebook files
+        run: python ai_lab/tools/check.py
+      - name: Save verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-lab-verification
+          path: ai_lab/reports/build-checks.json
+          if-no-files-found: ignore
+      - name: Save build for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-lab-static-site
+          path: ai_lab/build
+          include-hidden-files: true
+          if-no-files-found: error
+      - name: Package Pages artifact
+        if: github.event_name == 'workflow_dispatch' && inputs.publish
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ai_lab/build
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

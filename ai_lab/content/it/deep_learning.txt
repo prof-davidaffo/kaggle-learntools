@@ -1,0 +1,421 @@
+@@ tut1_intro:0
+# Introduzione
+Questa lezione del precedente corso Kaggle introduce le **convoluzioni**, componenti fondamentali delle reti per la computer vision e per altre applicazioni. In seguito passerai a usare modelli già addestrati.
+
+# Lezione originale
+La parte centrale è un video esterno richiamato dal codice seguente. Il video non è contenuto nel repository e non è stato tradotto o sottotitolato da AI Lab.
+@@ tut1_intro:2
+Dopo il video, **[verifica ciò che hai capito sulle convoluzioni](#$EXERCISE_FORKING_URL$)**.
+@@ tut2_building_models_from_convolutions:0
+# Introduzione
+La lezione spiega come combinare convoluzioni in modelli per la computer vision che hanno raggiunto risultati molto elevati su compiti specifici.
+
+# Lezione originale
+Il contenuto principale è un video esterno non incluso nei sorgenti: ne conserviamo il riferimento, senza dichiararne una traduzione.
+@@ tut2_building_models_from_convolutions:2
+Ora che conosci la struttura, prosegui con la [programmazione in TensorFlow e Keras](https://www.kaggle.com/dansbecker/programming-in-tensorflow-and-keras).
+@@ tut3_programming_tf_and_keras:0
+# Introduzione
+Imparerai a usare codice TensorFlow e Keras per applicare un modello di computer vision già addestrato.
+
+# Lezione originale
+Il video richiamato nella cella seguente è esterno e non tradotto. Il codice e le istruzioni disponibili nel repository sono conservati qui sotto.
+@@ tut3_programming_tf_and_keras:2
+# Codice di esempio
+## Scegliere le immagini
+@@ tut3_programming_tf_and_keras:4
+## Funzione per leggere e preparare le immagini
+@@ tut3_programming_tf_and_keras:6
+## Creare il modello con pesi preaddestrati e generare previsioni
+@@ tut3_programming_tf_and_keras:8
+## Visualizzare le previsioni
+@@ tut3_programming_tf_and_keras:10
+Ora **[usa un modello TensorFlow nell'esercizio](#$EXERCISE_FORKING_URL$)**.
+@@ tut4_transfer_learning:0
+# Introduzione
+Il **transfer learning** riutilizza un modello preaddestrato per un nuovo compito, anche con relativamente pochi dati. La lezione mostra come applicarlo alla computer vision.
+
+# Lezione originale
+Il video esterno non è incluso nei sorgenti e non è stato tradotto. Seguono istruzioni e codice disponibili.
+@@ tut4_transfer_learning:2
+# Codice di esempio
+## Definire il modello
+@@ tut4_transfer_learning:4
+## Compilare il modello
+@@ tut4_transfer_learning:6
+## Addestrare il modello
+@@ tut4_transfer_learning:8
+## Interpretare i risultati
+In questa fase l'accuracy di validazione può essere superiore a quella di training. Il risultato può sorprendere, ma le due misure sono calcolate in momenti diversi.
+
+La training accuracy aggrega previsioni fatte mentre i pesi stanno ancora migliorando; include quindi le prime immagini, viste con un modello meno addestrato. Loss e accuracy di validazione si calcolano invece dopo il passaggio completo sui dati, con i pesi aggiornati. Questo può spiegare parte della differenza senza indicare un problema.
+@@ tut4_transfer_learning:9
+Ora **[prova il transfer learning](#$EXERCISE_FORKING_URL$)**.
+@@ tut5_data_augmentation:0
+# Introduzione
+La **data augmentation** crea variazioni degli esempi di training, offrendo al modello più situazioni da cui apprendere. Può migliorare la generalizzazione, senza equivalere alla raccolta di nuovi esempi indipendenti.
+
+# Lezione originale
+Il video esterno è conservato come riferimento e non è stato tradotto.
+@@ tut5_data_augmentation:2
+# Codice di esempio
+Riprendiamo la configurazione del modello già studiata. Nell'interfaccia originale la cella era nascosta ma visualizzabile con il pulsante del codice.
+@@ tut5_data_augmentation:4
+## Addestrare con data augmentation
+@@ tut5_data_augmentation:6
+Ora **[applica la data augmentation](#$EXERCISE_FORKING_URL$)**.
+@@ tut6_deep_understanding:0
+# Introduzione
+La lezione affronta **stochastic gradient descent** e **backpropagation**, usati per aggiornare i pesi. Sono concetti complessi ma centrali per capire il deep learning.
+
+# Lezione originale
+Il video è esterno al repository e non tradotto. Per una spiegazione italiana disponibile nei sorgenti di AI Lab consulta anche il corso Intro to Deep Learning.
+@@ tut6_deep_understanding:2
+Ora puoi passare alle [reti costruite da zero](https://www.kaggle.com/dansbecker/deep-learning-from-scratch).
+
+Riferimento citato nel video: [attivazione ReLU](https://www.kaggle.com/dansbecker/rectified-linear-units-relu-in-deep-learning).
+@@ tut7_dl_from_scratch:0
+# Introduzione
+Finora hai usato modelli preaddestrati, che non sono sempre la soluzione più adatta. Qui impari a costruire una nuova architettura e addestrarla da zero.
+
+# Lezione originale
+Il video esterno non è stato tradotto. Conserviamo il codice disponibile nel repository.
+@@ tut7_dl_from_scratch:2
+# Codice di esempio
+@@ tut7_dl_from_scratch:4
+Ora **[costruisci il tuo modello](#$EXERCISE_FORKING_URL$)**.
+@@ tut8_dropout_and_strides:0
+# Introduzione
+Questa lezione introduce:
+
+* **Stride**, il passo della convoluzione, per ridurre calcoli e memoria.
+* **Dropout**, per contrastare l'overfitting.
+
+Sono tecniche particolarmente utili nei modelli grandi.
+
+# Lezione originale
+Il video esterno richiamato dal codice non è stato tradotto.
+@@ tut8_dropout_and_strides:2
+# Codice di esempio
+@@ tut8_dropout_and_strides:4
+**[Sperimenta dropout e stride](#$EXERCISE_FORKING_URL$)** con modelli più grandi.
+@@ ex1_convolutions:0
+# Introduzione
+Nel deep learning i valori dei filtri convoluzionali non vengono scelti a mano: si apprendono dai dati durante l'addestramento.
+
+![Esempio di convoluzione](https://storage.googleapis.com/kaggle-media/learn/images/op9Maqr.png)
+
+Esaminare come una convoluzione trasforma un'immagine aiuta però a capire il modello e individuare problemi.
+
+# Esercizi
+Esegui la cella seguente per caricare le funzioni che visualizzano immagini e risultati.
+@@ ex1_convolutions:2
+## 1. Individuare linee
+Nel video un filtro individuava linee orizzontali. Esegui il codice per confrontare l'immagine iniziale con il risultato della convoluzione.
+@@ ex1_convolutions:4
+Ora costruisci un filtro per **linee verticali**: sostituisci gli underscore con numeri, togli i commenti dalle due righe indicate ed esegui.
+@@ ex1_convolutions:6
+Per leggere un suggerimento o una soluzione, rimuovi il commento dalla chiamata corrispondente.
+@@ ex1_convolutions:9
+## 2. Dimensione del filtro
+Hai visto filtri 2×2, ma esistono anche 3×3, 4×4 e rettangolari, per esempio 4×7. Un filtro più grande può rappresentare più, meno o lo stesso numero di configurazioni visive rispetto a uno piccolo? Ragiona, poi esegui il controllo.
+@@ ex1_convolutions:11
+Prosegui con [la combinazione delle convoluzioni in modelli](https://www.kaggle.com/dansbecker/building-models-from-convolutions).
+@@ ex3_programming_tf_and_keras:0
+# Introduzione
+La serie *Silicon Valley* presentava un'app chiamata **See Food** per riconoscere cibo. Qui confronterai modelli preaddestrati per scegliere un motore di riconoscimento. Per ora concentrati sull'uso dei modelli; lo sviluppo interno verrà dopo.
+
+# Configurazione
+@@ ex3_programming_tf_and_keras:1
+Esegui le celle iniziali senza dover comprendere ogni dettaglio.
+
+## 1. Percorsi delle immagini
+Salva in **`img_paths`** i percorsi di alcune immagini disponibili nell'ambiente originale.
+@@ ex3_programming_tf_and_keras:3
+## 2. Eseguire un modello di esempio
+Il codice carica dati e modello preaddestrato, poi genera previsioni. Eseguilo.
+@@ ex3_programming_tf_and_keras:5
+## 3. Visualizzare le previsioni
+@@ ex3_programming_tf_and_keras:7
+## 4. Attivare i controlli
+Esegui la cella che inizializza i controlli originali prima di scrivere il tuo codice.
+@@ ex3_programming_tf_and_keras:9
+# Esercizi
+Scriverai funzioni riutilizzabili per confrontare modelli nel riconoscimento degli hot dog.
+
+## 1. Riconoscere un hot dog
+Il modello produce 1.000 categorie, ma ci interessa una risposta binaria. Scrivi **`is_hot_dog`**: riceve previsioni nel formato di **`preds`** e restituisce una lista di valori **True/False**.
+
+Procedi una riga alla volta, controllando i risultati fuori dalla funzione, poi assembla il codice. Le immagini sono due hot dog seguiti da due altri cibi: il risultato atteso è **`[True, True, False, False]`**. Usa **`decode_predictions`**, come nell'esempio.
+@@ ex3_programming_tf_and_keras:11
+Puoi togliere il commento alla chiamata per un suggerimento o la soluzione. Se la tua funzione non funziona, studia e inserisci la soluzione: servirà nel passaggio successivo.
+@@ ex3_programming_tf_and_keras:14
+## 2. Valutare l'accuracy
+Il modello **`my_model`** è adatto all'app? Scrivi una funzione riutilizzabile che riceve modello e dati e restituisce la frazione di classificazioni corrette. Riutilizza **`is_hot_dog`**.
+
+Il flusso dell'esempio è:
+
+```python
+my_model = ResNet50(weights='../input/resnet50/resnet50_weights_tf_dim_ordering_tf_kernels.h5')
+test_data = read_and_prep_images(img_paths)
+preds = my_model.predict(test_data)
+```
+@@ ex3_programming_tf_and_keras:16
+Rimuovi il commento alla chiamata corrispondente se desideri un suggerimento o la soluzione.
+@@ ex3_programming_tf_and_keras:19
+## 3. Confrontare un altro modello
+Oltre a ResNet esiste **VGG16**, un precedente vincitore della competizione ImageNet. Concentrati per ora sul procedimento d'uso.
+
+ResNet50 veniva creato con:
+
+```python
+my_model = ResNet50(weights='../input/resnet50/resnet50_weights_tf_dim_ordering_tf_kernels.h5')
+```
+
+I pesi VGG16 sono in **`../input/vgg16/vgg16_weights_tf_dim_ordering_tf_kernels.h5`**. Crea il modello con quei pesi e usa **`calc_accuracy`**. Va meglio o peggio di ResNet?
+@@ ex3_programming_tf_and_keras:21
+Per un suggerimento o la soluzione rimuovi il commento dalla relativa chiamata.
+@@ ex3_programming_tf_and_keras:24
+Se l'app deve funzionare su un telefono, quali fattori contano oltre all'accuracy? Ragiona su tempi, memoria e dimensione del modello.
+@@ ex3_programming_tf_and_keras:25
+Il [transfer learning](https://www.kaggle.com/dansbecker/transfer-learning/) ti permetterà di adattare modelli potenti a nuovi obiettivi.
+@@ ex4_transfer_learning:0
+# Introduzione
+Un operatore digitalizza molte fotografie con uno scanner. Alcune risultano ruotate e deve correggerle a mano. Costruirai un classificatore che distingua immagini dritte e ruotate per automatizzare parte del lavoro.
+
+Un prodotto commerciale richiederebbe una verifica più ampia, ma per l'esercizio userai poche immagini di cani, metà ruotate. Definizione e compilazione sono simili all'esempio; cambierà il training.
+
+Esegui la cella per attivare i controlli.
+@@ ex4_transfer_learning:2
+# 1. Definire il modello
+Parti dal codice fornito. Copiare e adattare esempi è normale nei primi progetti. Completa le parti indicate con **`____`** ed esegui.
+@@ ex4_transfer_learning:6
+# 2. Compilare
+Esegui la chiamata **`compile`** fornita.
+@@ ex4_transfer_learning:8
+La compilazione è quasi istantanea. Perché, se il deep learning richiede spesso molti calcoli? Ragiona prima di leggere la risposta nella cella seguente.
+@@ ex4_transfer_learning:10
+# 3. Capire la compilazione
+Hai passato **`optimizer`**, **`loss`** e **`metrics`**. Quali argomenti possono influenzare l'addestramento e quindi le previsioni? Ragiona, poi consulta la soluzione. Le metriche, da sole, misurano il risultato senza definire l'obiettivo ottimizzato.
+@@ ex4_transfer_learning:12
+# 4. Addestrare
+Le immagini di training sono in **`../input/dogs-gone-sideways/images/train`**, quelle di validazione in **`../input/dogs-gone-sideways/images/val`**. Configura **`train_generator`** e **`validation_generator`** con questi percorsi.
+
+Ci sono **220 immagini di training** e **217 di validazione**. Con batch da 10, determina **`steps_per_epoch`** nella chiamata storica **`fit_generator`**. Completa gli spazi ed esegui, osservando pesi e accuracy durante il training.
+@@ ex4_transfer_learning:16
+Quale frazione di immagini di validazione viene classificata correttamente? Nel prossimo passaggio proverai a migliorare il risultato con la [data augmentation](https://www.kaggle.com/dansbecker/data-augmentation/), applicata allo stesso problema.
+@@ ex5_data_augmentation:0
+# Introduzione
+Riprendiamo il riconoscimento delle immagini ruotate e aggiungiamo **data augmentation**. Definizione e compilazione del modello restano uguali: esegui il codice fornito per prepararlo.
+@@ ex5_data_augmentation:2
+# 1. Addestrare con augmentation
+Esegui la configurazione degli **ImageDataGenerator**, poi rispondi alle domande.
+@@ ex5_data_augmentation:4
+Perché servono sia un generatore con augmentation sia uno senza? Ragiona prima di leggere la soluzione.
+@@ ex5_data_augmentation:6
+# 2. Scegliere trasformazioni adatte
+**`rotation_range`** applica rotazioni casuali fino all'angolo indicato. È sensato usarlo se il target distingue immagini dritte e ruotate? Perché? Le trasformazioni devono preservare il significato dell'etichetta.
+@@ ex5_data_augmentation:8
+# 3. Codice
+Completa le parti mancanti, scegliendo il generatore corretto per ogni origine dei dati.
+@@ ex5_data_augmentation:12
+# 4. L'augmentation ha aiutato?
+Come potresti verificare se ha migliorato l'accuracy? Confronta sullo stesso validation set senza trasformazioni casuali.
+@@ ex5_data_augmentation:14
+Prosegui con [i meccanismi del deep learning](https://www.kaggle.com/dansbecker/a-deeper-understanding-of-deep-learning/).
+@@ ex7_from_scratch:0
+# Introduzione
+Dopo il riconoscimento di cifre, costruirai un modello per categorie di abbigliamento con immagini piccole, così da contenere i tempi.
+
+![Esempio di scarpa](https://storage.googleapis.com/kaggle-media/learn/images/GyXOnSB.png)
+@@ ex7_from_scratch:1
+# Preparare i dati
+Esegui il codice fornito senza modificarlo.
+@@ ex7_from_scratch:3
+# 1. Iniziare il modello
+Crea un **Sequential** chiamato **`fashion_model`**, senza aggiungere ancora layer.
+@@ ex7_from_scratch:6
+# 2. Primo layer
+Aggiungi **Conv2D** con **12 filtri**, **kernel_size 3** e attivazione **ReLU**. La forma dell'ingresso è **`(img_rows, img_cols, 1)`**, con le dimensioni già disponibili nelle variabili.
+@@ ex7_from_scratch:9
+# 3. Altri layer
+Aggiungi altri **due Conv2D**, ciascuno con **20 filtri**, kernel 3 e ReLU. Poi **Flatten** e un **Dense da 100 neuroni**. L'uscita è Dense con **`num_classes`** unità e attivazione **softmax**.
+@@ ex7_from_scratch:12
+# 4. Compilare
+Usa **`loss="categorical_crossentropy"`**, **`optimizer='adam'`** e **`metrics=['accuracy']`**.
+@@ ex7_from_scratch:15
+# 5. Addestrare
+Chiama **`fashion_model.fit`** con immagini e target ottenuti da **`prep_data`** nella cella iniziale. Imposta **`batch_size=100`**, **`epochs=4`** e **`validation_split=0.2`**. Osserva l'accuracy di validazione a ogni epoca.
+@@ ex7_from_scratch:18
+# 6. Confrontare un nuovo modello
+Crea **`second_fashion_model`** cambiando numero di layer o filtri. Definiscilo, compilalo e addestralo. Confronta il risultato di validazione con il modello iniziale, mantenendo la divisione dei dati comparabile.
+@@ ex7_from_scratch:22
+Prosegui con [stride e dropout](https://www.kaggle.com/dansbecker/dropout-and-strides-for-larger-models), utili quando crescono dimensioni e complessità del modello.
+@@ ex8_dropout_strides:0
+# Introduzione
+Hai costruito un modello su **Fashion MNIST**. Ora sperimenterai modelli più grandi, stride maggiori e dropout, osservando effetti su velocità e accuratezza. È l'ultimo passaggio del precedente [corso Deep Learning](https://www.kaggle.com/learn/deep-learning).
+
+## Preparazione
+Esegui la cella dei dati.
+@@ ex8_dropout_strides:2
+# 1. Aumentare lo stride
+Esegui il modello iniziale, che usa stride 1. Annota accuracy e tempo per epoca: serviranno per il confronto.
+@@ ex8_dropout_strides:4
+Nel modello **`fashion_model_1`**, cambia lo stride della **seconda convoluzione a 2**. Esegui e confronta velocità e accuracy con il modello precedente.
+@@ ex8_dropout_strides:6
+Per vedere la soluzione, rimuovi il commento ed esegui la cella seguente.
+@@ ex8_dropout_strides:8
+Nell'esempio originale il training diventava circa due volte più rapido con una differenza modesta nell'accuracy. Anche la previsione può diventare più veloce, un fattore rilevante in molte applicazioni. I tempi effettivi dipendono dall'ambiente.
+
+Puoi provare altri layer o filtri per cercare un compromesso migliore fra velocità e prestazioni.
+@@ ex8_dropout_strides:9
+# Conclusione
+Hai completato il precedente corso di deep learning e puoi sperimentare modelli di computer vision. Prova dropout, altri layer o un nuovo dataset. I riferimenti originali includono:
+
+* [Lettere scritte a mano](https://www.kaggle.com/olgabelitskaya/classification-of-handwritten-letters).
+* [Fiori](https://www.kaggle.com/alxmamaev/flowers-recognition).
+* [Cani e gatti](https://www.kaggle.com/c/dogs-vs-cats-redux-kernels-edition).
+* [Dieci specie di scimmie](https://www.kaggle.com/slothkong/10-monkey-species).
+* [Età ossea da radiografie](https://www.kaggle.com/kmader/rsna-bone-age), come studio didattico, senza uso clinico.
+
+Disponibilità e licenze dei dataset esterni vanno verificate prima dell'uso.
+@@ tut_tpus:0
+# Introduzione
+La competizione [Petals to the Metal](https://www.kaggle.com/c/tpu-getting-started) richiede di classificare **104 tipi di fiori** da immagini. Il tutorial costruisce un classificatore Keras e lo addestra su [TPU](https://www.kaggle.com/docs/tpu).
+
+L'originale suggerisce **Copy and Edit** per creare una copia modificabile. In AI Lab il notebook è conservato come approfondimento infrastrutturale: dati, TPU e dipendenze esterne non sono verificati.
+@@ tut_tpus:1
+# 1. Importazioni
+Iniziamo importando i pacchetti Python necessari.
+@@ tut_tpus:3
+# 2. Strategia di distribuzione
+La configurazione TPU descritta ha **otto core**, ciascuno usato come acceleratore. La **distribution strategy** indica a TensorFlow come suddividere il lavoro. Esegui la cella nell'ambiente compatibile originale per crearla.
+@@ tut_tpus:5
+La strategia viene usata alla creazione del modello, con una replica per core.
+
+# 3. Dati della competizione
+## Percorso GCS
+Nell'ambiente TPU descritto i dati devono essere accessibili tramite [Google Cloud Storage](https://cloud.google.com/storage/). Un percorso pubblico GCS può essere usato come un percorso dei dati Kaggle. La cella recupera quello della competizione.
+@@ tut_tpus:7
+Il procedimento vale per dataset pubblici Kaggle; per quelli privati il testo rinvia alla [documentazione TPU](https://www.kaggle.com/docs/tpu#tpu3pt5).
+
+## Leggere i dati
+Il formato [TFRecord](https://www.kaggle.com/ryanholbrook/tfrecords-basics) facilita la distribuzione dei dati sui core. La cella di lettura è lunga e nell'interfaccia originale era nascosta: puoi studiarla per adattare dati tuoi.
+@@ tut_tpus:9
+## Pipeline
+Usiamo **`tf.data`** per preparare pipeline efficienti di training, validazione e test.
+@@ tut_tpus:11
+La cella crea i dataset per Keras e adatta la dimensione dei batch al numero di core TPU.
+@@ tut_tpus:13
+Gli oggetti **`tf.data.Dataset`** possono essere visti come flussi di record. Training e validazione contengono coppie **`(image, label)`**.
+@@ tut_tpus:15
+Il test contiene **`(image, idnum)`**: l'ID identifica l'immagine nel successivo CSV di invio.
+@@ tut_tpus:17
+# 4. Esplorare i dati
+Osserviamo alcune immagini.
+@@ tut_tpus:19
+Una funzione ausiliaria visualizza un batch. Creiamo un iteratore che restituisce **20 immagini** alla volta.
+@@ tut_tpus:21
+Usa **`next`** per ottenere il batch successivo e visualizzarlo.
+@@ tut_tpus:23
+Poiché **`ds_iter`** e **`one_batch`** sono definiti in celle separate, basta rieseguire quella del batch per vedere altre immagini.
+@@ tut_tpus:24
+# 5. Definire il modello
+Usiamo **transfer learning**: riutilizziamo parte di un modello preaddestrato. Qui si sceglie **VGG16**, addestrato su [ImageNet](https://image-net.org/). Puoi confrontare altri [modelli Keras](https://www.tensorflow.org/api_docs/python/tf/keras/applications), per esempio [Xception](https://www.tensorflow.org/api_docs/python/tf/keras/applications/Xception).
+
+Definisci il modello dentro **`strategy.scope()`**, un [context manager Python](https://docs.python.org/3/reference/compound_stmts.html#with), affinché TensorFlow applichi la distribuzione sui core.
+@@ tut_tpus:26
+Le versioni **`sparse_categorical`** di loss e metriche sono appropriate per etichette intere in una classificazione multiclasse.
+@@ tut_tpus:28
+# 6. Addestramento
+## Pianificazione del learning rate
+Il training usa una pianificazione specifica del passo di apprendimento.
+@@ tut_tpus:30
+## Fit
+Definiti i parametri, possiamo avviare l'addestramento.
+@@ tut_tpus:32
+La cella seguente mostra l'evoluzione di loss e metriche; nell'esempio originale il modello converge.
+@@ tut_tpus:34
+# 7. Valutare le previsioni
+Prima di prevedere sul test, studia la validazione per individuare errori e possibili miglioramenti. Useremo **matrice di confusione** e **ispezione visiva**.
+@@ tut_tpus:36
+## Matrice di confusione
+La [matrice di confusione](https://en.wikipedia.org/wiki/Confusion_matrix) incrocia classi reali e previste. La cella prepara i dati e usa **`confusion_matrix`** di [scikit-learn](https://scikit-learn.org/stable/index.html).
+@@ tut_tpus:38
+La cella calcola anche [F1](https://en.wikipedia.org/wiki/F1_score), [precision e recall](https://en.wikipedia.org/wiki/Precision_and_recall). Le funzioni provengono da **`sklearn.metrics`**, importate nello script ausiliario.
+@@ tut_tpus:40
+## Ispezione visiva
+Osservare immagini ed etichette previste aiuta a scoprire errori ricorrenti. Configuriamo la visualizzazione di **20 immagini** per volta; puoi modificare il numero.
+@@ tut_tpus:42
+Visualizza i fiori con le specie previste. Riesegui per ottenere un altro gruppo.
+@@ tut_tpus:44
+# 8. Previsioni sul test
+Quando sei soddisfatto della validazione, genera le previsioni sul test.
+@@ tut_tpus:46
+Creiamo **`submission.csv`**, il file da inviare per ottenere un punteggio in classifica.
+@@ tut_tpus:48
+# 9. Invio
+Nella procedura originale, se necessario si creava una copia con **Copy and Edit** prima dell'invio.
+
+#$SUBMIT_TO_COMP$
+@@ ex_tpus:0
+Questo esercizio prepara il primo invio a [Petals to the Metal](https://www.kaggle.com/c/tpu-getting-started). Il testo originale descrive regole, uso di TPU gratuite e classifica; disponibilità attuale non verificata. Per il codice rimanda al [tutorial originale](https://www.kaggle.com/ryanholbrook/create-your-first-submission).
+@@ ex_tpus:1
+# Iscriversi
+Apri la [competizione](https://www.kaggle.com/c/tpu-getting-started) e la scheda **Rules**. Leggi le regole su invii, squadre e condizioni, poi accetta con **I Understand and Accept** se intendi partecipare.
+
+# Salvare ed eseguire
+Il salvataggio con esecuzione completa produce una copia di **`submission.csv`**. La procedura storica era:
+
+1. Selezionare **Save Version**.
+2. Aprire **Advanced Settings**.
+3. Scegliere **Run with TPU for this session** e salvare.
+4. Selezionare **Save & Run All (Commit)** e **Save**.
+
+![Salvare](https://storage.googleapis.com/kaggle-media/learn/images/ebMUMSq.png)
+![Impostazioni avanzate](https://storage.googleapis.com/kaggle-media/learn/images/sx9l1fL.png)
+![Acceleratore](https://storage.googleapis.com/kaggle-media/learn/images/1cB5ykf.png)
+![Esecuzione completa](https://storage.googleapis.com/kaggle-media/learn/images/YeJLsNG.png)
+
+L'esecuzione poteva richiedere 10–15 minuti. Alla fine si apriva l'elenco delle versioni dal numero accanto al pulsante e si selezionava **… > Open in Viewer** sulla versione recente.
+
+# Inviare
+Si apriva **Output**, poi **Submit**, per inviare il file e ricevere il risultato.
+
+![Output](https://storage.googleapis.com/kaggle-media/learn/images/thKwt1q.png)
+![Invio](https://storage.googleapis.com/kaggle-media/learn/images/j00mDeI.png)
+
+Le schermate sono storiche e non attestano il funzionamento attuale.
+@@ ex_tpus:2
+# Codice
+Il codice riproduce il [tutorial](https://www.kaggle.com/ryanholbrook/create-your-first-submission) ed era eseguito durante il salvataggio completo.
+
+## Caricare le funzioni ausiliarie
+@@ ex_tpus:4
+## Creare la strategia di distribuzione
+@@ ex_tpus:6
+## Caricare i dati della competizione
+@@ ex_tpus:8
+## Esplorare i dati
+Usa le funzioni ausiliarie del tutorial per esaminare il dataset.
+@@ ex_tpus:10
+Controlla la forma dei dati.
+@@ ex_tpus:13
+Visualizza esempi di training.
+@@ ex_tpus:15
+## Definire il modello
+@@ ex_tpus:17
+## Addestrare
+@@ ex_tpus:19
+Esamina le curve di apprendimento.
+@@ ex_tpus:21
+## Validazione
+Crea una matrice di confusione.
+@@ ex_tpus:24
+Confronta immagini, etichette reali e previsioni.
+@@ ex_tpus:27
+## Previsioni sul test
+Genera le previsioni da inviare.
+@@ ex_tpus:30
+# Approfondire
+Prova a migliorare il modello. La precedente competizione [Flower Classification with TPUs](https://www.kaggle.com/c/flower-classification-with-tpus) offre notebook e discussioni con idee da studiare.

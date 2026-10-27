@@ -1,0 +1,5 @@
+Melbourne Housing Snapshot by Dan Becker, based on the Melbourne Housing Market dataset by Tony Pino.
+https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot
+License: CC-BY-NC-SA-4.0
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+Dataset terms are separate from the Apache-2.0 code license.

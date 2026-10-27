@@ -1,0 +1,29 @@
+{
+  "mode": "jsdom",
+  "note": "Functional DOM checks only; no graphical layout or screenshot validation.",
+  "results": [
+    {
+      "check": "search_theme_navigation",
+      "media_context": "desktop",
+      "status": "passed"
+    },
+    {
+      "check": "search_theme_navigation",
+      "media_context": "mobile",
+      "status": "passed"
+    },
+    {
+      "check": "local_math_and_image_fallback",
+      "status": "passed"
+    },
+    {
+      "check": "search_failure_message",
+      "status": "passed"
+    },
+    {
+      "check": "saved_example_inference_interface",
+      "status": "passed",
+      "note": "Uses existing parameters; no training."
+    }
+  ]
+}
