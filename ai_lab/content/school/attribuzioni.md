@@ -4,13 +4,13 @@
 
 ## Materiali Kaggle
 
-Sorgenti: [fork del docente](https://github.com/prof-davidaffo/kaggle-learntools) e [repository originale Kaggle/learntools](https://github.com/Kaggle/learntools). I materiali sono derivati dal commit registrato nell’[inventario](inventory.json). Il codice originale non è stato modificato.
+Sorgenti: [fork del docente](https://github.com/prof-davidaffo/kaggle-learntools) e [repository originale Kaggle/learntools](https://github.com/Kaggle/learntools). I materiali sono derivati dal commit registrato nell’[inventario](inventory.json). I file sorgente originali sono conservati.
 
 Il repository originale usa **Apache License 2.0**. La [licenza completa](LICENSE-Kaggle.txt) è inclusa nel sito; il file `LICENSE` originale resta nella radice. Nella copia analizzata non è presente un file NOTICE. Restano validi gli avvisi degli autori presenti nei sorgenti.
 
 I metadati originali attribuiscono il corso Machine Learning a **Dan Becker**, con contributi di **Alexis Cook**, e Intro to Deep Learning a **Ryan Holbrook**. Il corso storico Deep Learning è attribuito a Dan Becker, con materiali TPU di Ryan Holbrook. Le pagine collegano i file di provenienza e ne conservano i riferimenti.
 
-Le traduzioni italiane sono **adattamenti didattici AI Lab**: mantengono concetti, progressione e codice, con formulazioni più compatte dove opportuno e note esplicite sui servizi storici. Non sono una trascrizione dei video esterni. Il codice delle celle originali resta in inglese. Obiettivi, prerequisiti e autovalutazione aggiunti sono identificati come materiale scolastico.
+Le traduzioni italiane sono adattamenti AI Lab dei testi e dei commenti didattici disponibili nei sorgenti. Le istruzioni Python, gli identificatori e le API restano invariati. I video esterni non sono tradotti.
 
 ## Materiale originale AI Lab
 

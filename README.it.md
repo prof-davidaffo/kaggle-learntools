@@ -1,11 +1,11 @@
 # AI Lab — Machine Learning e Deep Learning con Python
 
-Corso in italiano per la scuola secondaria di secondo grado: **16 ore, otto incontri**, con lezioni ed esercizi ricavati dai sorgenti Kaggle Learn, dataset originali e progetto finale guidato.
+Corso in italiano per la scuola secondaria di secondo grado: i corsi completi **Intro to Machine Learning** e **Intro to Deep Learning**, con lezioni ed esercizi tradotti dai sorgenti Kaggle Learn e dataset originali.
 
 La piattaforma è in `ai_lab/`. Le directory originali Kaggle e il README originale rimangono intatti.
 
 - [Guida completa in italiano](ai_lab/README.md): installazione, build, manutenzione e pubblicazione.
-- [Programma degli otto incontri](ai_lab/content/school/percorso.md).
+- [Istruzioni per Colab e Jupyter](ai_lab/content/school/esecuzione.md).
 - [Dataset e istruzioni per gli studenti](ai_lab/content/school/dataset.md).
 - [Inventario e risultati delle verifiche](ai_lab/reports/VERIFICA.md).
 - [Workflow GitHub Pages](.github/workflows/ai-lab-pages.yml): pubblicazione manuale, successiva alla revisione.

@@ -45,14 +45,16 @@ jobs:
           cache-dependency-path: ai_lab/requirements/site.txt
       - name: Install site dependencies
         run: python -m pip install -r ai_lab/requirements/site.txt
-      - name: Generate school material
-        run: |
-          python ai_lab/tools/school_notebooks.py
-          python ai_lab/tools/programme.py
+      - name: Generate additional notebooks
+        run: python ai_lab/tools/school_notebooks.py
       - name: Generate translated notebooks and build static site
         run: python ai_lab/tools/build.py
       - name: Check pages, internal links and notebook files
         run: python ai_lab/tools/check.py
+      - name: Check Colab runtime downloads and adapters
+        run: python ai_lab/qa/check-colab.py
+      - name: Check versioned Colab notebooks are up to date
+        run: git diff --exit-code -- ai_lab/colab
       - name: Save verification report
         if: always()
         uses: actions/upload-artifact@v4
@@ -73,9 +75,30 @@ jobs:
         with:
           path: ai_lab/build
 
+  colab-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: ai_lab/requirements/colab-checks.txt
+      - name: Install checker integration dependencies
+        run: python -m pip install -r ai_lab/requirements/colab-checks.txt
+      - name: Check Keras compatibility without model training
+        run: python ai_lab/qa/check-colab.py --keras
+      - name: Save Colab compatibility report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-lab-colab-compatibility
+          path: ai_lab/reports/colab-checks.json
+          if-no-files-found: ignore
+
   deploy:
     if: github.event_name == 'workflow_dispatch' && inputs.publish
-    needs: build
+    needs: [build, colab-checks]
     runs-on: ubuntu-latest
     permissions:
       contents: read

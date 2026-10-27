@@ -1,0 +1,255 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "ai_lab/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "ai_lab/NOTICE",
+      "bytes": 445,
+      "sha256": "b0e16218f31607af7c595705938ca64ef655dbb2edcd3b00f565c869ea0896f7"
+    },
+    {
+      "path": "ai_lab/datasets.json",
+      "bytes": 3535,
+      "sha256": "1be265c3509c1cafd34e748e4715a0acf7fddb9bfbaa27e5d431fcb93b7e3896"
+    },
+    {
+      "path": "ai_lab/input/dl-course-data/ATTRIBUTION.txt",
+      "bytes": 357,
+      "sha256": "b092a0f1b248b6ca1249eee90154d70d58df22fb0cb5d715b9c6b82cbea366d4"
+    },
+    {
+      "path": "ai_lab/input/dl-course-data/concrete.csv",
+      "bytes": 48486,
+      "sha256": "901749b7e40a90657777fb0a88489638f2d9f80546e72b28cf720a2fdd778a76"
+    },
+    {
+      "path": "ai_lab/input/dl-course-data/fuel.csv",
+      "bytes": 92128,
+      "sha256": "0b030fa9d256830c7d99313e76c4084eaf73d6b40200358a989d5cdfbc03d736"
+    },
+    {
+      "path": "ai_lab/input/dl-course-data/hotel.csv",
+      "bytes": 16855599,
+      "sha256": "7c2ae42a7353905ea136e5c2287f17c92c5435826598bfbb8491c6f0c7b1fc06"
+    },
+    {
+      "path": "ai_lab/input/dl-course-data/ion.csv",
+      "bytes": 80563,
+      "sha256": "b4d79463764f2eea7b77228100a5b687577717fc35aacf2e72575bcfd4cddec7"
+    },
+    {
+      "path": "ai_lab/input/dl-course-data/red-wine.csv",
+      "bytes": 100951,
+      "sha256": "d6a0d9bd24806944818795f22500c46cb6424cbff517aacda36595d3ed9b2daa"
+    },
+    {
+      "path": "ai_lab/input/dl-course-data/spotify.csv",
+      "bytes": 7971379,
+      "sha256": "9902920cfe4940f0914ebb6716801a42f7f19ac88fbd6693eaae7e2822b16845"
+    },
+    {
+      "path": "ai_lab/input/home-data-for-ml-course/ATTRIBUTION.txt",
+      "bytes": 351,
+      "sha256": "39b5a14deb8a7357aaf3a0d903236b531316da1cd7823530e9bb1fc381daa1c9"
+    },
+    {
+      "path": "ai_lab/input/home-data-for-ml-course/test.csv",
+      "bytes": 451405,
+      "sha256": "8fdd3d829d4d986b58f845c9553b225e67dd8383624d90fb6ca1d4bed5798c1e"
+    },
+    {
+      "path": "ai_lab/input/home-data-for-ml-course/train.csv",
+      "bytes": 460676,
+      "sha256": "1e18addf81e5e4d347cc17ee6075bbe4a42b7fa26b9e5b063e8f692a5f929d41"
+    },
+    {
+      "path": "ai_lab/input/melbourne-housing-snapshot/ATTRIBUTION.txt",
+      "bytes": 309,
+      "sha256": "79c9d16f63717e821bab55bfa768b1e45582d9bc05b1d3f87b944fe34a5db4a3"
+    },
+    {
+      "path": "ai_lab/input/melbourne-housing-snapshot/melb_data.csv",
+      "bytes": 2091239,
+      "sha256": "3e449c3e95088da8a3a6b10331a5703f2c951d0740f317f97ed9baf0db1fd9f8"
+    },
+    {
+      "path": "ai_lab/localization/it.json",
+      "bytes": 6265,
+      "sha256": "007c56737401e9277a8678f84e17999ef029b195ed5288506053e455fdba9052"
+    },
+    {
+      "path": "ai_lab/tools/colab_runtime.py",
+      "bytes": 3355,
+      "sha256": "24c516651bf205b1c9511923ad4971fdca39a6248568d2b3aa46c198e64d1821"
+    },
+    {
+      "path": "ai_lab/tools/feedback.py",
+      "bytes": 4074,
+      "sha256": "72eb184f373bd2d4262a9cc91829cf87657fe13dc183e7c2cc24dd68e77ee1e6"
+    },
+    {
+      "path": "ai_lab/tools/keras_compat.py",
+      "bytes": 2719,
+      "sha256": "7963e5fd7f8c824567d92ef78512dcf653417c17bd484f38772608b5be676da2"
+    },
+    {
+      "path": "learntools/__init__.py",
+      "bytes": 206,
+      "sha256": "ee94d1736d0e69c097c4e9773122227c8eb8a713ff138215b1b732e1cea63e18"
+    },
+    {
+      "path": "learntools/core/__init__.py",
+      "bytes": 1633,
+      "sha256": "8c6f73203d6c48ec3cb38557222070a8fde2718b83e42b1159a9ddaeb2e80eaf"
+    },
+    {
+      "path": "learntools/core/asserts.py",
+      "bytes": 6825,
+      "sha256": "fbbbc926bdb8d06070f1ce5ca4b00f582c7ecc1855d11b4d3de577a062b0bfc2"
+    },
+    {
+      "path": "learntools/core/colors.py",
+      "bytes": 115,
+      "sha256": "5956fe93f927b223aa595425d572e2a031c933c8022b343776acf082df89d27c"
+    },
+    {
+      "path": "learntools/core/constants.py",
+      "bytes": 711,
+      "sha256": "b5b6c06b8c7732bd501f36b7af49fe076f05b8607616fecb2518aaeaf93090b4"
+    },
+    {
+      "path": "learntools/core/exceptions.py",
+      "bytes": 641,
+      "sha256": "2c05bf35791952d2f2af8685fed3909bd0111fd8a1242031167ac9ae2679a587"
+    },
+    {
+      "path": "learntools/core/globals_binder.py",
+      "bytes": 1320,
+      "sha256": "449b88062c464dfc29fc1497cc8407499ddef6eea3e061e5b6dff335f7164bbe"
+    },
+    {
+      "path": "learntools/core/multiproblem.py",
+      "bytes": 797,
+      "sha256": "78f7d8799ec58e5924270fd371a5f3a07406aa0f0d16bf3a6f633d0a1ee0901c"
+    },
+    {
+      "path": "learntools/core/problem.py",
+      "bytes": 10699,
+      "sha256": "4ae5bbc0c07d0faed4c4b5643ebe1bc1a2aa9ed6d7980fad9a63e3587e91159e"
+    },
+    {
+      "path": "learntools/core/problem_view.py",
+      "bytes": 6831,
+      "sha256": "4afbc3654ff3e536782e9b413a9aceb4bdb83a99d41c20e0ef9a31c643a72fdd"
+    },
+    {
+      "path": "learntools/core/richtext.py",
+      "bytes": 3454,
+      "sha256": "439713c47729d8b31691b17ef91bff7c6d76933d8e0e7f4450e211e13a83bdb3"
+    },
+    {
+      "path": "learntools/core/tracking.py",
+      "bytes": 5217,
+      "sha256": "3c5c6babb28e999a94f4863692c84796e951c9f232529ebc54ce2988b19a5e87"
+    },
+    {
+      "path": "learntools/core/utils.py",
+      "bytes": 3773,
+      "sha256": "2c61629d23f237269c8835e873eb06acc7a9141236671bb5c7c0ed7a92a07bd1"
+    },
+    {
+      "path": "learntools/deep_learning_intro/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "learntools/deep_learning_intro/dltools.py",
+      "bytes": 3886,
+      "sha256": "3a6672e649ec3cfff726c3af1551e1c4de8e2c53c761f02403ca8ecd1a115a65"
+    },
+    {
+      "path": "learntools/deep_learning_intro/ex1.py",
+      "bytes": 3779,
+      "sha256": "ada557ddf1040f0e45859a317984d34e620b37b3e3a8c4799fef950c92384d96"
+    },
+    {
+      "path": "learntools/deep_learning_intro/ex2.py",
+      "bytes": 5534,
+      "sha256": "460a5813ed6197abffb6c36bfc75a6251a27c179aec87b4aa9ec312b62126a3f"
+    },
+    {
+      "path": "learntools/deep_learning_intro/ex3.py",
+      "bytes": 2679,
+      "sha256": "096e6b5478d79b8f33cf3e75c85806a1005a4f7b3932debd5f3d3b6a364854ea"
+    },
+    {
+      "path": "learntools/deep_learning_intro/ex4.py",
+      "bytes": 1900,
+      "sha256": "c47bb54201f59b656b010776f0ee3b050678ce7e8da94b7952fb13267afc69f5"
+    },
+    {
+      "path": "learntools/deep_learning_intro/ex5.py",
+      "bytes": 5329,
+      "sha256": "8c2495c4d0aa266f0c1278c2beeccc92e747970470685acd88c27c6876411f75"
+    },
+    {
+      "path": "learntools/deep_learning_intro/ex6.py",
+      "bytes": 4101,
+      "sha256": "2ffaaed6e20e0d7469c2ca90f61607c49349b7cdc6048f0f52e7cd7b68e78e42"
+    },
+    {
+      "path": "learntools/machine_learning/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "learntools/machine_learning/ex2.py",
+      "bytes": 1235,
+      "sha256": "b91e1d800cbb54f7cfb3fedcce26233bca5623912a388fbe6b27341864a3c9e9"
+    },
+    {
+      "path": "learntools/machine_learning/ex3.py",
+      "bytes": 3534,
+      "sha256": "7dd3444428ce345e71ae67fc84645aff23b82857ddf59b89f6513e52b42c5db4"
+    },
+    {
+      "path": "learntools/machine_learning/ex4.py",
+      "bytes": 4064,
+      "sha256": "a34913f57434c55a33896515eb98e1a381e4d0b8782e9900a88d45214641fde6"
+    },
+    {
+      "path": "learntools/machine_learning/ex5.py",
+      "bytes": 1690,
+      "sha256": "11941969f2d573480fc84ca436de0e6b724979cef686a6d7dd6e8a6c857ab341"
+    },
+    {
+      "path": "learntools/machine_learning/ex6.py",
+      "bytes": 1240,
+      "sha256": "9fa6706543ff7754b2fa7e102ad094e596374eb92d3f3c03571767be0e29d336"
+    },
+    {
+      "path": "learntools/machine_learning/ex7.py",
+      "bytes": 1083,
+      "sha256": "b8b06262052f595cb6fcafe61f26380a433692029d41f7323527516b62799e99"
+    },
+    {
+      "path": "learntools/machine_learning/ex8.py",
+      "bytes": 2674,
+      "sha256": "9219b18744b5d26450fba790c87c00ef073eac420f3bcb1d93ba3e110a6f3b50"
+    },
+    {
+      "path": "learntools/machine_learning/ex_automl.py",
+      "bytes": 307,
+      "sha256": "9d9dfbacf3bd6a91f0e8cbdf470cfc32134065a4e6eab8e3dc5f1500919b8d2f"
+    }
+  ]
+}

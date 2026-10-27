@@ -25,11 +25,18 @@ from pygments.lexers import PythonLexer
 
 from catalog import TRACKS
 from feedback import translations as feedback_translations
+from code_translation import translate_notebook
+from colab import generate as generate_colab, launch_url
 
 ROOT = Path(__file__).resolve().parents[2]
 LAB = ROOT / 'ai_lab'
 sys.path.insert(0, str(ROOT / 'notebooks'))
 from nb_utils.lesson_preprocessor import LearnLessonPreprocessor  # noqa: E402
+
+
+def is_core(entry):
+    """Identify the seven ML and six DL modules in the introductory curricula."""
+    return entry['index'] < {'machine_learning': 7, 'deep_learning_intro': 6}.get(entry['track'], 0)
 
 
 def read_translations(track):
@@ -54,7 +61,7 @@ class ItalianPreprocessor(LearnLessonPreprocessor):
 
     def KEEP_GOING(self, **kwargs):
         if not hasattr(self.lesson, 'next'):
-            return '## Percorso completato\n\nTorna al catalogo per scegliere un progetto.'
+            return '## Corso completato\n\n[Torna al programma](../../catalogo.html).'
         target = self.lesson.next
         return f'## Prosegui\n\n[{target.topic}]({target.tutorial.url}).'
 
@@ -118,6 +125,14 @@ def make_resources(entry, entries):
     for a, b in zip(lessons, lessons[1:]):
         a.next = b
         b.prev = a
+    if is_core(entry):
+        last = 6 if entry['track'] == 'machine_learning' else 5
+        if hasattr(lessons[last], 'next'):
+            del lessons[last].next
+        if entry['track'] == 'machine_learning':
+            lessons[last].next = SimpleNamespace(
+                topic=TRACKS['deep_learning_intro']['title'],
+                tutorial=SimpleNamespace(url='../deep_learning_intro/tut1.html'))
     return dict(track_meta=SimpleNamespace(lessons=lessons, course_name=TRACKS[entry['track']]['title'],
                                          course_url='../../catalogo.html'),
                 lesson=lessons[entry['index']], nb_meta=SimpleNamespace(type=entry['kind']),
@@ -154,6 +169,8 @@ def notebook_content(nb, entry, outdir):
     notes = dict(re.findall(r'^\[\^([^\]]+)\]: (.*)$', '\n'.join(cell.source for cell in nb.cells if cell.cell_type == 'markdown'), re.M))
     used_notes = set()
     for number, cell in enumerate(nb.cells):
+        if cell.get('id') in {'ai-lab-local-guide', 'ai-lab-local-setup'}:
+            continue
         if cell.cell_type == 'markdown':
             source = re.sub(r'^\[\^[^\]]+\]: .*$', '', cell.source, flags=re.M)
             for key, definition in notes.items():
@@ -213,28 +230,73 @@ def relative_link(page, target):
     return os.path.relpath(target, str(Path(page).parent)).replace(os.sep, '/')
 
 
-def derived_pages(entries):
+def derived_pages(entries, output):
     pages = {}
-    catalog = '# Il corso completo\n\nTutti i notebook pertinenti recuperati dalla fork sono accessibili qui. Le pagine sono traduzioni adattate dei testi disponibili: non ricostruiscono video o dataset mancanti. Il programma scolastico seleziona soltanto una parte di questi materiali.\n\n'
+    intro = nbformat.read(LAB/'notebooks/00-python-essenziale.ipynb', as_version=4)
+    translate_notebook(intro)
+    intro_url = launch_url(CONFIG, '00-python-essenziale.ipynb')
+    intro_html = f'<div class="actions"><a class="button" href="{intro_url}">Apri in Colab</a><a class="button secondary" download href="notebooks/00-python-essenziale.ipynb">Scarica notebook</a></div>'
+    intro_html += notebook_content(intro, {'track': 'python', 'stem': 'intro'}, output)
+    pages['python.html'] = ('Python per il corso', intro_html, 'school')
+    for cell in intro.cells:
+        if cell.cell_type == 'markdown':
+            cell.source = re.sub(r'\]\(([^)]+\.html)\)',
+                                 lambda match: '](' + CONFIG['site_url'] + match[1] + ')',
+                                 cell.source)
+    nbformat.write(intro, output/'notebooks/00-python-essenziale.ipynb')
+    catalog = '# Il corso completo\n\nSegui tutti i moduli di **Intro to Machine Learning** e **Intro to Deep Learning**, nello stesso ordine dei corsi Kaggle, con lezioni ed esercizi tradotti in italiano dai sorgenti disponibili.\n\nPrima di iniziare: [Python per il corso](python.html), un ripasso della sintassi e delle operazioni sui dati.\n\n[Inizia dalla prima lezione](corsi/machine_learning/tut1.html) · [Scarica tutti i notebook e i dataset](downloads/ai-lab-studenti.zip).\n\n'
     for track, setting in TRACKS.items():
-        group = [entry for entry in entries if entry['track'] == track]
+        group = [entry for entry in entries if entry['track'] == track and is_core(entry)]
+        if not group:
+            continue
         catalog += f'## {setting["title"]}\n\n'
         if track == 'deep_learning':
             catalog += 'Archivio del precedente corso: API datate e video esterni non tradotti. È materiale aggiuntivo, distinto da Intro to Deep Learning.\n\n'
         catalog += '| Modulo | Lezione | Esercizio |\n| --- | --- | --- |\n'
         for index, (title, _) in enumerate(setting['topics']):
             subset = [entry for entry in group if entry['index'] == index]
-            links = {entry['kind']: f'[{"Leggi" if entry["kind"]=="tutorial" else "Esercizio"}]({entry["page"]})' for entry in subset}
+            if not subset:
+                continue
+            links = {}
+            for entry in subset:
+                label = 'Leggi' if entry['kind'] == 'tutorial' else 'Esercizio'
+                name = f'{entry["track"]}-{entry["stem"]}.ipynb'
+                links[entry['kind']] = f'[{label}]({entry["page"]}) · [Colab]({launch_url(CONFIG, name)})'
             catalog += f'| {index+1:02d} · {title} | {links.get("tutorial", "Non presente nei sorgenti")} | {links.get("exercise", "Non presente nei sorgenti")} |\n'
         catalog += '\n'
-    catalog += '## Provenienza e modalità di esecuzione\n\nI due notebook ML sulla classificazione (`tut8`/`ex8`) non sono registrati nei metadati originali e vengono recuperati come approfondimento separato. AutoML è un documento storico dipendente da servizi a pagamento: non viene eseguito nel percorso gratuito. TPU/Higgs e i materiali TPU della computer vision sono approfondimenti infrastrutturali.\n\n[Inventario con hash e metadati](inventory.json) · [Ambienti e dataset](esecuzione.html) · [Licenze](attribuzioni.html).\n'
+    catalog += '## Altri materiali disponibili\n\nGli ulteriori notebook recuperati dalla fork, i materiali storici e le attività originali AI Lab sono conservati nella sezione [Materiali aggiuntivi](aggiuntivi.html).\n\n[Inventario con hash e metadati](inventory.json) · [Ambienti e dataset](esecuzione.html) · [Licenze](attribuzioni.html).\n'
     pages['catalogo.html'] = ('Il corso completo', render_markdown(catalog), 'school')
+    exercises = '# Esercitazioni in Colab\n\nApri un esercizio, salva una copia nel tuo Drive ed esegui la cella **Preparazione in Colab** prima di iniziare. I dataset vengono caricati automaticamente.\n\n'
+    for track in ('machine_learning', 'deep_learning_intro'):
+        exercises += f'## {TRACKS[track]["title"]}\n\n'
+        for entry in entries:
+            if entry['track'] != track or entry['kind'] != 'exercise' or not is_core(entry):
+                continue
+            name = f'{entry["track"]}-{entry["stem"]}.ipynb'
+            exercises += f'- **{entry["index"]+1}. {entry["title"]}** — [Apri in Colab]({launch_url(CONFIG, name)}) · [Lezione ed esercizio]({entry["page"]})\n'
+        exercises += '\n'
+    exercises += '[Istruzioni per Colab](esecuzione.html) · [Ripasso Python in Colab](' + intro_url + ').\n'
+    pages['esercitazioni.html'] = ('Esercitazioni in Colab', render_markdown(exercises), 'school')
+    extras = '# Materiali aggiuntivi\n\nQuesti contenuti sono conservati per consultazione e non fanno parte dei tredici moduli dei due corsi introduttivi.\n\n'
+    for track, setting in TRACKS.items():
+        group = [entry for entry in entries if entry['track'] == track and not is_core(entry)]
+        if not group:
+            continue
+        extras += f'## {setting["title"]}\n\n'
+        for entry in group:
+            label = ('Esercizio: ' if entry['kind'] == 'exercise' else '') + entry['title']
+            extras += f'- [{label}]({entry["page"]})\n'
+        extras += '\n'
+    extras += '## Attività originali AI Lab\n\n- [Notebook e laboratori aggiuntivi](laboratori.html).\n- [Progetti facoltativi](progetti.html).\n\nLe attività AI Lab sono materiale originale del progetto scolastico, distinto dalle lezioni Kaggle.\n'
+    pages['aggiuntivi.html'] = ('Materiali aggiuntivi', render_markdown(extras), 'school')
     execution_path = LAB/'reports/execution.json'
     report = json.loads(execution_path.read_text()) if execution_path.exists() else {'results': []}
     states = {record['notebook']:record for record in report['results']}
     lab_text = '# Notebook e laboratori\n\n## Percorso principale: esercizi Kaggle e dataset originali\n\nScarica il [pacchetto studenti completo](downloads/ai-lab-studenti.zip), estrailo e segui la [preparazione dei dataset](dataset.html). Include notebook tradotti, codice learntools originale e strumenti per scaricare o importare gli archivi. Non è necessario sostituire i dati con simulazioni.\n\nLe pagine del [corso completo](catalogo.html) propongono anche download individuali. Il bootstrap locale mantiene i percorsi originali e disattiva il solo invio di eventi all’iframe Kaggle, senza modificare i sorgenti. La compatibilità dei controlli Keras va verificata con le versioni indicate.\n\n## Laboratori aggiuntivi AI Lab\n\nI notebook seguenti sono materiale originale aggiuntivo; non sostituiscono i contenuti Kaggle. Contengono esempi inizialmente completi e attività da svolgere modificando il codice.\n\n'
     lab_text += '| Notebook | Dipendenze per i calcoli | Verifica disponibile |\n| --- | --- | --- |\n'
     for path in sorted((LAB/'notebooks').glob('*.ipynb')):
+        if path.name == '00-python-essenziale.ipynb':
+            continue
         nb = json.loads(path.read_text())
         title = nb['cells'][0]['source'].splitlines()[0].removeprefix('# ')
         deps = ', '.join(nb['metadata']['ai_lab']['dependencies']) or 'Python standard'
@@ -242,7 +304,7 @@ def derived_pages(entries):
         status = {'passed':'Celle Python eseguite' if report.get('mode')=='python_cells' else 'Kernel Jupyter eseguito',
                   'not_run':'Non eseguito: dipendenze mancanti', 'failed':'Esecuzione fallita'}.get(record.get('status'),'Non eseguito')
         lab_text += f'| [{title}](notebooks/{path.name}) | {deps} | {status} |\n'
-    lab_text += '\nIl notebook 08 usa il file JSON creato dal notebook 07 nella stessa cartella. I laboratori 01–03 ricostruiscono alberi ed ensemble con Python standard per essere eseguibili senza scikit-learn; non riproducono tutte le funzionalità della libreria. La rete del laboratorio 04 è realmente addestrata con NumPy; non è un’esecuzione TensorFlow.\n\n## Notebook dei corsi Kaggle\n\nOgni pagina del [corso completo](catalogo.html) include il download del notebook tradotto. Sono mantenuti codice originale e controlli, con una nota sui dati richiesti. Non sono certificati come pronti all’esecuzione fuori da Kaggle. Le soluzioni e gli assert sono pubblici.\n\n[Guida a Jupyter e ambienti remoti](esecuzione.html) · [Dettagli delle verifiche](verifiche.html).'
+    lab_text += '\nIl notebook 08 usa il file JSON creato dal notebook 07 nella stessa cartella. I laboratori 01–03 ricostruiscono alberi ed ensemble con Python standard per essere eseguibili senza scikit-learn; non riproducono tutte le funzionalità della libreria. La rete del laboratorio 04 è realmente addestrata con NumPy; non è un’esecuzione TensorFlow.\n\n## Notebook dei corsi Kaggle\n\nOgni pagina del [corso completo](catalogo.html) include il download del notebook tradotto. Sono mantenuti codice originale e controlli, con una nota sui dati richiesti. Le versioni Colab preparano i dati e adattano i metadati Keras usati dai controlli. La sessione remota resta da verificare con un account Google. Le soluzioni sono pubbliche.\n\n[Guida a Jupyter e ambienti remoti](esecuzione.html) · [Dettagli delle verifiche](verifiche.html).'
     pages['laboratori.html'] = ('Notebook e laboratori',render_markdown(lab_text),'school')
     checks = '# Stato delle verifiche\n\nQuesta pagina distingue ciò che è stato eseguito da ciò che richiede ancora un ambiente compatibile. Non è una certificazione dei servizi esterni.\n\n'
     checks += f'## Copertura dei sorgenti\n\n{len(entries)} notebook convertiti. La build verifica che ogni cella Markdown abbia una traduzione e che gli hash dei sorgenti corrispondano all’inventario. Riusa il preprocessor Kaggle per espandere le macro senza pulire o modificare gli originali. Le traduzioni sono adattamenti didattici, non trascrizioni integrali dei video esterni.\n\n'
@@ -259,7 +321,7 @@ def derived_pages(entries):
     ui_report = LAB/'reports/ui-checks.json'
     if ui_report.is_file():
         checks += '\n## Funzioni dell’interfaccia\n\nVerificati con un DOM locale: ricerca sotto il prefisso del repository, cambio e memorizzazione del tema, apertura/chiusura del menu, focus da tastiera nel contesto mobile, formule KaTeX, messaggi per risorse non disponibili e modulo di inferenza del modello già salvato. Non è un controllo grafico del layout e non esegue addestramento.\n'
-    checks += '\n## Limiti e controlli da completare\n\nGli originali Kaggle non sono stati eseguiti con i dataset remoti. Non sono stati verificati Colab, invii a competizioni, servizi AutoML o TPU. Le immagini esterne possono non caricarsi senza rete. Formule, font, CSS, ricerca e interfaccia sono risorse locali del sito. La verifica visiva desktop/mobile non è stata completata: il server locale e Chromium sono impediti dai permessi di questo ambiente.\n\nLe esecuzioni con TensorFlow e scikit-learn restano da svolgere in un ambiente compatibile. Il workflow Pages compila e controlla i link prima di rendere disponibile un artefatto. La pubblicazione manuale richiede autorizzazione ed è documentata nel README.\n'
+    checks += '\n## Limiti e controlli da completare\n\nGli originali Kaggle non sono stati eseguiti con i dataset remoti. I notebook Colab sono predisposti con caricamento dei dati e adattatore Keras; download, cache e integrità dei file sono controllati localmente. La sessione autenticata Colab non è stata eseguita qui. Invii a competizioni, servizi AutoML e TPU non sono verificati. Le immagini esterne possono non caricarsi senza rete. Formule, font, CSS, ricerca e interfaccia sono risorse locali del sito. La verifica visiva desktop/mobile non è stata completata: il server locale e Chromium sono impediti dai permessi di questo ambiente.\n\nLe esecuzioni con TensorFlow e scikit-learn restano da svolgere in un ambiente compatibile. Il workflow Pages compila e controlla i link prima di rendere disponibile un artefatto. La pubblicazione manuale richiede autorizzazione ed è documentata nel README.\n'
     pages['verifiche.html'] = ('Stato delle verifiche',render_markdown(checks),'school')
     return pages
 
@@ -284,7 +346,9 @@ def build(output):
     (output/'assets/syntax.css').write_text(HtmlFormatter(style='friendly').get_style_defs('.highlight'))
     (output/'notebooks').mkdir(exist_ok=True)
     for path in (LAB/'notebooks').glob('*.ipynb'):
-        shutil.copy2(path, output/'notebooks'/path.name)
+        notebook = nbformat.read(path, as_version=4)
+        translate_notebook(notebook)
+        nbformat.write(notebook, output/'notebooks'/path.name)
     shutil.copy2(ROOT/'LICENSE', output/'LICENSE-Kaggle.txt')
     shutil.copy2(LAB/'reports/inventory.json', output/'inventory.json')
     if (LAB/'reports/data-inventory.json').is_file():
@@ -311,16 +375,18 @@ def build(output):
                            'ai_lab': {'source': str(entry['source'].relative_to(ROOT)),
                                       'source_sha256': hashlib.sha256(entry['source'].read_bytes()).hexdigest(),
                                       'execution_status': 'not_verified', 'license': 'Apache-2.0', 'language': 'it'}}
-            intro = f"# {entry['title']}\n\nTraduzione e adattamento italiano AI Lab da Kaggle Learn, licenza Apache-2.0.\n\n{status_text(entry)}\n\nPrerequisiti: Python di base e moduli precedenti.\n\nObiettivo: {entry['objective']}\n"
+            intro = f"# {entry['title']}\n\n"
+            if not is_core(entry):
+                intro += status_text(entry) + '\n\n'
             nb.cells.insert(0, nbformat.v4.new_markdown_cell(intro, id='ai-lab-context'))
             if not entry['historical'] and not entry['special']:
-                nb.cells.insert(1, nbformat.v4.new_markdown_cell('## Preparazione locale AI Lab\n\nQuesta cella aggiunta configura i percorsi e disattiva gli eventi destinati all’iframe Kaggle. Usa il pacchetto studenti completo e scarica i dataset originali come descritto nella guida. Non modifica il codice delle lezioni. Su Kaggle mantiene l’ambiente originale.', id='ai-lab-local-guide'))
+                nb.cells.insert(1, nbformat.v4.new_markdown_cell('## Preparazione\n\nEsegui questa cella prima della lezione. Mantieni il notebook nella cartella del pacchetto studenti.', id='ai-lab-local-guide'))
                 nb.cells.insert(2, nbformat.v4.new_code_cell(LOCAL_SETUP,id='ai-lab-local-setup'))
-            nb.cells.append(nbformat.v4.new_markdown_cell(f"## Riepilogo e autovalutazione\n\n{entry['objective']}\n\nSpiega il procedimento a un compagno e descrivi un possibile errore. Negli esercizi completa il codice prima di consultare i suggerimenti.\n\nContenuto scolastico aggiunto da AI Lab; non fa parte del notebook originale.", id='ai-lab-recap'))
+            translate_notebook(nb)
             label = ('Esercizio: ' if entry['kind']=='exercise' else '')+entry['title']
             name = entry['track']+'-'+entry['stem']+'.ipynb'
-            content = '<div class="notice">'+html.escape(status_text(entry))+'</div>'
-            content += f'<div class="actions"><a class="button" download href="../../notebooks/{name}">Scarica notebook tradotto</a><a class="button secondary" href="../../dataset.html">Prepara i dataset originali</a></div>'
+            colab_button = f'<a class="button" href="{launch_url(CONFIG, name)}">Apri in Colab</a>' if is_core(entry) else ''
+            content = f'<div class="actions">{colab_button}<a class="button secondary" download href="../../notebooks/{name}">Scarica notebook</a><a class="button secondary" href="../../esecuzione.html">Come eseguirlo</a></div>'
             content += notebook_content(nb, entry, output)
             # Retain every source media URL and reference, including ones condensed in translation.
             source_text = '\n'.join(c.source for c in nbformat.read(entry['source'], as_version=4).cells if c.cell_type=='markdown')
@@ -328,7 +394,7 @@ def build(output):
             content += '<details><summary>Provenienza e riferimenti del sorgente</summary>'
             source_relative = str(entry['source'].relative_to(ROOT))
             commit = json.loads((LAB/'reports/inventory.json').read_text())['upstream_commit']
-            content += f'<p>Traduzione adattata da <a href="{CONFIG["repository"]}/blob/{commit}/{source_relative}">{source_relative}</a>. Codice originale conservato; nessuna esecuzione durante la conversione. Le aggiunte AI Lab sono identificate.</p><ul>'
+            content += f'<p>Fonte: <a href="{CONFIG["repository"]}/blob/{commit}/{source_relative}">{source_relative}</a>, Kaggle Learn, Apache-2.0. Traduzione italiana AI Lab.</p><ul>'
             content += ''.join(f'<li><a href="{html.escape(url,quote=True)}">{html.escape(url)}</a></li>' for url in urls)+'</ul></details>'
             normalize_notebook_links(nb, entry, entries)
             for cell in nb.cells:
@@ -345,7 +411,13 @@ def build(output):
         text = source.read_text()
         title = text.splitlines()[0].removeprefix('# ')
         pages[source.stem+'.html'] = (title, render_markdown(text), 'school')
-    pages.update(derived_pages(entries))
+    pages.update(derived_pages(entries, output))
+    colab_report = generate_colab(output, [entry for entry in entries if is_core(entry)], CONFIG)
+    (LAB/'reports/colab.json').write_text(json.dumps(colab_report, indent=2)+'\n')
+    # Remove obsolete generated pages when the published curriculum changes.
+    for stale in output.rglob('*.html'):
+        if stale.relative_to(output).as_posix() not in pages:
+            stale.unlink()
     for page, (title, body, section) in pages.items():
         dest = output/page
         dest.parent.mkdir(parents=True, exist_ok=True)
@@ -376,7 +448,8 @@ def build(output):
                         packaged_data.append((path, f'ai_lab/input/{alias}'))
     with zipfile.ZipFile(output/'downloads/ai-lab-studenti.zip','w',zipfile.ZIP_DEFLATED) as bundle:
         for path in sorted((output/'notebooks').glob('*.ipynb')):
-            folder = 'kaggle' if any(path.name.startswith(track+'-') for track in TRACKS) else 'aggiuntivi'
+            folder = ('preparazione' if path.name == '00-python-essenziale.ipynb' else
+                      'kaggle' if any(path.name.startswith(track+'-') for track in TRACKS) else 'aggiuntivi')
             bundle.write(path, f'ai-lab-studenti/ai_lab/notebooks/{folder}/{path.name}')
         for path in sorted((ROOT/'learntools').rglob('*')):
             relative = path.relative_to(ROOT/'learntools')
@@ -398,28 +471,32 @@ def build(output):
 
 def shell(page, title, body, section, entries):
     rel = lambda target: relative_link(page, target)
+    body = re.sub(r'(<a\b[^>]*\bhref="https://colab\.research\.google\.com/[^"]*")',
+                  r'\1 target="_blank" rel="noopener noreferrer"', body)
     nav = ''
-    for key,label in [('index.html','Panoramica'),('catalogo.html','Corso completo'),('percorso.html','Percorso di 16 ore'),('laboratori.html','Notebook e laboratori'),('dataset.html','Dataset originali'),('progetti.html','Progetti finali'),('esecuzione.html','Come eseguire Python'),('attribuzioni.html','Fonti e licenze')]:
+    for key,label in [('index.html','Panoramica'),('python.html','Python per il corso'),('catalogo.html','Programma completo'),('esercitazioni.html','Esercitazioni in Colab'),('dataset.html','Dataset originali'),('esecuzione.html','Come eseguire Python'),('aggiuntivi.html','Materiali aggiuntivi'),('attribuzioni.html','Fonti e licenze')]:
         nav += f'<a {"aria-current=page" if key==page else ""} href="{rel(key)}">{label}</a>'
     for track, setting in TRACKS.items():
+        group = [e for e in entries if e['track'] == track and is_core(e)]
+        if not group:
+            continue
         nav += f'<details {"open" if section==track else ""}><summary>{setting["short"]}</summary>'
-        for entry in [e for e in entries if e['track']==track]:
+        for entry in group:
             name = ('↳ Esercizio' if entry['kind']=='exercise' else entry['title'])
             nav += f'<a {"aria-current=page" if page==entry["page"] else ""} href="{rel(entry["page"])}">{entry["index"]+1:02d} · {name}</a>'
         nav += '</details>'
-    ordered = [e['page'] for e in entries if e['track']==section]
-    if page.startswith('incontro-'):
-        ordered = [f'incontro-{i}.html' for i in range(1,9)]
+    core_pages = ['python.html'] + [e['page'] for e in entries if is_core(e)]
+    ordered = core_pages if page in core_pages else [
+        e['page'] for e in entries if e['track'] == section and not is_core(e)]
     pager = ''
-    crumb = 'Il tuo laboratorio di intelligenza artificiale'
+    crumb = ''
     if page in ordered:
         i = ordered.index(page)
-        crumb = f'{TRACKS[section]["short"] if section in TRACKS else "Percorso scolastico"} · {i+1} di {len(ordered)}'
+        crumb = f'{"Corso completo" if page in core_pages else "Materiali aggiuntivi"} · {i+1} di {len(ordered)}'
         if i:
             pager += f'<a href="{rel(ordered[i-1])}">← Precedente</a>'
         if i+1<len(ordered):
             pager += f'<a href="{rel(ordered[i+1])}">Successiva →</a>'
-    hero = '<span class="eyebrow">IMPARA · SPERIMENTA · COSTRUISCI</span>' if page=='index.html' else ''
     return f'''<!doctype html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)} · {html.escape(CONFIG['title'])}</title>
@@ -432,11 +509,11 @@ def shell(page, title, body, section, entries):
 <script defer src="{rel('assets/vendor/katex/auto-render.min.js')}"></script>
 <script defer src="{rel('assets/app.js')}"></script></head>
 <body data-root="{rel('index.html').removesuffix('index.html') or './'}"><a class="skip" href="#contenuto">Vai al contenuto</a>
-<header><a class="brand" href="{rel('index.html')}"><span class="brand-icon">AI</span><span>{html.escape(CONFIG['title'])}<small>IL TUO LABORATORIO DI IDEE</small></span></a>
+<header><a class="brand" href="{rel('index.html')}"><span>{html.escape(CONFIG['title'])}</span></a>
 <div class="header-actions"><button id="menu" aria-expanded="false" aria-controls="sidebar">Indice</button><button id="theme" aria-label="Cambia tema" aria-pressed="false">Tema scuro</button></div></header>
-<aside id="sidebar"><label for="search">Cerca nel corso</label><input id="search" type="search" placeholder="Es. validazione, neurone…" autocomplete="off"><div id="search-status" role="status"></div><div id="results"></div><nav aria-label="Navigazione del corso">{nav}</nav><p class="teacher">{html.escape(CONFIG['teacher'])}<br>Python · dati · intelligenza artificiale</p></aside>
-<main id="contenuto"><div class="breadcrumb">{crumb}</div>{hero}<article>{body}</article><nav class="pager" aria-label="Lezione precedente e successiva">{pager}</nav>
-<footer>{html.escape(CONFIG['title'])} · {html.escape(CONFIG['subtitle'])}<br>Materiale scolastico in italiano da Kaggle Learn e laboratori originali.<br><a href="{rel('attribuzioni.html')}">Attribuzioni e licenze</a> · <a href="{rel('verifiche.html')}">Stato delle verifiche</a></footer></main></body></html>'''
+<aside id="sidebar"><label for="search">Cerca nel corso</label><input id="search" type="search" placeholder="Cerca…" autocomplete="off"><div id="search-status" role="status"></div><div id="results"></div><nav aria-label="Navigazione del corso">{nav}</nav><p class="teacher">{html.escape(CONFIG['teacher'])}</p></aside>
+<main id="contenuto">{'<div class="breadcrumb">'+crumb+'</div>' if crumb else ''}<article>{body}</article><nav class="pager" aria-label="Lezione precedente e successiva">{pager}</nav>
+<footer><a href="{rel('attribuzioni.html')}">Fonti e licenze</a> · <a href="{rel('verifiche.html')}">Verifiche tecniche</a></footer></main></body></html>'''
 
 
 if __name__ == '__main__':

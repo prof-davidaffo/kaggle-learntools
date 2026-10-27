@@ -2,9 +2,9 @@
 
 ## Sito e materiali
 
-Build completata: **69 pagine**, delle quali **47 pagine notebook Kaggle**, e **59 notebook scaricabili** (47 tradotti e 12 aggiuntivi AI Lab). Tutte le 307 celle Markdown delle sorgenti esaminate hanno una traduzione adattata. I video esterni non sono stati tradotti.
+Build completata: **63 pagine**, delle quali **47 pagine notebook Kaggle**, e **60 notebook scaricabili** (47 tradotti, 12 aggiuntivi AI Lab e il ripasso Python). Tutte le 307 celle Markdown delle sorgenti esaminate hanno una traduzione adattata. I video esterni non sono stati tradotti.
 
-Controllo statico: **5393 riferimenti locali** esaminati, nessun collegamento o frammento mancante. Indice di ricerca: 69 voci. Schemi notebook, hash dei sorgenti e integrità ZIP studenti verificati. Nessuna modifica ai file già tracciati dal repository originale (`git diff --exit-code` riuscito).
+Controllo statico: **3608 riferimenti locali** esaminati, nessun collegamento o frammento mancante. Indice di ricerca: 63 voci. Schemi notebook, hash dei sorgenti e integrità ZIP studenti verificati. Nessuna modifica ai file originali nelle directory `notebooks` e `learntools`, né alla licenza Kaggle.
 
 Sintassi JavaScript e Python degli strumenti verificata. Le otto espressioni delimitate da parentesi LaTeX nelle pagine sono state accettate dal motore KaTeX locale. La probabilità calcolata in JavaScript dal JSON del modello di esempio coincide con Python: 0.7045370869511655 per l'ingresso [5, 2]. Non si è ripetuto l'addestramento.
 
@@ -41,3 +41,13 @@ Nove CSV originali inclusi nei percorsi locali, nel sito e nello ZIP studenti. H
 Eseguiti con jsdom sull’HTML e sul JavaScript generati: ricerca e link sotto il prefisso `/kaggle-learntools/`, tema persistente, menu e tasto Escape con focus mobile, formule locali, fallback per immagini e ricerca non disponibili, modulo di inferenza da parametri già salvati. Tutti i controlli sono riusciti. Si tratta di verifiche DOM, non di rendering grafico o schermate; la limitazione della verifica visiva resta valida. Rapporto: ui-checks.json.
 
 Le condizioni dei dati sono documentate separatamente in LICENZE-DATI.md. Per Iowa e DL non è stata trovata una prova primaria sufficiente a dichiarare autorizzata la redistribuzione: il punto rimane aperto, senza bloccare la preparazione locale e senza pubblicazione remota.
+
+## Integrazione Colab
+
+Generate 26 versioni Colab: ripasso Python, 13 notebook ML e 12 DL. La pagina esercitazioni collega direttamente i 12 esercizi ufficiali. I notebook Colab sono copie di distribuzione versionate; la build verifica che il codice delle lezioni coincida con quello dei notebook locali, esclusa la cella di preparazione.
+
+Controllati 50 file del runtime con download tramite protocollo file locale, hash, cache, ripristino di file corrotti, alias Iowa e rifiuto di percorsi esterni alla destinazione. Verificata la lettura dei metadati tramite l'adattatore. Non sono stati eseguiti training o download di librerie scientifiche.
+
+La CI include un job separato che installerà TensorFlow e proverà i checker su modelli Keras reali, con risposte corrette ed errate e senza chiamare fit. Il job non è stato eseguito remotamente in questa sessione: l'assenza di TensorFlow locale resta dichiarata in colab-checks.json. Il deploy dipende anche dall'esito di questo job.
+
+L'accesso autenticato a Colab e il caricamento dalla versione remota del repository saranno verificabili dopo il push. Nessun push o deploy è stato eseguito. Occorre ancora una prima prova da un account Google, aprendo un esercizio ML e uno DL.

@@ -1,0 +1,6 @@
+# CI-only dependencies: Colab uses its existing scientific environment.
+tensorflow>=2.16,<3
+pandas
+scikit-learn
+matplotlib
+ipython

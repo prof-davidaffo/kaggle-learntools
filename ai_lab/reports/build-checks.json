@@ -1,9 +1,10 @@
 {
-  "pages": 69,
+  "pages": 63,
   "course_pages": 47,
-  "notebooks": 59,
-  "local_links_checked": 5393,
-  "search_entries": 69,
+  "notebooks": 60,
+  "colab_notebooks": 26,
+  "local_links_checked": 3608,
+  "search_entries": 63,
   "original_csv_files_checked": 9,
   "student_bundle": "passed",
   "errors": []

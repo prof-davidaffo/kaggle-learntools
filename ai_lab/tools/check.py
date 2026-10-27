@@ -10,7 +10,7 @@ from urllib.parse import unquote, urlsplit
 import zipfile
 
 import nbformat
-from build import LAB, get_entries, check_source_lock
+from build import LAB, get_entries, check_source_lock, is_core
 
 
 class Document(HTMLParser):
@@ -67,12 +67,45 @@ def check(directory):
     expected={entry['page'] for entry in get_entries()}
     for page in expected:
         if not (directory/page).is_file(): errors.append('Missing course page: '+page)
-    for number in range(1,9):
-        if not (directory/f'incontro-{number}.html').is_file(): errors.append(f'Missing meeting {number}')
+    core_entries = [entry for entry in get_entries() if is_core(entry)]
+    for track, count in [('machine_learning', 7), ('deep_learning_intro', 6)]:
+        topics = {entry['index'] for entry in core_entries if entry['track'] == track}
+        if topics != set(range(count)): errors.append('Incomplete original curriculum: '+track)
+    catalog = pages.get((directory/'catalogo.html').resolve())
+    if catalog:
+        for entry in core_entries:
+            if entry['page'] not in catalog.links:
+                errors.append('Original curriculum missing catalog link: '+entry['page'])
+    for path, document in pages.items():
+        if any('percorso.html' in link or 'incontro-' in link for link in document.links):
+            errors.append(f'{path}: obsolete school schedule link')
+        if '16 ore' in path.read_text().lower(): errors.append(f'{path}: obsolete 16-hour distinction')
     notebooks=list((directory/'notebooks').glob('*.ipynb'))
     for path in notebooks:
         try: nbformat.validate(nbformat.read(path,as_version=4))
         except Exception as error: errors.append(f'{path}: {error}')
+    colab_names = {'00-python-essenziale.ipynb'} | {
+        f'{entry["track"]}-{entry["stem"]}.ipynb' for entry in core_entries}
+    for name in colab_names:
+        path = LAB/'colab'/name
+        if not path.is_file():
+            errors.append('Missing Colab notebook: '+name)
+            continue
+        colab_notebook = nbformat.read(path, as_version=4)
+        nbformat.validate(colab_notebook)
+        setup = [cell for cell in colab_notebook.cells if cell.id == 'ai-lab-colab-setup']
+        if len(setup) != 1: errors.append('Missing or duplicate Colab preparation cell: '+name)
+        local_notebook = nbformat.read(directory/'notebooks'/name, as_version=4)
+        local_code = [cell.source for cell in local_notebook.cells
+                      if cell.cell_type == 'code' and cell.id != 'ai-lab-local-setup']
+        colab_code = [cell.source for cell in colab_notebook.cells
+                      if cell.cell_type == 'code' and cell.id != 'ai-lab-colab-setup']
+        if local_code != colab_code: errors.append('Colab version changed lesson code: '+name)
+    for document in pages.values():
+        for link in document.links:
+            if '/ai_lab/colab/' in link and urlsplit(link).netloc == 'colab.research.google.com':
+                name = unquote(urlsplit(link).path.rsplit('/', 1)[-1])
+                if name not in colab_names: errors.append('Invalid Colab launch target: '+link)
     index=json.loads((directory/'search.json').read_text())
     for entry in index:
         if not (directory/entry['url']).is_file(): errors.append('Invalid search target: '+entry['url'])
@@ -108,6 +141,7 @@ def check(directory):
             if 'ai-lab-studenti/ai_lab/input/'+name not in names:
                 errors.append('Student bundle missing original Iowa path alias: '+name)
     report={'pages':len(pages),'course_pages':len(expected),'notebooks':len(notebooks),
+            'colab_notebooks':len(colab_names),
             'local_links_checked':sum(len(document.links) for document in pages.values()),
             'search_entries':len(index),'original_csv_files_checked':data_files_checked,
             'student_bundle':'passed' if not errors else 'see errors',

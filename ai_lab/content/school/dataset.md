@@ -1,5 +1,7 @@
 # Scaricare e preparare i dataset originali
 
+In **Colab** non devi scaricare né caricare CSV: la cella iniziale dei notebook li prepara automaticamente. Le istruzioni di importazione qui sotto servono per il lavoro locale e la manutenzione.
+
 **I nove CSV originali del percorso principale sono già inclusi nella repository e nel pacchetto studenti.** Sono stati importati dagli archivi Kaggle forniti dal docente, senza modificare i dati. Non serve scaricarli nuovamente per iniziare le lezioni.
 
 ## Il pacchetto per gli studenti
@@ -75,10 +77,10 @@ Lo strumento richiama la CLI e importa gli ZIP; non raccoglie né salva credenzi
 
 Il bootstrap aggiunto ai notebook trova la fork o il pacchetto, aggiunge `learntools` al percorso Python e imposta come cartella di lavoro **`ai_lab/runtime`**. In questo modo i riferimenti originali `../input/...` puntano a **`ai_lab/input`**. Esegui quella cella prima delle celle originali.
 
-I controlli DL originali leggono anche attributi interni di **Keras 2**. È quindi previsto un ambiente separato con Python **3.11** e `ai_lab/requirements/kaggle-local.txt`, distinto dall’ambiente Keras moderno degli approfondimenti AI Lab. Il file specifica un obiettivo di compatibilità; l’installazione e l’esecuzione completa con i dati restano da confermare su un computer connesso.
+I controlli DL originali leggono anche attributi interni di **Keras 2**. `ai_lab/requirements/kaggle-local.txt` conserva un insieme di dipendenze storiche, separato dagli approfondimenti con Keras moderno. Non implica che sul computer sia installata una particolare versione di Python. Controlla `python --version`: la compatibilità di quei pacchetti va verificata con l’interprete effettivo.
 
 ```sh
-python3.11 -m venv .venv-kaggle
+python -m venv .venv-kaggle
 source .venv-kaggle/bin/activate
 python -m pip install -r ai_lab/requirements/kaggle-local.txt
 jupyter lab

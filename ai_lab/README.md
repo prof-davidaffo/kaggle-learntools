@@ -5,11 +5,13 @@ Piattaforma statica in italiano per la scuola secondaria di secondo grado. Il pe
 ## Stato e materiali
 
 - 47 notebook sorgente recuperati: 18 ML, 13 Intro to Deep Learning e 16 del precedente corso di computer vision.
-- Traduzioni adattate di tutte le 307 celle Markdown; codice originale in inglese e preprocessor Kaggle riutilizzato. I video esterni non sono tradotti né ricostruiti.
-- Corso completo, 8 incontri da 120 minuti, guide ai progetti, ricerca locale, temi chiaro/scuro, formule KaTeX locali e download.
+- Capitolo introduttivo «Python per il corso», con esempi ed esercizi. La pagina `python.html` viene generata dal notebook sorgente `notebooks/00-python-essenziale.ipynb`: modifica quel file per aggiornare entrambi. Nel pacchetto studenti si trova in `ai_lab/notebooks/preparazione/`.
+- Traduzioni adattate di tutte le 307 celle Markdown e dei commenti didattici nel codice; istruzioni Python e identificatori originali conservati. Il preprocessor Kaggle è riutilizzato. I video esterni non sono tradotti né ricostruiti.
+- I due corsi originali completi, con 7 moduli ML e 6 moduli DL, ricerca locale, temi chiaro/scuro, formule KaTeX locali e download. Altri sorgenti recuperati e attività AI Lab restano nei materiali aggiuntivi.
 - Pacchetto studenti ZIP con notebook tradotti, `learntools` originale e strumenti di acquisizione dei dati.
 - I nove CSV principali sono stati importati dagli archivi forniti dal docente in `data/`. Sono presenti in `ai_lab/input`, nel sito generato e nel pacchetto studenti. Il download dal terminale resta impedito dalla rete, ma i file locali sono disponibili.
 - Il componente locale AI Lab traduce etichette, suggerimenti e spiegazioni dei due corsi introduttivi; la diagnostica tecnica dei controlli resta originale. L’esecuzione completa con i dataset resta da completare.
+- 26 notebook per Colab (ripasso Python, 13 notebook ML e 12 DL), con link diretti alle 12 esercitazioni, caricamento automatico dei CSV e adattatore dei controlli Keras. La sessione autenticata remota non è stata eseguita qui.
 - Nessun push, modifica delle impostazioni o pubblicazione effettuati.
 
 ## Struttura
@@ -24,6 +26,7 @@ ai_lab/
   content/school/           # New teaching material and project guides
   tools/                    # Build, generation, data import and validation
   notebooks/                # Additional school notebooks
+  colab/                    # Generated, versioned Colab notebooks and runtime manifest
   requirements/             # Separate site and notebook environments
   assets/                   # CSS, JS, local KaTeX and example model
   input/                    # Nine original CSVs, source attributions and legacy aliases
@@ -37,14 +40,13 @@ Il README originale nella radice resta intatto. `ai_lab/reports/ANALISI.md` cont
 
 ## Installazione e build del sito
 
-Usa Python 3.12 in un ambiente virtuale:
+Usa l’interprete Python disponibile sul computer e crea un ambiente virtuale. Controlla la versione con `python --version`:
 
 ```sh
-python3.12 -m venv ai_lab/.venv
+python -m venv ai_lab/.venv
 source ai_lab/.venv/bin/activate
 python -m pip install -r ai_lab/requirements/site.txt
 python ai_lab/tools/school_notebooks.py
-python ai_lab/tools/programme.py
 python ai_lab/tools/build.py
 python ai_lab/tools/check.py
 python -m http.server 8000 --directory ai_lab/build
@@ -84,10 +86,10 @@ python ai_lab/tools/datasets.py deep-learning --import-files /path/to/red-wine.c
 
 Lo script controlla i file attesi, estrae in sicurezza e non sovrascrive file diversi già presenti. Per Iowa crea gli alias train.csv/test.csv richiesti dalle celle storiche.
 
-Per il codice e i checker originali Keras 2 è previsto un ambiente separato Python **3.11**:
+Per il codice e i checker originali Keras 2 usa un ambiente separato. Il file `requirements/kaggle-local.txt` contiene dipendenze storiche: la compatibilità va verificata con la versione di Python effettivamente disponibile, non presunta dal comando seguente:
 
 ```sh
-python3.11 -m venv ai_lab/.venv-kaggle
+python -m venv ai_lab/.venv-kaggle
 source ai_lab/.venv-kaggle/bin/activate
 python -m pip install -r ai_lab/requirements/kaggle-local.txt
 jupyter lab ai_lab/build/notebooks
@@ -95,7 +97,31 @@ jupyter lab ai_lab/build/notebooks
 
 La prima cella aggiunta individua la fork/pacchetto, configura `ai_lab/runtime` e il percorso di `learntools`. I riferimenti `../input/...` restano invariati. Disattiva nel processo locale soltanto gli eventi destinati all’iframe Kaggle. Il codice delle lezioni originali non viene riscritto. L’ambiente di compatibilità è predisposto, ma non è stato verificato con i dati in questa sessione.
 
-Dopo la build puoi distribuire `ai_lab/build/downloads/ai-lab-studenti.zip`: contiene notebook, codice e guida; **contiene i nove CSV principali già pronti nei percorsi corretti**. Non sono previsti pulsanti Colab/Kaggle presentati come verificati: l’upload nei servizi remoti resta da provare dopo l’accesso ai dati.
+Dopo la build puoi distribuire `ai_lab/build/downloads/ai-lab-studenti.zip`: contiene notebook, codice e guida; **contiene i nove CSV principali già pronti nei percorsi corretti**. I pulsanti Colab aprono le versioni dedicate in `ai_lab/colab`; Kaggle rimane una fonte esterna e non ha pulsanti di esecuzione verificati.
+
+## Google Colab
+
+Per gli studenti l’ambiente principale è Colab: dalla pagina **Esercitazioni in Colab** o da una lezione aprono il notebook, salvano una copia nel proprio Drive ed eseguono la preparazione. Non sono richieste installazioni locali o credenziali Kaggle.
+
+La build genera `colab/*.ipynb` e `colab/runtime.json`, che vanno **versionati e inviati su GitHub**. La duplicazione dei notebook distribuiti serve ai link Colab basati su file GitHub: non modificare queste copie manualmente. Cambia i sorgenti, rigenera e includi anche `ai_lab/colab` nel commit. La CI segnala copie obsolete.
+
+`config.json` contiene `colab_ref`, il branch o riferimento usato sia nei link sia nei download. La prima cella scarica circa 28 MB di file, verifica gli hash, riusa i file già presenti nella sessione e crea gli alias Iowa. Usa le librerie scientifiche di Colab e installa solo quelle mancanti; non impone una versione locale di Python né effettua downgrade di TensorFlow.
+
+`tools/keras_compat.py` adatta esclusivamente i controlli: espone forma degli input, loss e metriche tramite le API correnti e gestisce i pesi Keras. Non modifica il training, i modelli degli studenti o i file Kaggle. I controlli originali continuano a decidere se la risposta è corretta.
+
+Verifiche senza addestramento:
+
+```sh
+python ai_lab/qa/check-colab.py
+```
+
+In un ambiente con TensorFlow, oppure nel job CI dedicato:
+
+```sh
+python ai_lab/qa/check-colab.py --keras
+```
+
+Il secondo comando verifica i controlli con modelli Keras reali e risposte corrette ed errate, senza chiamare `fit()`. Il primo controlla download, cache, recupero dei file incompleti, hash e lettura dei metadati. I rapporti sono `reports/colab.json` e `reports/colab-checks.json`. Questi controlli non certificano un accesso autenticato a Colab: dopo il push occorre aprire un esercizio ML e uno DL dal sito con l’account usato a scuola.
 
 ## Dati nella repository e licenze
 
@@ -105,9 +131,9 @@ I CSV importati non sono esclusi da Git: la struttura è pronta a versionarli. I
 
 ## Contenuti e aggiornamenti
 
-Le traduzioni in `content/it/<track>.txt` sono divise da marcatori `@@ nome_notebook:indice_cella`. Mantieni tutti i marcatori; scrivi spiegazioni italiane e lascia codice, variabili, commenti e docstring in inglese. Il confronto delle chiavi garantisce copertura per cella, non certifica da solo la qualità della traduzione.
+Le traduzioni in `content/it/<track>.txt` sono divise da marcatori `@@ nome_notebook:indice_cella`. Mantieni tutti i marcatori e scrivi spiegazioni italiane. Variabili, funzioni, API e docstring restano in inglese. I commenti didattici sono tradotti durante la build tramite `localization/comments.it.json` e `tools/code_translation.py`, anche nei blocchi Python del testo. La trasformazione confronta i token prima e dopo ed esclude qualsiasi modifica al codice eseguibile. Gli esempi di codice commentati e le direttive del generatore restano codice. Il confronto delle chiavi garantisce copertura per cella, non certifica da solo la qualità della traduzione.
 
-Per modificare titolo, sottotitolo, docente e URL cambia `config.json`. Per modificare gli incontri cambia `tools/programme.py`, che verifica 120 minuti per incontro. Le altre guide sono Markdown in `content/school`. I notebook aggiuntivi sono generati da `tools/school_notebooks.py`; modifica il generatore per evitare di perdere interventi alla rigenerazione.
+Per modificare titolo, sottotitolo, docente e URL cambia `config.json`. Il programma principale segue integralmente i due corsi Kaggle; il precedente piano di otto incontri è conservato soltanto in `archive/school-plan` e non viene pubblicato. Le altre guide sono Markdown in `content/school`. I notebook aggiuntivi sono generati da `tools/school_notebooks.py`; modifica il generatore per evitare di perdere interventi alla rigenerazione.
 
 Per aggiornare Kaggle, prima conserva le modifiche locali. Recupera upstream in modo non distruttivo, confronta sorgenti e metadati, esegui `python ai_lab/tools/inventory.py` per vedere file nuovi, rimossi o cambiati, rivedi le traduzioni interessate e aggiorna gli hash con `python ai_lab/tools/inventory.py --update` **dopo** la revisione. Il blocco include anche metadati e preprocessor originali. La build si ferma se un hash differisce: non aggiornare semplicemente gli hash per aggirare il controllo. Non lanciare `prepare_push.py` sugli originali: chiama una pulizia dei file. Il generatore AI Lab usa il preprocessor su copie in memoria.
 
