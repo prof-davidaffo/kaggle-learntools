@@ -5,7 +5,7 @@ Piattaforma statica in italiano per la scuola secondaria di secondo grado. Il pe
 ## Stato e materiali
 
 - 47 notebook sorgente recuperati: 18 ML, 13 Intro to Deep Learning e 16 del precedente corso di computer vision.
-- Capitolo introduttivo «Python per il corso», con esempi ed esercizi. La pagina `python.html` viene generata dal notebook sorgente `notebooks/00-python-essenziale.ipynb`: modifica quel file per aggiornare entrambi. Nel pacchetto studenti si trova in `ai_lab/notebooks/preparazione/`.
+- Capitolo introduttivo «Python per il corso», dalle prime istruzioni alle tabelle, con termini spiegati al primo utilizzo, esempi commentati, risultati attesi e sette esercizi con soluzione. La pagina `python.html` viene generata dal notebook sorgente `notebooks/00-python-essenziale.ipynb`: modifica quel file per aggiornare entrambi. Nel pacchetto studenti si trova in `ai_lab/notebooks/preparazione/`.
 - Traduzioni adattate di tutte le 307 celle Markdown e dei commenti didattici nel codice; istruzioni Python e identificatori originali conservati. Il preprocessor Kaggle è riutilizzato. I video esterni non sono tradotti né ricostruiti.
 - I due corsi originali completi, con 7 moduli ML e 6 moduli DL, ricerca locale, temi chiaro/scuro, formule KaTeX locali e download. Altri sorgenti recuperati e attività AI Lab restano nei materiali aggiuntivi.
 - Pacchetto studenti ZIP con notebook tradotti, `learntools` originale e strumenti di acquisizione dei dati.

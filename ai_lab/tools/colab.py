@@ -84,12 +84,12 @@ def generate(output, entries, config):
         cells = [cell for cell in nb.cells if cell.id not in {'ai-lab-local-guide', 'ai-lab-local-setup'}]
         guide = nbformat.v4.new_markdown_cell(
             '## Preparazione in Colab\n\n'
-            '1. Salva una copia del notebook nel tuo Drive.\n'
-            '2. Esegui la cella seguente e attendi «Preparazione completata».\n'
-            '3. Prosegui dall’alto verso il basso e completa gli esercizi.\n\n'
-            'La cella carica i dataset e i controlli dal repository del corso. '
-            'Non devi installare Python né caricare manualmente i CSV. '
-            'Se la sessione viene riavviata, esegui nuovamente la preparazione.',
+            '1. Salvare una copia del notebook nel proprio Drive.\n'
+            '2. Eseguire la cella seguente e attendere «Preparazione completata».\n'
+            '3. Eseguire le celle nell’ordine e svolgere gli esercizi.\n\n'
+            'La cella di preparazione acquisisce i dataset e i controlli degli esercizi '
+            'dal repository del corso e configura l’ambiente Python. '
+            'Dopo il riavvio della sessione occorre eseguire nuovamente la preparazione.',
             id='ai-lab-colab-guide')
         setup = nbformat.v4.new_code_cell(setup_cell(config, deep_learning), id='ai-lab-colab-setup')
         nb.cells = [cells[0], guide, setup, *cells[1:]]

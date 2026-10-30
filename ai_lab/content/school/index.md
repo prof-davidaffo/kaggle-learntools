@@ -4,7 +4,7 @@ Traduzione italiana dei due corsi introduttivi di Kaggle Learn. Sono richieste c
 
 ## Prima di iniziare
 
-[Python per il corso](python.html): variabili, liste, funzioni e le operazioni con pandas e NumPy usate negli esercizi. Puoi saltare il capitolo se conosci già questi argomenti.
+[Python per il corso](python.html) presenta variabili, condizioni, liste, cicli e funzioni, seguiti dalle operazioni su tabelle e grafici. Il capitolo comprende definizioni, esempi commentati e sette esercizi con soluzione. Costituisce la preparazione alle lezioni per chi affronta la programmazione per la prima volta.
 
 ## Intro to Machine Learning
 
