@@ -2,7 +2,7 @@
 
 Indirizzo configurato: **https://prof-davidaffo.github.io/kaggle-learntools/**.
 
-Questa guida prepara il primo invio e gli aggiornamenti. Nessun comando Git riportato qui è stato eseguito automaticamente. Il workflow compila su push e pull request; pubblica soltanto quando avviato manualmente con `publish` attivato. Non richiede token personali o altri segreti.
+Questa guida prepara il primo invio e gli aggiornamenti. Nessun comando Git riportato qui è stato eseguito automaticamente. Il workflow compila, controlla e pubblica automaticamente a ogni push su `master`; le pull request sui percorsi configurati eseguono build e controlli. Non richiede token personali o altri segreti.
 
 ## 1. Controllo locale
 
@@ -56,7 +56,7 @@ git commit -m "Add Italian AI Lab course and GitHub Pages workflow"
 git push origin master
 ```
 
-Questi comandi inviano i file; non avviano automaticamente la pubblicazione. Il workflow manuale deve essere presente nel branch predefinito del repository per comparire in Actions. Se il branch predefinito remoto è diverso da `master`, integra le modifiche con una normale pull request verso quel branch, senza push forzati.
+Il push su `master` avvia automaticamente build, controlli e pubblicazione. Il branch di pubblicazione è configurato nel filtro `push.branches` del workflow; se lo cambi, aggiorna anche `colab_ref` e gli URL in `config.json`.
 
 ## 4. Abilitare Pages
 
@@ -70,16 +70,15 @@ Il workflow dichiara già i permessi necessari: `contents: read` per la build, `
 ## 5. Prima pubblicazione
 
 1. Apri [Actions → AI Lab — build e GitHub Pages](https://github.com/prof-davidaffo/kaggle-learntools/actions/workflows/ai-lab-pages.yml).
-2. Attendi che la build del push sia verde. L'artefatto **ai-lab-static-site** contiene il sito pronto; **ai-lab-verification** contiene il rapporto dei controlli.
-3. Seleziona **Run workflow**, scegli il branch approvato, attiva **Pubblicare su GitHub Pages** (`publish=true`) e avvia.
-4. Attendi il completamento dei job **build**, **colab-checks** e **deploy**. Se è prevista una revisione dell'ambiente, approvala dalla pagina dell'esecuzione.
-5. Apri l'URL mostrato dal job deploy: **https://prof-davidaffo.github.io/kaggle-learntools/**. Controlla anche ricerca, una lezione e un download.
+2. Apri l’esecuzione avviata dal push su `master`. L'artefatto **ai-lab-static-site** contiene il sito pronto; **ai-lab-verification** contiene il rapporto dei controlli.
+3. Attendi il completamento dei job **build**, **colab-checks** e **deploy**. Se è prevista una revisione dell'ambiente, approvala dalla pagina dell'esecuzione.
+4. Apri l'URL mostrato dal job deploy: **https://prof-davidaffo.github.io/kaggle-learntools/**. Controlla anche ricerca, una lezione e un download.
 
-Lasciando `publish=false` ottieni una build verificata e gli artefatti, senza deploy. Il job deploy dipende dalla build e dai controlli Keras senza addestramento: un errore interrompe la pubblicazione. Il rapporto aggiuntivo è nell’artefatto **ai-lab-colab-compatibility**.
+Puoi anche avviare **Run workflow** manualmente: con `publish=true` pubblichi, con `publish=false` ottieni soltanto build verificata e artefatti. Il job deploy dipende dalla build e dai controlli Keras senza addestramento: un errore interrompe la pubblicazione. Il rapporto aggiuntivo è nell’artefatto **ai-lab-colab-compatibility**.
 
 ## Aggiornamenti e problemi comuni
 
-Modifica i sorgenti in `ai_lab/`, rigenera e controlla il sito, invia le modifiche approvate e ripeti il workflow manuale. Non modificare direttamente `ai_lab/build/`: viene rigenerato. Per cambiare titolo, docente o indirizzo usa `config.json`; `base_path` deve corrispondere al percorso di `site_url`, inclusa la barra finale.
+Modifica i sorgenti in `ai_lab/`, rigenera e controlla il sito con `./build.sh`, includi anche gli aggiornamenti di `ai_lab/colab` nel commit ed esegui il push su `master`: il sito viene ricostruito e pubblicato automaticamente. Non modificare direttamente `ai_lab/build/`: viene rigenerato. Per cambiare titolo, docente o indirizzo usa `config.json`; `base_path` deve corrispondere al percorso di `site_url`, inclusa la barra finale.
 
 | Problema | Verifica |
 | --- | --- |

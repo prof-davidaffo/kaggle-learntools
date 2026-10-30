@@ -2,15 +2,7 @@ name: AI Lab — build e GitHub Pages
 
 on:
   push:
-    paths:
-      - 'ai_lab/**'
-      - 'notebooks/machine_learning/**'
-      - 'notebooks/deep_learning_intro/**'
-      - 'notebooks/deep_learning/**'
-      - 'notebooks/nb_utils/**'
-      - 'learntools/**'
-      - 'LICENSE'
-      - '.github/workflows/ai-lab-pages.yml'
+    branches: [master]
   pull_request:
     paths:
       - 'ai_lab/**'
@@ -21,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       publish:
-        description: 'Pubblicare su GitHub Pages (autorizzazione esplicita)'
+        description: 'Pubblicare su GitHub Pages anche per questo avvio manuale'
         type: boolean
         required: true
         default: false
@@ -70,7 +62,7 @@ jobs:
           include-hidden-files: true
           if-no-files-found: error
       - name: Package Pages artifact
-        if: github.event_name == 'workflow_dispatch' && inputs.publish
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish)
         uses: actions/upload-pages-artifact@v4
         with:
           path: ai_lab/build
@@ -97,7 +89,7 @@ jobs:
           if-no-files-found: ignore
 
   deploy:
-    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish)
     needs: [build, colab-checks]
     runs-on: ubuntu-latest
     permissions:

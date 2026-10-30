@@ -8,7 +8,7 @@ La piattaforma è in `ai_lab/`. Le directory originali Kaggle e il README origin
 - [Istruzioni per Colab e Jupyter](ai_lab/content/school/esecuzione.md).
 - [Dataset e istruzioni per gli studenti](ai_lab/content/school/dataset.md).
 - [Inventario e risultati delle verifiche](ai_lab/reports/VERIFICA.md).
-- [Workflow GitHub Pages](.github/workflows/ai-lab-pages.yml): pubblicazione manuale, successiva alla revisione.
+- [Workflow GitHub Pages](.github/workflows/ai-lab-pages.yml): build, controlli e pubblicazione automatici a ogni push su `master`.
 - [Pubblicazione passo per passo](ai_lab/PUBBLICAZIONE.md): primo invio, impostazioni Pages e aggiornamenti.
 
 Il sito generato è in `ai_lab/build/`; il pacchetto completo con notebook e nove CSV è `ai_lab/build/downloads/ai-lab-studenti.zip`. I prodotti di build non vengono versionati: sono generati localmente o da GitHub Actions.

@@ -170,13 +170,11 @@ Per una verifica manuale futura dei soli notebook aggiuntivi, se desiderata, `to
 
 La [guida operativa alla pubblicazione](PUBBLICAZIONE.md) contiene i comandi per il primo invio, i collegamenti alle impostazioni e la procedura per gli aggiornamenti.
 
-Il workflow si attiva su push/PR per **compilare, controllare e produrre un artefatto da revisionare**. Non pubblica automaticamente. Per pubblicare, dopo l’autorizzazione:
+Il workflow **compila, controlla e pubblica automaticamente a ogni push su `master`**. Le pull request sui percorsi configurati eseguono build e controlli. Il deploy parte soltanto quando build e controlli Colab/Keras terminano con successo.
 
-1. Invia sul repository le modifiche approvate, senza operazioni Git distruttive.
-2. In **Settings → Pages → Build and deployment → Source**, seleziona **GitHub Actions**. Non è stato fatto da questa sessione.
-3. Consenti le Actions e, se necessario, autorizza il branch nell’ambiente `github-pages`.
-4. In **Actions → AI Lab — build e GitHub Pages → Run workflow**, seleziona il branch e imposta **publish=true**.
-5. Controlla build e deploy. L’URL previsto è `https://prof-davidaffo.github.io/kaggle-learntools/`.
+Per la configurazione iniziale seleziona **GitHub Actions** in **Settings → Pages → Build and deployment → Source**, consenti le Actions e il branch `master` nell’ambiente `github-pages`. Per gli aggiornamenti basta il push su `master`: controlla i job in **Actions → AI Lab — build e GitHub Pages**. L’URL previsto è `https://prof-davidaffo.github.io/kaggle-learntools/`.
+
+Resta disponibile l’avvio manuale con **Run workflow**: `publish=true` pubblica il sito, `publish=false` esegue soltanto build e controlli.
 
 Il workflow usa `pages:write` e `id-token:write` solo nel job deploy. I link del sito sono relativi e funzionano sotto `/kaggle-learntools/`; `site_url` definisce i canonical. Per cambiare repository o dominio aggiorna `config.json`. GitHub Actions non è stata eseguita remotamente qui: la configurazione predisposta non equivale a una pubblicazione verificata.
 
