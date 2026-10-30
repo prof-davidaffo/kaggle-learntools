@@ -40,6 +40,24 @@ Il README originale nella radice resta intatto. `ai_lab/reports/ANALISI.md` cont
 
 ## Installazione e build del sito
 
+Dalla radice del repository, genera e verifica il sito con:
+
+```sh
+./build.sh
+```
+
+Lo script crea e riutilizza `ai_lab/.venv`, installa le dipendenze, genera i notebook e il sito ed esegue i controlli. Serve Python 3 e, per installare le dipendenze mancanti, una connessione Internet. Per scegliere l’interprete alla creazione dell’ambiente: `PYTHON=python3.12 ./build.sh` (la CI usa Python 3.12).
+
+Avvia poi il server sul sito già generato:
+
+```sh
+./start.sh
+```
+
+Apri `http://localhost:8000` e ferma il server con `Ctrl+C`. Per cambiare porta usa `./start.sh --port 8001`. Il server non installa dipendenze e non rigenera il sito: dopo aver modificato i contenuti, esegui di nuovo `./build.sh`.
+
+In alternativa, puoi eseguire i passaggi manualmente.
+
 Usa l’interprete Python disponibile sul computer e crea un ambiente virtuale. Controlla la versione con `python --version`:
 
 ```sh
@@ -112,6 +130,7 @@ La build genera `colab/*.ipynb` e `colab/runtime.json`, che vanno **versionati e
 Verifiche senza addestramento:
 
 ```sh
+python -m pip install pandas scikit-learn matplotlib ipython
 python ai_lab/qa/check-colab.py
 ```
 
@@ -121,7 +140,7 @@ In un ambiente con TensorFlow, oppure nel job CI dedicato:
 python ai_lab/qa/check-colab.py --keras
 ```
 
-Il secondo comando verifica i controlli con modelli Keras reali e risposte corrette ed errate, senza chiamare `fit()`. Il primo controlla download, cache, recupero dei file incompleti, hash e lettura dei metadati. I rapporti sono `reports/colab.json` e `reports/colab-checks.json`. Questi controlli non certificano un accesso autenticato a Colab: dopo il push occorre aprire un esercizio ML e uno DL dal sito con l’account usato a scuola.
+Il secondo comando verifica i controlli con modelli Keras reali e risposte corrette ed errate, senza chiamare `fit()`. Il primo controlla download, cache, recupero dei file incompleti, hash e lettura dei metadati; esegue inoltre la preparazione in un processo isolato usando soltanto i file scaricati e verifica un controllo ML con risposte corrette ed errate. I rapporti sono `reports/colab.json` e `reports/colab-checks.json`. Questi controlli non certificano un accesso autenticato a Colab: dopo il push occorre aprire un esercizio ML e uno DL dal sito con l’account usato a scuola.
 
 ## Dati nella repository e licenze
 

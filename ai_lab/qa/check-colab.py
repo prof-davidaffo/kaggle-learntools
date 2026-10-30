@@ -5,6 +5,7 @@ import importlib
 import json
 from pathlib import Path
 import sys
+import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,6 +34,41 @@ def check_downloads():
             assert hashlib.sha256((root/item['path']).read_bytes()).hexdigest() == item['sha256']
         assert (root/'ai_lab/input/train.csv').read_bytes() == (root/'ai_lab/input/home-data-for-ml-course/train.csv').read_bytes()
         assert (root/'ai_lab/input/test.csv').read_bytes() == (root/'ai_lab/input/home-data-for-ml-course/test.csv').read_bytes()
+        # Use a fresh interpreter outside the checkout: repository imports would
+        # hide missing files in the partial Colab download.
+        subprocess.run([sys.executable, '-I', '-c', '''
+import importlib.util
+from pathlib import Path
+import sys
+
+root = Path(sys.argv[1])
+spec = importlib.util.spec_from_file_location('bootstrap', root/'ai_lab/tools/colab_runtime.py')
+bootstrap = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(bootstrap)
+namespace = {}
+bootstrap.setup(root, namespace)
+import learntools
+from learntools.core import binder, tracking
+assert binder.g is namespace
+assert list(learntools.__path__) == [str(root/'learntools')]
+assert learntools.__version__ == '0.3.5'
+assert not (root/'learntools/data_viz_to_coder').exists()
+assert 'learntools.data_viz_to_coder' not in sys.modules
+tracking.track({})
+import pandas as pd
+from learntools.machine_learning.ex2 import LoadHomeData
+home_data = pd.read_csv(root/'ai_lab/input/home-data-for-ml-course/train.csv')
+LoadHomeData().check(home_data)
+try:
+    LoadHomeData().check(home_data.head())
+except AssertionError:
+    pass
+else:
+    raise AssertionError('The downloaded checker accepted incomplete data')
+bootstrap.setup(root, namespace)
+assert binder.g is namespace
+assert Path.cwd() == root/'ai_lab/runtime'
+''', str(root)], cwd=temporary, check=True)
         damaged = root/manifest['files'][0]['path']
         damaged.write_bytes(b'incomplete download')
         download_runtime(manifest_path.as_uri(), ROOT.as_uri(), root)
@@ -144,6 +180,7 @@ if __name__ == '__main__':
     count = check_downloads()
     check_views()
     result = {'runtime_files': count, 'downloads_cache_integrity': 'passed',
+              'downloaded_runtime_setup': 'passed',
               'metadata_adapter': 'passed', 'cloud_session': 'not_run',
               'tensorflow_checks': check_keras() if arguments.keras else 'not_run: use --keras in a TensorFlow environment'}
     (LAB/'reports/colab-checks.json').write_text(json.dumps(result, indent=2)+'\n')

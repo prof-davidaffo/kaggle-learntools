@@ -1,6 +1,8 @@
 """Download and initialize the course runtime inside a hosted notebook."""
 from concurrent.futures import ThreadPoolExecutor
+import ast
 import hashlib
+from importlib.machinery import ModuleSpec
 import importlib.util
 import json
 import os
@@ -54,6 +56,32 @@ def download_runtime(manifest_url, source_url, root):
     return root
 
 
+def _load_learntools(root):
+    """Expose the downloaded courses without upstream's eager imports of all tracks."""
+    package_dir = root/'learntools'
+    current = sys.modules.get('learntools')
+    if getattr(current, '_ai_lab_package_dir', None) == str(package_dir):
+        return
+
+    # Keep the original version and files; only bypass the top-level imports.
+    # tracking.py needs __version__ while core is being imported.
+    source = ast.parse((package_dir/'__init__.py').read_text())
+    version = next(ast.literal_eval(node.value) for node in source.body
+                   if isinstance(node, ast.Assign)
+                   and any(isinstance(target, ast.Name) and target.id == '__version__'
+                           for target in node.targets))
+    spec = ModuleSpec('learntools', loader=None, is_package=True)
+    spec.submodule_search_locations = [str(package_dir)]
+    package = importlib.util.module_from_spec(spec)
+    package.__version__ = version
+    package._ai_lab_package_dir = str(package_dir)
+    # A failed earlier setup can leave core submodules cached in the kernel.
+    for name in list(sys.modules):
+        if name == 'learntools' or name.startswith('learntools.'):
+            del sys.modules[name]
+    sys.modules['learntools'] = package
+
+
 def setup(root, namespace, deep_learning=False):
     root = Path(root).resolve()
     required = {'numpy': 'numpy', 'pandas': 'pandas', 'matplotlib': 'matplotlib',
@@ -70,6 +98,7 @@ def setup(root, namespace, deep_learning=False):
     runtime = root/'ai_lab/runtime'
     runtime.mkdir(parents=True, exist_ok=True)
     os.chdir(runtime)
+    _load_learntools(root)
     from learntools.core import binder, tracking
     tracking.track = lambda event: None
     if not binder.bound:

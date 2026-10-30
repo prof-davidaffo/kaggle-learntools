@@ -1,6 +1,7 @@
 {
   "runtime_files": 50,
   "downloads_cache_integrity": "passed",
+  "downloaded_runtime_setup": "passed",
   "metadata_adapter": "passed",
   "cloud_session": "not_run",
   "tensorflow_checks": "not_run: use --keras in a TensorFlow environment"

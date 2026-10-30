@@ -44,7 +44,7 @@ jobs:
           cache: pip
           cache-dependency-path: ai_lab/requirements/site.txt
       - name: Install site dependencies
-        run: python -m pip install -r ai_lab/requirements/site.txt
+        run: python -m pip install -r ai_lab/requirements/site.txt pandas scikit-learn matplotlib ipython
       - name: Generate additional notebooks
         run: python ai_lab/tools/school_notebooks.py
       - name: Generate translated notebooks and build static site
