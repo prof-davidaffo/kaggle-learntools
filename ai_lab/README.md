@@ -5,7 +5,7 @@ Piattaforma statica in italiano per la scuola secondaria di secondo grado. Il pe
 ## Stato e materiali
 
 - 47 notebook sorgente recuperati: 18 ML, 13 Intro to Deep Learning e 16 del precedente corso di computer vision.
-- Capitolo introduttivo «Python per il corso», dalle prime istruzioni alle tabelle, con termini spiegati al primo utilizzo, esempi commentati, risultati attesi e sette esercizi con soluzione. La pagina `python.html` viene generata dal notebook sorgente `notebooks/00-python-essenziale.ipynb`: modifica quel file per aggiornare entrambi. Nel pacchetto studenti si trova in `ai_lab/notebooks/preparazione/`.
+- Capitolo introduttivo «Python per il corso», per chi conosce già la programmazione imperativa: sintassi Python ed esercizi con soluzione. La pagina `python.html` viene generata dal notebook sorgente `notebooks/00-python-essenziale.ipynb`: modifica quel file per aggiornare entrambi. Nel pacchetto studenti si trova in `ai_lab/notebooks/preparazione/`.
 - Traduzioni adattate di tutte le 307 celle Markdown e dei commenti didattici nel codice; istruzioni Python e identificatori originali conservati. Il preprocessor Kaggle è riutilizzato. I video esterni non sono tradotti né ricostruiti.
 - I due corsi originali completi, con 7 moduli ML e 6 moduli DL, ricerca locale, temi chiaro/scuro, formule KaTeX locali e download. Altri sorgenti recuperati e attività AI Lab restano nei materiali aggiuntivi.
 - Pacchetto studenti ZIP con notebook tradotti, `learntools` originale e strumenti di acquisizione dei dati.
@@ -55,6 +55,10 @@ Avvia poi il server sul sito già generato:
 ```
 
 Apri `http://localhost:8000` e ferma il server con `Ctrl+C`. Per cambiare porta usa `./start.sh --port 8001`. Il server non installa dipendenze e non rigenera il sito: dopo aver modificato i contenuti, esegui di nuovo `./build.sh`.
+
+Per provare in locale i notebook aggiornati, genera l’anteprima con `./build.sh --dev`, avvia il sito con `./start.sh` e, in un altro terminale, avvia `./jupyter-start.sh`. Il pulsante **Apri il notebook locale** apre il notebook corrispondente in JupyterLab. Lo script crea `ai_lab/.venv-jupyter` con `python3` e installa JupyterLab e le librerie dei notebook. Puoi scegliere un altro interprete con `JUPYTER_PYTHON` prima della creazione dell’ambiente. Per il deep learning installa anche TensorFlow con Python fino alla versione 3.13; con Python 3.14 i notebook che lo richiedono necessitano di un ambiente compatibile. La porta Jupyter è la 8888. Il pulsante Colab apre sempre la versione su GitHub.
+
+A ogni avvio Jupyter apre nuove copie dei notebook in `ai_lab/runtime/jupyter-*`. I salvataggi riguardano quelle copie; i notebook della build restano intatti. Le cartelle di sessione restano disponibili sul computer e sono ignorate da Git. La build normale `./build.sh` produce il sito di produzione, privo del collegamento a Jupyter locale.
 
 In alternativa, puoi eseguire i passaggi manualmente.
 

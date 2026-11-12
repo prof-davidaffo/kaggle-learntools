@@ -15,7 +15,7 @@ import shutil
 import sys
 import zipfile
 from types import SimpleNamespace
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 import markdown
 import nbformat
@@ -230,12 +230,25 @@ def relative_link(page, target):
     return os.path.relpath(target, str(Path(page).parent)).replace(os.sep, '/')
 
 
+def local_notebook_url(filename):
+    return f'http://127.0.0.1:8888/lab/tree/{quote(filename)}'
+
+
+def local_notebook_button(filename):
+    if not CONFIG.get('_development'):
+        return ''
+    return f'<a class="button secondary" href="{local_notebook_url(filename)}">Apri il notebook locale</a>'
+
+
 def derived_pages(entries, output):
     pages = {}
     intro = nbformat.read(LAB/'notebooks/00-python-essenziale.ipynb', as_version=4)
     translate_notebook(intro)
     intro_url = launch_url(CONFIG, '00-python-essenziale.ipynb')
-    intro_html = f'<div class="actions"><a class="button" href="{intro_url}">Apri in Colab</a><a class="button secondary" download href="notebooks/00-python-essenziale.ipynb">Scarica notebook</a></div>'
+    intro_html = f'<div class="actions"><a class="button" href="{intro_url}">Apri in Colab</a>{local_notebook_button("00-python-essenziale.ipynb")}<a class="button secondary" download href="notebooks/00-python-essenziale.ipynb">Scarica notebook</a></div>'
+    if CONFIG.get('_development'):
+        intro_html += ('<p>Anteprima locale: il pulsante Colab apre la versione pubblicata su GitHub. '
+                       'Avvia Jupyter con <code>./jupyter-start.sh</code> per aprire i notebook locali.</p>')
     intro_html += notebook_content(intro, {'track': 'python', 'stem': 'intro'}, output)
     pages['python.html'] = ('Python per il corso', intro_html, 'school')
     for cell in intro.cells:
@@ -244,7 +257,7 @@ def derived_pages(entries, output):
                                  lambda match: '](' + CONFIG['site_url'] + match[1] + ')',
                                  cell.source)
     nbformat.write(intro, output/'notebooks/00-python-essenziale.ipynb')
-    catalog = '# Il corso completo\n\nSegui tutti i moduli di **Intro to Machine Learning** e **Intro to Deep Learning**, nello stesso ordine dei corsi Kaggle, con lezioni ed esercizi tradotti in italiano dai sorgenti disponibili.\n\nPrima di iniziare: [Python per il corso](python.html), un ripasso della sintassi e delle operazioni sui dati.\n\n[Inizia dalla prima lezione](corsi/machine_learning/tut1.html) · [Scarica tutti i notebook e i dataset](downloads/ai-lab-studenti.zip).\n\n'
+    catalog = '# Il corso completo\n\nSegui tutti i moduli di **Intro to Machine Learning** e **Intro to Deep Learning**, nello stesso ordine dei corsi Kaggle, con lezioni ed esercizi tradotti in italiano dai sorgenti disponibili.\n\nPrima di iniziare: [Python per il corso](python.html), un’introduzione alla sintassi del linguaggio per chi sa già programmare.\n\n[Inizia dalla prima lezione](corsi/machine_learning/tut1.html) · [Scarica tutti i notebook e i dataset](downloads/ai-lab-studenti.zip).\n\n'
     for track, setting in TRACKS.items():
         group = [entry for entry in entries if entry['track'] == track and is_core(entry)]
         if not group:
@@ -262,6 +275,8 @@ def derived_pages(entries, output):
                 label = 'Leggi' if entry['kind'] == 'tutorial' else 'Esercizio'
                 name = f'{entry["track"]}-{entry["stem"]}.ipynb'
                 links[entry['kind']] = f'[{label}]({entry["page"]}) · [Colab]({launch_url(CONFIG, name)})'
+                if CONFIG.get('_development'):
+                    links[entry['kind']] += f' · [Locale]({local_notebook_url(name)})'
             catalog += f'| {index+1:02d} · {title} | {links.get("tutorial", "Non presente nei sorgenti")} | {links.get("exercise", "Non presente nei sorgenti")} |\n'
         catalog += '\n'
     catalog += '## Altri materiali disponibili\n\nGli ulteriori notebook recuperati dalla fork, i materiali storici e le attività originali AI Lab sono conservati nella sezione [Materiali aggiuntivi](aggiuntivi.html).\n\n[Inventario con hash e metadati](inventory.json) · [Ambienti e dataset](esecuzione.html) · [Licenze](attribuzioni.html).\n'
@@ -273,7 +288,10 @@ def derived_pages(entries, output):
             if entry['track'] != track or entry['kind'] != 'exercise' or not is_core(entry):
                 continue
             name = f'{entry["track"]}-{entry["stem"]}.ipynb'
-            exercises += f'- **{entry["index"]+1}. {entry["title"]}** — [Apri in Colab]({launch_url(CONFIG, name)}) · [Lezione ed esercizio]({entry["page"]})\n'
+            exercises += f'- **{entry["index"]+1}. {entry["title"]}** — [Apri in Colab]({launch_url(CONFIG, name)}) · [Lezione ed esercizio]({entry["page"]})'
+            if CONFIG.get('_development'):
+                exercises += f' · [Apri il notebook locale]({local_notebook_url(name)})'
+            exercises += '\n'
         exercises += '\n'
     exercises += '[Istruzioni per Colab](esecuzione.html) · [Ripasso Python in Colab](' + intro_url + ').\n'
     pages['esercitazioni.html'] = ('Esercitazioni in Colab', render_markdown(exercises), 'school')
@@ -326,9 +344,10 @@ def derived_pages(entries, output):
     return pages
 
 
-def build(output):
+def build(output, development=False):
     global CONFIG
     CONFIG = json.loads((LAB/'config.json').read_text())
+    CONFIG['_development'] = development
     if not CONFIG['site_url'].endswith('/'):
         raise ValueError('site_url must end with /')
     site_address = urlparse(CONFIG['site_url'])
@@ -381,12 +400,15 @@ def build(output):
             nb.cells.insert(0, nbformat.v4.new_markdown_cell(intro, id='ai-lab-context'))
             if not entry['historical'] and not entry['special']:
                 nb.cells.insert(1, nbformat.v4.new_markdown_cell('## Preparazione\n\nEsegui questa cella prima della lezione. Mantieni il notebook nella cartella del pacchetto studenti.', id='ai-lab-local-guide'))
-                nb.cells.insert(2, nbformat.v4.new_code_cell(LOCAL_SETUP,id='ai-lab-local-setup'))
+                setup = LOCAL_SETUP
+                if entry['track'] == 'deep_learning_intro':
+                    setup += "\n    from ai_lab.tools.keras_compat import install as install_keras_compat\n    install_keras_compat()\n"
+                nb.cells.insert(2, nbformat.v4.new_code_cell(setup,id='ai-lab-local-setup'))
             translate_notebook(nb)
             label = ('Esercizio: ' if entry['kind']=='exercise' else '')+entry['title']
             name = entry['track']+'-'+entry['stem']+'.ipynb'
             colab_button = f'<a class="button" href="{launch_url(CONFIG, name)}">Apri in Colab</a>' if is_core(entry) else ''
-            content = f'<div class="actions">{colab_button}<a class="button secondary" download href="../../notebooks/{name}">Scarica notebook</a><a class="button secondary" href="../../esecuzione.html">Come eseguirlo</a></div>'
+            content = f'<div class="actions">{colab_button}{local_notebook_button(name)}<a class="button secondary" download href="../../notebooks/{name}">Scarica notebook</a><a class="button secondary" href="../../esecuzione.html">Come eseguirlo</a></div>'
             content += notebook_content(nb, entry, output)
             # Retain every source media URL and reference, including ones condensed in translation.
             source_text = '\n'.join(c.source for c in nbformat.read(entry['source'], as_version=4).cells if c.cell_type=='markdown')
@@ -519,8 +541,9 @@ def shell(page, title, body, section, entries):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, default=LAB/'build')
+    parser.add_argument('--dev', action='store_true', help='Add links for the local development environment')
     args = parser.parse_args()
     destination = args.output.resolve()
     if destination in (ROOT, LAB) or ROOT.is_relative_to(destination):
         parser.error('Output must be a dedicated build directory')
-    build(destination)
+    build(destination, development=args.dev)

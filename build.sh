@@ -2,13 +2,19 @@
 # Prepara l'ambiente, genera e verifica il sito AI Lab.
 set -euo pipefail
 
-if [[ $# -gt 0 ]]; then
-    if [[ $# -eq 1 && ( "$1" == --help || "$1" == -h ) ]]; then
-        echo 'Uso: ./build.sh'
+build_mode=()
+case "${1:-}" in
+    "") ;;
+    --dev) build_mode=(--dev) ;;
+    --help|-h)
+        echo 'Uso: ./build.sh [--dev]'
+        echo '--dev aggiunge il collegamento al notebook Jupyter locale.'
         echo "Per scegliere l'interprete: PYTHON=python3.12 ./build.sh"
-        exit 0
-    fi
-    echo 'Uso: ./build.sh' >&2
+        exit 0 ;;
+    *) echo 'Uso: ./build.sh [--dev]' >&2; exit 1 ;;
+esac
+if [[ $# -gt 1 ]]; then
+    echo 'Uso: ./build.sh [--dev]' >&2
     exit 1
 fi
 
@@ -31,7 +37,7 @@ echo 'Preparazione dipendenze…'
 echo 'Generazione notebook…'
 "$venv_python" ai_lab/tools/school_notebooks.py
 echo 'Build del sito…'
-"$venv_python" ai_lab/tools/build.py
+"$venv_python" ai_lab/tools/build.py "${build_mode[@]}"
 echo 'Verifica del sito…'
 "$venv_python" ai_lab/tools/check.py
 

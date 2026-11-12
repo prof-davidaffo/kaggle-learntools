@@ -4,7 +4,7 @@ Traduzione italiana dei due corsi introduttivi di Kaggle Learn. Sono richieste c
 
 ## Prima di iniziare
 
-[Python per il corso](python.html) presenta variabili, condizioni, liste, cicli e funzioni, seguiti dalle operazioni su tabelle e grafici. Il capitolo comprende definizioni, esempi commentati e sette esercizi con soluzione. Costituisce la preparazione alle lezioni per chi affronta la programmazione per la prima volta.
+[Python per il corso](python.html) introduce la sintassi e le caratteristiche di Python usate nel corso. È pensato per chi conosce già la programmazione imperativa e incontra Python per la prima volta; comprende esempi ed esercizi con soluzione.
 
 ## Intro to Machine Learning
 
