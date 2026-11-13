@@ -92,7 +92,9 @@ def generate(output, entries, config):
             'Dopo il riavvio della sessione occorre eseguire nuovamente la preparazione.',
             id='ai-lab-colab-guide')
         setup = nbformat.v4.new_code_cell(setup_cell(config, deep_learning), id='ai-lab-colab-setup')
-        nb.cells = [cells[0], guide, setup, *cells[1:]]
+        # The Python introduction needs only the standard library. Keep the
+        # dataset/checker bootstrap out of the first programming examples.
+        nb.cells = cells if name == '00-python-essenziale.ipynb' else [cells[0], guide, setup, *cells[1:]]
         nb.metadata['colab'] = {'name': name, 'provenance': []}
         nb.metadata['ai_lab']['environment'] = 'colab'
         nb.metadata['ai_lab']['execution_status'] = 'prepared_not_cloud_executed'
@@ -111,7 +113,8 @@ def generate(output, entries, config):
         'File generati da `python ai_lab/tools/build.py`, da versionare insieme alle sorgenti. '
         'Non modificarli direttamente: modifica le traduzioni o il notebook Python sorgente e rigenera.\n\n'
         'I link Colab aprono questi file dal branch configurato in `ai_lab/config.json` (`colab_ref`). '
-        'La prima cella carica solo i file elencati in `runtime.json`, ne controlla gli hash e configura '
+        'Il capitolo Python usa soltanto la libreria standard e non richiede preparazione o download. '
+        'Nei notebook ML e DL la prima cella carica solo i file elencati in `runtime.json`, ne controlla gli hash e configura '
         'dataset, learntools e adattatore Keras. Gli originali Kaggle restano invariati.\n\n'
         'I file devono essere inviati su GitHub prima che i link e il download automatico siano utilizzabili. '
         'La preparazione locale non equivale a una sessione Colab eseguita e verificata.\n')

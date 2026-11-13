@@ -1,6 +1,6 @@
 # Fonti, attribuzioni e licenze
 
-**AI Lab** è un progetto scolastico indipendente. Non è una piattaforma ufficiale Kaggle e non rilascia attestati Kaggle.
+Questo sito è una **traduzione italiana e riorganizzazione didattica dei corsi originali Kaggle Learn**, a cura di **AI Lab**, progetto scolastico indipendente. La riorganizzazione riguarda presentazione, navigazione e accesso ai materiali; le lezioni conservano integralmente il contenuto dei notebook sorgente. Non è una piattaforma ufficiale Kaggle e non rilascia attestati Kaggle.
 
 ## Materiali Kaggle
 
@@ -10,7 +10,7 @@ Il repository originale usa **Apache License 2.0**. La [licenza completa](LICENS
 
 I metadati originali attribuiscono il corso Machine Learning a **Dan Becker**, con contributi di **Alexis Cook**, e Intro to Deep Learning a **Ryan Holbrook**. Il corso storico Deep Learning è attribuito a Dan Becker, con materiali TPU di Ryan Holbrook. Le pagine collegano i file di provenienza e ne conservano i riferimenti.
 
-Le traduzioni italiane sono adattamenti AI Lab dei testi e dei commenti didattici disponibili nei sorgenti. Le istruzioni Python, gli identificatori e le API restano invariati. I video esterni non sono tradotti.
+Le traduzioni italiane AI Lab riportano integralmente i testi disponibili nei notebook sorgente, conservando spiegazioni, esempi, domande, figure e riferimenti nell’ordine originale. Il riferimento è la versione registrata nell’inventario. Le note sull’ambiente locale o Colab sono aggiunte separate e identificate come AI Lab. Sono tradotti anche i commenti didattici; istruzioni Python, identificatori e API restano invariati. I video esterni non sono tradotti.
 
 ## Materiale originale AI Lab
 

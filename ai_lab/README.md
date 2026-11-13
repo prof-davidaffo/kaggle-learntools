@@ -1,12 +1,14 @@
-# AI Lab — Machine Learning e Deep Learning con Python
+# Corsi Kaggle — traduzione e riorganizzazione italiana · AI Lab
 
-Piattaforma statica in italiano per la scuola secondaria di secondo grado. Il percorso principale usa **lezioni, esercizi e dataset originali Kaggle**. I laboratori AI Lab aggiuntivi sono identificati e separati. Non è una piattaforma ufficiale Kaggle.
+Traduzione italiana e riorganizzazione didattica dei corsi originali Kaggle Learn per la scuola secondaria di secondo grado, a cura del progetto indipendente AI Lab. Il percorso principale conserva integralmente **lezioni, esercizi e dataset originali Kaggle**; la riorganizzazione riguarda presentazione, navigazione e accesso ai materiali. I laboratori AI Lab aggiuntivi sono identificati e separati. Non è una piattaforma ufficiale Kaggle.
 
 ## Stato e materiali
 
 - 47 notebook sorgente recuperati: 18 ML, 13 Intro to Deep Learning e 16 del precedente corso di computer vision.
 - Capitolo introduttivo «Python per il corso», per chi conosce già la programmazione imperativa: sintassi Python ed esercizi con soluzione. La pagina `python.html` viene generata dal notebook sorgente `notebooks/00-python-essenziale.ipynb`: modifica quel file per aggiornare entrambi. Nel pacchetto studenti si trova in `ai_lab/notebooks/preparazione/`.
-- Traduzioni adattate di tutte le 307 celle Markdown e dei commenti didattici nel codice; istruzioni Python e identificatori originali conservati. Il preprocessor Kaggle è riutilizzato. I video esterni non sono tradotti né ricostruiti.
+- Il capitolo Python usa soltanto la libreria standard, senza preparazione Colab o download di dataset. Spiega i rientri tramite il tasto Tab, sviluppa i concetti prima degli esercizi e include sei esercizi con soluzioni commentate.
+- La revisione didattica assume già noti variabili, selezione, iterazione e funzioni: insiste sulle differenze di Python (tipizzazione dinamica, riferimenti alle liste, `range`, `while` e parametri). Come confronto per la progressione è stato consultato *Hashtag*, vol. 1, di M. Boscaini, A. Montresor e M. Masetti (Hoepli, 2022), modulo F, soprattutto unità F2–F4. Testi ed esempi del capitolo sono originali; il PDF di riferimento non fa parte del sito o del pacchetto studenti.
+- Traduzione integrale delle 307 celle Markdown dei 47 notebook Kaggle: spiegazioni, esempi, domande, consegne, didascalie e approfondimenti sono conservati nello stesso ordine degli originali versionati. Le precedenti sintesi sono state sostituite. I commenti didattici nel codice sono tradotti; istruzioni Python e identificatori restano invariati. Il preprocessor Kaggle è riutilizzato. I video esterni non sono tradotti né ricostruiti.
 - I due corsi originali completi, con 7 moduli ML e 6 moduli DL, ricerca locale, temi chiaro/scuro, formule KaTeX locali e download. Altri sorgenti recuperati e attività AI Lab restano nei materiali aggiuntivi.
 - Pacchetto studenti ZIP con notebook tradotti, `learntools` originale e strumenti di acquisizione dei dati.
 - I nove CSV principali sono stati importati dagli archivi forniti dal docente in `data/`. Sono presenti in `ai_lab/input`, nel sito generato e nel pacchetto studenti. Il download dal terminale resta impedito dalla rete, ma i file locali sono disponibili.
@@ -154,7 +156,11 @@ I CSV importati non sono esclusi da Git: la struttura è pronta a versionarli. I
 
 ## Contenuti e aggiornamenti
 
-Le traduzioni in `content/it/<track>.txt` sono divise da marcatori `@@ nome_notebook:indice_cella`. Mantieni tutti i marcatori e scrivi spiegazioni italiane. Variabili, funzioni, API e docstring restano in inglese. I commenti didattici sono tradotti durante la build tramite `localization/comments.it.json` e `tools/code_translation.py`, anche nei blocchi Python del testo. La trasformazione confronta i token prima e dopo ed esclude qualsiasi modifica al codice eseguibile. Gli esempi di codice commentati e le direttive del generatore restano codice. Il confronto delle chiavi garantisce copertura per cella, non certifica da solo la qualità della traduzione.
+Le traduzioni in `content/it/<track>.txt` sono divise da marcatori `@@ nome_notebook:indice_cella`. Traduci integralmente ogni cella del sorgente: non riassumere, accorpare spiegazioni o sostituire esempi e domande con una sintesi. Conserva gerarchia dei titoli, formule, figure con didascalie, collegamenti, codice e consegne nella posizione originale. Eventuali chiarimenti didattici o aggiornamenti dell’ambiente vanno in note esplicitamente marcate **AI Lab**, separate dalla traduzione. Il riferimento è il commit registrato in `reports/inventory.json`, non una versione online successiva.
+
+Variabili, funzioni, API e docstring restano in inglese. I commenti didattici sono tradotti durante la build tramite `localization/comments.it.json` e `tools/code_translation.py`, anche nei blocchi Python del testo. La trasformazione confronta i token prima e dopo ed esclude modifiche al codice eseguibile. Gli esempi di codice commentati e le direttive del generatore restano codice.
+
+La build usa `tools/translation_checks.py` per confrontare ogni cella con l’originale: verifica link, immagini effettivamente inserite nel testo, macro, gerarchia dei titoli e codice degli esempi; segnala anche riduzioni importanti del testo. Il rapporto è `reports/translation-checks.json`. La lunghezza è solo un segnale d’allarme: né questo controllo né la copertura delle chiavi certificano la fedeltà semantica. Ogni modifica richiede il confronto del testo italiano con l’intera cella inglese.
 
 Per modificare titolo, sottotitolo, docente e URL cambia `config.json`. Il programma principale segue integralmente i due corsi Kaggle; il precedente piano di otto incontri è conservato soltanto in `archive/school-plan` e non viene pubblicato. Le altre guide sono Markdown in `content/school`. I notebook aggiuntivi sono generati da `tools/school_notebooks.py`; modifica il generatore per evitare di perdere interventi alla rigenerazione.
 

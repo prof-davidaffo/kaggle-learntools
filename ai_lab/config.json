@@ -1,7 +1,7 @@
 {
-  "title": "AI Lab",
-  "subtitle": "Machine Learning e Deep Learning con Python",
-  "description": "Intro to Machine Learning e Intro to Deep Learning di Kaggle Learn: lezioni ed esercizi in italiano.",
+  "title": "Corsi Kaggle — traduzione e riorganizzazione italiana",
+  "subtitle": "Machine Learning e Deep Learning con Python · progetto AI Lab",
+  "description": "Traduzione italiana e riorganizzazione didattica dei corsi originali Intro to Machine Learning e Intro to Deep Learning di Kaggle Learn, a cura del progetto scolastico indipendente AI Lab.",
   "teacher": "Prof. Davide Daffonchio",
   "repository": "https://github.com/prof-davidaffo/kaggle-learntools",
   "colab_ref": "master",

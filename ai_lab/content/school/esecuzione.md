@@ -4,6 +4,10 @@
 
 Per seguire il corso puoi usare Colab dal browser. Non serve installare Python sul computer.
 
+Il [capitolo Python](python.html) è subito eseguibile: salva una copia e comincia dalla prima cella di codice. Non richiede preparazione, dataset o controlli `check()`; gli esercizi hanno risultati attesi e soluzioni commentate.
+
+Per le lezioni e gli esercizi di Machine Learning e Deep Learning:
+
 1. Apri le [esercitazioni](esercitazioni.html) e scegli **Apri in Colab**. Lo stesso pulsante è presente nelle lezioni e nel [capitolo Python](python.html).
 2. Accedi con il tuo account Google e salva una copia del notebook nel tuo Drive, così conservi le modifiche.
 3. Esegui la cella **Preparazione in Colab** con **Maiusc + Invio** e attendi il messaggio «Preparazione completata».

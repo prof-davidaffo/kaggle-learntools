@@ -94,7 +94,9 @@ def check(directory):
         colab_notebook = nbformat.read(path, as_version=4)
         nbformat.validate(colab_notebook)
         setup = [cell for cell in colab_notebook.cells if cell.id == 'ai-lab-colab-setup']
-        if len(setup) != 1: errors.append('Missing or duplicate Colab preparation cell: '+name)
+        expected_setup = 0 if name == '00-python-essenziale.ipynb' else 1
+        if len(setup) != expected_setup:
+            errors.append('Unexpected number of Colab preparation cells: '+name)
         local_notebook = nbformat.read(directory/'notebooks'/name, as_version=4)
         local_code = [cell.source for cell in local_notebook.cells
                       if cell.cell_type == 'code' and cell.id != 'ai-lab-local-setup']

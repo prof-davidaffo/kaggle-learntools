@@ -27,6 +27,7 @@ from catalog import TRACKS
 from feedback import translations as feedback_translations
 from code_translation import translate_notebook
 from colab import generate as generate_colab, launch_url
+from translation_checks import audit_cell
 
 ROOT = Path(__file__).resolve().parents[2]
 LAB = ROOT / 'ai_lab'
@@ -57,13 +58,13 @@ class ItalianPreprocessor(LearnLessonPreprocessor):
         return None
 
     def YOURTURN(self, **kwargs):
-        return f'## Ora prova tu\n\n[Apri l’esercizio]({self.lesson.exercise.forking_url}).'
+        return f'# Ora tocca a te\n\nProva l’[esercizio pratico]({self.lesson.exercise.forking_url}) su {self.lesson.topic}.'
 
     def KEEP_GOING(self, **kwargs):
         if not hasattr(self.lesson, 'next'):
             return '## Corso completato\n\n[Torna al programma](../../catalogo.html).'
         target = self.lesson.next
-        return f'## Prosegui\n\n[{target.topic}]({target.tutorial.url}).'
+        return f'# Prosegui\n\nSei pronto per **[{target.topic}]({target.tutorial.url})**.'
 
     def NEXT_NOTEBOOK_URL(self, **kwargs):
         if self.nb_meta.type == 'tutorial' and hasattr(self.lesson, 'exercise'):
@@ -73,10 +74,12 @@ class ItalianPreprocessor(LearnLessonPreprocessor):
         return '../../catalogo.html'
 
     def SUBMIT_TO_COMP(self, **kwargs):
-        return ('La procedura storica richiedeva **Save Version → Save and Run All → Save**, '
-                'poi l’apertura della versione con **Open in Viewer** e l’invio del CSV dalla '
-                'scheda **Data** o **Output** con **Submit**. Richiede account, regole accettate '
-                'e ambiente Kaggle. Interfaccia e invio attuali non verificati da AI Lab.')
+        return ('1. Comincia premendo **Save Version** nell’angolo in alto a destra della finestra. Si aprirà una finestra di dialogo.\n'
+                '2. Assicurati che sia selezionato **Save and Run All**, poi premi **Save**.\n'
+                '3. Comparirà una finestra in basso a sinistra nel notebook. Al termine dell’esecuzione, premi il numero a destra di **Save Version**: apparirà un elenco di versioni sulla destra. Premi i tre puntini **(...)** accanto alla versione più recente e seleziona **Open in Viewer**. Entrerai nella modalità di visualizzazione della stessa pagina; scorri verso il basso per tornare a queste istruzioni.\n'
+                '4. Apri la scheda **Data** vicino alla parte superiore dello schermo. Seleziona il file da inviare e premi **Submit** per inviare i risultati alla classifica.\n\n'
+                'Hai inviato correttamente la tua soluzione alla competizione!\n\n'
+                'Se vuoi continuare a migliorare le prestazioni, seleziona **Edit** in alto a destra. Puoi quindi modificare il codice e ripetere il procedimento. C’è molto margine di miglioramento e salirai in classifica man mano che lavori.\n')
 
 
 def get_entries():
@@ -146,7 +149,7 @@ def render_markdown(text):
         formulas.append(match.group())
         return f'AILABMATHPLACEHOLDER{len(formulas)-1}END'
     text = re.sub(r'\\\[.*?\\\]|\\\(.*?\\\)|(?<!\\)\$\$.*?(?<!\\)\$\$|(?<![\\\w])\$[^\n$]+?\$', stash, text, flags=re.S)
-    output = markdown.markdown(text, extensions=['fenced_code', 'tables', 'toc', 'codehilite', 'footnotes'],
+    output = markdown.markdown(text, extensions=['fenced_code', 'tables', 'toc', 'codehilite', 'footnotes', 'md_in_html'],
                                extension_configs={'codehilite': {'guess_lang': False}})
     for index, formula in enumerate(formulas):
         output = output.replace(f'AILABMATHPLACEHOLDER{index}END', html.escape(formula))
@@ -374,6 +377,7 @@ def build(output, development=False):
         shutil.copy2(LAB/'reports/data-inventory.json', output/'data-inventory.json')
     pages = {}
     coverage = []
+    translation_audit = []
     for track in TRACKS:
         translations = read_translations(track)
         expected = {f"{e['stem']}:{i}" for e in entries if e['track']==track
@@ -386,7 +390,13 @@ def build(output, development=False):
             for i, cell in enumerate(nb.cells):
                 cell.id = f"cell-{i}"
                 if cell.cell_type == 'markdown':
-                    cell.source = translations[f"{entry['stem']}:{i}"]
+                    key = f"{entry['stem']}:{i}"
+                    translated = translations[key]
+                    audit = audit_cell(cell.source, translated)
+                    translation_audit.append({'track': track, 'cell': key, **audit})
+                    if audit['errors']:
+                        raise ValueError(f"Translation integrity {track}/{key}: {audit['errors']}")
+                    cell.source = translated
             nb, _ = ItalianPreprocessor().preprocess(nb, make_resources(entry, entries))
             nb.nbformat_minor = 5
             nb.metadata = {'kernelspec': {'display_name': 'Python 3', 'language': 'python', 'name': 'python3'},
@@ -395,8 +405,11 @@ def build(output, development=False):
                                       'source_sha256': hashlib.sha256(entry['source'].read_bytes()).hexdigest(),
                                       'execution_status': 'not_verified', 'license': 'Apache-2.0', 'language': 'it'}}
             intro = f"# {entry['title']}\n\n"
+            intro += ('> **Nota AI Lab — ambiente di lettura.** Il testo seguente è la traduzione del notebook Kaggle originale conservato nel repository. '
+                      'I riferimenti a pulsanti, celle nascoste e invii descrivono l’ambiente Kaggle dell’originale; qui le celle di codice sono visibili. '
+                      'Per eseguire i notebook fuori da Kaggle, segui la guida AI Lab all’ambiente.\n\n')
             if not is_core(entry):
-                intro += status_text(entry) + '\n\n'
+                intro += '> **Nota AI Lab — materiale aggiuntivo.** ' + status_text(entry) + '\n\n'
             nb.cells.insert(0, nbformat.v4.new_markdown_cell(intro, id='ai-lab-context'))
             if not entry['historical'] and not entry['special']:
                 nb.cells.insert(1, nbformat.v4.new_markdown_cell('## Preparazione\n\nEsegui questa cella prima della lezione. Mantieni il notebook nella cartella del pacchetto studenti.', id='ai-lab-local-guide'))
@@ -410,7 +423,7 @@ def build(output, development=False):
             colab_button = f'<a class="button" href="{launch_url(CONFIG, name)}">Apri in Colab</a>' if is_core(entry) else ''
             content = f'<div class="actions">{colab_button}{local_notebook_button(name)}<a class="button secondary" download href="../../notebooks/{name}">Scarica notebook</a><a class="button secondary" href="../../esecuzione.html">Come eseguirlo</a></div>'
             content += notebook_content(nb, entry, output)
-            # Retain every source media URL and reference, including ones condensed in translation.
+            # Provide a source index in addition to the links retained in place.
             source_text = '\n'.join(c.source for c in nbformat.read(entry['source'], as_version=4).cells if c.cell_type=='markdown')
             urls = sorted(set(re.findall(r'https?://[^\s<>"\)]+', source_text)))
             content += '<details><summary>Provenienza e riferimenti del sorgente</summary>'
@@ -488,6 +501,15 @@ def build(output, development=False):
             bundle.write(path,'ai-lab-studenti/'+relative)
     (output/'.nojekyll').touch()
     (LAB/'reports/coverage.json').write_text(json.dumps(coverage,ensure_ascii=False,indent=2)+'\n')
+    (LAB/'reports/translation-checks.json').write_text(json.dumps({
+        'reference': 'Locked Kaggle source notebooks in reports/inventory.json',
+        'scope': 'All source Markdown cells, including additional and historical notebooks',
+        'checks': ['source links', 'inline images', 'navigation macros', 'heading hierarchy',
+                   'fenced code tokens excluding translated comments', 'major shortening'],
+        'limitation': 'Structural checks do not certify semantic fidelity; bilingual review is required.',
+        'notebooks': len(entries), 'cells': len(translation_audit),
+        'errors': [], 'details': translation_audit,
+    }, ensure_ascii=False, indent=2)+'\n')
     print(f'Built {len(pages)} pages and {len(list((output/"notebooks").glob("*.ipynb")))} notebooks in {output}')
 
 
@@ -535,7 +557,7 @@ def shell(page, title, body, section, entries):
 <div class="header-actions"><button id="menu" aria-expanded="false" aria-controls="sidebar">Indice</button><button id="theme" aria-label="Cambia tema" aria-pressed="false">Tema scuro</button></div></header>
 <aside id="sidebar"><label for="search">Cerca nel corso</label><input id="search" type="search" placeholder="Cerca…" autocomplete="off"><div id="search-status" role="status"></div><div id="results"></div><nav aria-label="Navigazione del corso">{nav}</nav><p class="teacher">{html.escape(CONFIG['teacher'])}</p></aside>
 <main id="contenuto">{'<div class="breadcrumb">'+crumb+'</div>' if crumb else ''}<article>{body}</article><nav class="pager" aria-label="Lezione precedente e successiva">{pager}</nav>
-<footer><a href="{rel('attribuzioni.html')}">Fonti e licenze</a> · <a href="{rel('verifiche.html')}">Verifiche tecniche</a></footer></main></body></html>'''
+<footer><p>Traduzione italiana e riorganizzazione dei corsi originali Kaggle Learn · Progetto indipendente AI Lab.</p><a href="{rel('attribuzioni.html')}">Autori, fonti e licenze</a> · <a href="{rel('verifiche.html')}">Verifiche tecniche</a></footer></main></body></html>'''
 
 
 if __name__ == '__main__':

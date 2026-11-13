@@ -1,0 +1,2474 @@
+{
+  "reference": "Locked Kaggle source notebooks in reports/inventory.json",
+  "scope": "All source Markdown cells, including additional and historical notebooks",
+  "checks": [
+    "source links",
+    "inline images",
+    "navigation macros",
+    "heading hierarchy",
+    "fenced code tokens excluding translated comments",
+    "major shortening"
+  ],
+  "limitation": "Structural checks do not certify semantic fidelity; bilingual review is required.",
+  "notebooks": 47,
+  "cells": 307,
+  "errors": [],
+  "details": [
+    {
+      "track": "machine_learning",
+      "cell": "tut1:0",
+      "source_words": 539,
+      "translation_words": 526,
+      "word_ratio": 0.976,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut2:0",
+      "source_words": 58,
+      "translation_words": 59,
+      "word_ratio": 1.017,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut2:2",
+      "source_words": 109,
+      "translation_words": 103,
+      "word_ratio": 0.945,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut2:4",
+      "source_words": 173,
+      "translation_words": 172,
+      "word_ratio": 0.994,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex2:0",
+      "source_words": 88,
+      "translation_words": 88,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex2:2",
+      "source_words": 16,
+      "translation_words": 18,
+      "word_ratio": 1.125,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex2:7",
+      "source_words": 27,
+      "translation_words": 28,
+      "word_ratio": 1.037,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex2:11",
+      "source_words": 106,
+      "translation_words": 107,
+      "word_ratio": 1.009,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:0",
+      "source_words": 89,
+      "translation_words": 88,
+      "word_ratio": 0.989,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:3",
+      "source_words": 128,
+      "translation_words": 130,
+      "word_ratio": 1.016,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:5",
+      "source_words": 107,
+      "translation_words": 104,
+      "word_ratio": 0.972,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:7",
+      "source_words": 7,
+      "translation_words": 7,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:9",
+      "source_words": 26,
+      "translation_words": 25,
+      "word_ratio": 0.962,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:12",
+      "source_words": 27,
+      "translation_words": 26,
+      "word_ratio": 0.963,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:13",
+      "source_words": 134,
+      "translation_words": 133,
+      "word_ratio": 0.993,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:15",
+      "source_words": 102,
+      "translation_words": 92,
+      "word_ratio": 0.902,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut3:17",
+      "source_words": 12,
+      "translation_words": 13,
+      "word_ratio": 1.083,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex3:0",
+      "source_words": 31,
+      "translation_words": 30,
+      "word_ratio": 0.968,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex3:2",
+      "source_words": 44,
+      "translation_words": 39,
+      "word_ratio": 0.886,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex3:7",
+      "source_words": 104,
+      "translation_words": 90,
+      "word_ratio": 0.865,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex3:11",
+      "source_words": 18,
+      "translation_words": 22,
+      "word_ratio": 1.222,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex3:13",
+      "source_words": 44,
+      "translation_words": 42,
+      "word_ratio": 0.955,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex3:19",
+      "source_words": 25,
+      "translation_words": 25,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex3:23",
+      "source_words": 28,
+      "translation_words": 27,
+      "word_ratio": 0.964,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex3:25",
+      "source_words": 24,
+      "translation_words": 18,
+      "word_ratio": 0.75,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut4:0",
+      "source_words": 321,
+      "translation_words": 311,
+      "word_ratio": 0.969,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut4:2",
+      "source_words": 14,
+      "translation_words": 11,
+      "word_ratio": 0.786,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut4:4",
+      "source_words": 248,
+      "translation_words": 243,
+      "word_ratio": 0.98,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut4:6",
+      "source_words": 93,
+      "translation_words": 96,
+      "word_ratio": 1.032,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut4:7",
+      "source_words": 15,
+      "translation_words": 19,
+      "word_ratio": 1.267,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex4:0",
+      "source_words": 33,
+      "translation_words": 28,
+      "word_ratio": 0.848,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex4:2",
+      "source_words": 50,
+      "translation_words": 44,
+      "word_ratio": 0.88,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex4:7",
+      "source_words": 28,
+      "translation_words": 26,
+      "word_ratio": 0.929,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex4:11",
+      "source_words": 8,
+      "translation_words": 9,
+      "word_ratio": 1.125,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex4:14",
+      "source_words": 9,
+      "translation_words": 11,
+      "word_ratio": 1.222,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex4:17",
+      "source_words": 57,
+      "translation_words": 51,
+      "word_ratio": 0.895,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex4:21",
+      "source_words": 33,
+      "translation_words": 30,
+      "word_ratio": 0.909,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut5:0",
+      "source_words": 535,
+      "translation_words": 475,
+      "word_ratio": 0.888,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut5:2",
+      "source_words": 21,
+      "translation_words": 22,
+      "word_ratio": 1.048,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut5:4",
+      "source_words": 17,
+      "translation_words": 16,
+      "word_ratio": 0.941,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut5:6",
+      "source_words": 90,
+      "translation_words": 94,
+      "word_ratio": 1.044,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex5:0",
+      "source_words": 37,
+      "translation_words": 36,
+      "word_ratio": 0.973,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex5:2",
+      "source_words": 31,
+      "translation_words": 29,
+      "word_ratio": 0.935,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex5:4",
+      "source_words": 56,
+      "translation_words": 54,
+      "word_ratio": 0.964,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex5:9",
+      "source_words": 61,
+      "translation_words": 56,
+      "word_ratio": 0.918,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex5:13",
+      "source_words": 44,
+      "translation_words": 43,
+      "word_ratio": 0.977,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut6:0",
+      "source_words": 185,
+      "translation_words": 177,
+      "word_ratio": 0.957,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut6:2",
+      "source_words": 26,
+      "translation_words": 25,
+      "word_ratio": 0.962,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut6:4",
+      "source_words": 87,
+      "translation_words": 83,
+      "word_ratio": 0.954,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex6:0",
+      "source_words": 9,
+      "translation_words": 9,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex6:2",
+      "source_words": 24,
+      "translation_words": 24,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex6:3",
+      "source_words": 7,
+      "translation_words": 7,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex6:7",
+      "source_words": 58,
+      "translation_words": 58,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut7:0",
+      "source_words": 57,
+      "translation_words": 66,
+      "word_ratio": 1.158,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex7:0",
+      "source_words": 53,
+      "translation_words": 50,
+      "word_ratio": 0.943,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex7:2",
+      "source_words": 14,
+      "translation_words": 13,
+      "word_ratio": 0.929,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex7:4",
+      "source_words": 40,
+      "translation_words": 37,
+      "word_ratio": 0.925,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex7:6",
+      "source_words": 14,
+      "translation_words": 15,
+      "word_ratio": 1.071,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex7:8",
+      "source_words": 14,
+      "translation_words": 13,
+      "word_ratio": 0.929,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex7:11",
+      "source_words": 26,
+      "translation_words": 23,
+      "word_ratio": 0.885,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex7:13",
+      "source_words": 345,
+      "translation_words": 310,
+      "word_ratio": 0.899,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_automl:0",
+      "source_words": 302,
+      "translation_words": 256,
+      "word_ratio": 0.848,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_automl:1",
+      "source_words": 43,
+      "translation_words": 40,
+      "word_ratio": 0.93,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_automl:2",
+      "source_words": 51,
+      "translation_words": 42,
+      "word_ratio": 0.824,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_automl:3",
+      "source_words": 245,
+      "translation_words": 175,
+      "word_ratio": 0.714,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_automl:6",
+      "source_words": 15,
+      "translation_words": 14,
+      "word_ratio": 0.933,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_automl:8",
+      "source_words": 31,
+      "translation_words": 21,
+      "word_ratio": 0.677,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_automl:10",
+      "source_words": 70,
+      "translation_words": 60,
+      "word_ratio": 0.857,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex_automl:0",
+      "source_words": 269,
+      "translation_words": 218,
+      "word_ratio": 0.81,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex_automl:1",
+      "source_words": 432,
+      "translation_words": 343,
+      "word_ratio": 0.794,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex_automl:3",
+      "source_words": 59,
+      "translation_words": 53,
+      "word_ratio": 0.898,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex_automl:5",
+      "source_words": 98,
+      "translation_words": 78,
+      "word_ratio": 0.796,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:0",
+      "source_words": 736,
+      "translation_words": 551,
+      "word_ratio": 0.749,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:1",
+      "source_words": 300,
+      "translation_words": 228,
+      "word_ratio": 0.76,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:3",
+      "source_words": 75,
+      "translation_words": 65,
+      "word_ratio": 0.867,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:5",
+      "source_words": 218,
+      "translation_words": 162,
+      "word_ratio": 0.743,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:7",
+      "source_words": 167,
+      "translation_words": 144,
+      "word_ratio": 0.862,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:9",
+      "source_words": 34,
+      "translation_words": 28,
+      "word_ratio": 0.824,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:11",
+      "source_words": 275,
+      "translation_words": 206,
+      "word_ratio": 0.749,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:13",
+      "source_words": 190,
+      "translation_words": 149,
+      "word_ratio": 0.784,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut_titanic:14",
+      "source_words": 39,
+      "translation_words": 35,
+      "word_ratio": 0.897,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:0",
+      "source_words": 230,
+      "translation_words": 225,
+      "word_ratio": 0.978,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:3",
+      "source_words": 20,
+      "translation_words": 18,
+      "word_ratio": 0.9,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:5",
+      "source_words": 19,
+      "translation_words": 17,
+      "word_ratio": 0.895,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:7",
+      "source_words": 21,
+      "translation_words": 21,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:9",
+      "source_words": 44,
+      "translation_words": 42,
+      "word_ratio": 0.955,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:11",
+      "source_words": 57,
+      "translation_words": 49,
+      "word_ratio": 0.86,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:12",
+      "source_words": 81,
+      "translation_words": 77,
+      "word_ratio": 0.951,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:13",
+      "source_words": 48,
+      "translation_words": 54,
+      "word_ratio": 1.125,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:15",
+      "source_words": 105,
+      "translation_words": 105,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "tut8:16",
+      "source_words": 28,
+      "translation_words": 27,
+      "word_ratio": 0.964,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex8:0",
+      "source_words": 130,
+      "translation_words": 121,
+      "word_ratio": 0.931,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex8:2",
+      "source_words": 17,
+      "translation_words": 13,
+      "word_ratio": 0.765,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex8:4",
+      "source_words": 10,
+      "translation_words": 12,
+      "word_ratio": 1.2,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex8:6",
+      "source_words": 30,
+      "translation_words": 25,
+      "word_ratio": 0.833,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex8:10",
+      "source_words": 26,
+      "translation_words": 24,
+      "word_ratio": 0.923,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex8:14",
+      "source_words": 25,
+      "translation_words": 22,
+      "word_ratio": 0.88,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex8:17",
+      "source_words": 33,
+      "translation_words": 30,
+      "word_ratio": 0.909,
+      "errors": []
+    },
+    {
+      "track": "machine_learning",
+      "cell": "ex8:19",
+      "source_words": 30,
+      "translation_words": 28,
+      "word_ratio": 0.933,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut1:0",
+      "source_words": 475,
+      "translation_words": 462,
+      "word_ratio": 0.973,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut1:1",
+      "source_words": 314,
+      "translation_words": 298,
+      "word_ratio": 0.949,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut1:3",
+      "source_words": 148,
+      "translation_words": 137,
+      "word_ratio": 0.926,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex1:0",
+      "source_words": 69,
+      "translation_words": 64,
+      "word_ratio": 0.928,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex1:2",
+      "source_words": 41,
+      "translation_words": 43,
+      "word_ratio": 1.049,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex1:4",
+      "source_words": 20,
+      "translation_words": 19,
+      "word_ratio": 0.95,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex1:6",
+      "source_words": 43,
+      "translation_words": 39,
+      "word_ratio": 0.907,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex1:12",
+      "source_words": 27,
+      "translation_words": 26,
+      "word_ratio": 0.963,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex1:18",
+      "source_words": 98,
+      "translation_words": 91,
+      "word_ratio": 0.929,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex1:24",
+      "source_words": 163,
+      "translation_words": 143,
+      "word_ratio": 0.877,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex1:26",
+      "source_words": 15,
+      "translation_words": 14,
+      "word_ratio": 0.933,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut2:0",
+      "source_words": 449,
+      "translation_words": 401,
+      "word_ratio": 0.893,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut2:1",
+      "source_words": 139,
+      "translation_words": 134,
+      "word_ratio": 0.964,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut2:3",
+      "source_words": 51,
+      "translation_words": 49,
+      "word_ratio": 0.961,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex2:0",
+      "source_words": 73,
+      "translation_words": 67,
+      "word_ratio": 0.918,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex2:2",
+      "source_words": 30,
+      "translation_words": 27,
+      "word_ratio": 0.9,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex2:4",
+      "source_words": 33,
+      "translation_words": 31,
+      "word_ratio": 0.939,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex2:10",
+      "source_words": 48,
+      "translation_words": 45,
+      "word_ratio": 0.938,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex2:18",
+      "source_words": 103,
+      "translation_words": 91,
+      "word_ratio": 0.883,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex2:25",
+      "source_words": 111,
+      "translation_words": 90,
+      "word_ratio": 0.811,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex2:27",
+      "source_words": 21,
+      "translation_words": 19,
+      "word_ratio": 0.905,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:0",
+      "source_words": 1023,
+      "translation_words": 962,
+      "word_ratio": 0.94,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:1",
+      "source_words": 134,
+      "translation_words": 122,
+      "word_ratio": 0.91,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:3",
+      "source_words": 36,
+      "translation_words": 30,
+      "word_ratio": 0.833,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:5",
+      "source_words": 27,
+      "translation_words": 29,
+      "word_ratio": 1.074,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:7",
+      "source_words": 43,
+      "translation_words": 44,
+      "word_ratio": 1.023,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:9",
+      "source_words": 39,
+      "translation_words": 36,
+      "word_ratio": 0.923,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:11",
+      "source_words": 60,
+      "translation_words": 51,
+      "word_ratio": 0.85,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:13",
+      "source_words": 38,
+      "translation_words": 39,
+      "word_ratio": 1.026,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut3:14",
+      "source_words": 13,
+      "translation_words": 17,
+      "word_ratio": 1.308,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:0",
+      "source_words": 41,
+      "translation_words": 38,
+      "word_ratio": 0.927,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:2",
+      "source_words": 38,
+      "translation_words": 36,
+      "word_ratio": 0.947,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:4",
+      "source_words": 25,
+      "translation_words": 22,
+      "word_ratio": 0.88,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:6",
+      "source_words": 13,
+      "translation_words": 13,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:8",
+      "source_words": 32,
+      "translation_words": 30,
+      "word_ratio": 0.938,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:17",
+      "source_words": 41,
+      "translation_words": 42,
+      "word_ratio": 1.024,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:22",
+      "source_words": 26,
+      "translation_words": 23,
+      "word_ratio": 0.885,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:24",
+      "source_words": 18,
+      "translation_words": 18,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:26",
+      "source_words": 184,
+      "translation_words": 175,
+      "word_ratio": 0.951,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:28",
+      "source_words": 26,
+      "translation_words": 29,
+      "word_ratio": 1.115,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex3:30",
+      "source_words": 20,
+      "translation_words": 19,
+      "word_ratio": 0.95,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut4:0",
+      "source_words": 907,
+      "translation_words": 784,
+      "word_ratio": 0.864,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut4:2",
+      "source_words": 131,
+      "translation_words": 115,
+      "word_ratio": 0.878,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut4:4",
+      "source_words": 32,
+      "translation_words": 27,
+      "word_ratio": 0.844,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut4:6",
+      "source_words": 35,
+      "translation_words": 34,
+      "word_ratio": 0.971,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut4:8",
+      "source_words": 28,
+      "translation_words": 30,
+      "word_ratio": 1.071,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:0",
+      "source_words": 33,
+      "translation_words": 30,
+      "word_ratio": 0.909,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:2",
+      "source_words": 26,
+      "translation_words": 28,
+      "word_ratio": 1.077,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:4",
+      "source_words": 30,
+      "translation_words": 28,
+      "word_ratio": 0.933,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:6",
+      "source_words": 33,
+      "translation_words": 28,
+      "word_ratio": 0.848,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:8",
+      "source_words": 18,
+      "translation_words": 25,
+      "word_ratio": 1.389,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:10",
+      "source_words": 30,
+      "translation_words": 26,
+      "word_ratio": 0.867,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:12",
+      "source_words": 15,
+      "translation_words": 15,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:14",
+      "source_words": 37,
+      "translation_words": 43,
+      "word_ratio": 1.162,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:21",
+      "source_words": 19,
+      "translation_words": 19,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:23",
+      "source_words": 15,
+      "translation_words": 14,
+      "word_ratio": 0.933,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex4:25",
+      "source_words": 34,
+      "translation_words": 24,
+      "word_ratio": 0.706,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut5:0",
+      "source_words": 709,
+      "translation_words": 632,
+      "word_ratio": 0.891,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut5:2",
+      "source_words": 16,
+      "translation_words": 15,
+      "word_ratio": 0.938,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut5:4",
+      "source_words": 13,
+      "translation_words": 11,
+      "word_ratio": 0.846,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut5:6",
+      "source_words": 63,
+      "translation_words": 63,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:0",
+      "source_words": 37,
+      "translation_words": 35,
+      "word_ratio": 0.946,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:2",
+      "source_words": 5,
+      "translation_words": 7,
+      "word_ratio": 1.4,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:4",
+      "source_words": 44,
+      "translation_words": 42,
+      "word_ratio": 0.955,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:10",
+      "source_words": 15,
+      "translation_words": 15,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:12",
+      "source_words": 29,
+      "translation_words": 26,
+      "word_ratio": 0.897,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:14",
+      "source_words": 36,
+      "translation_words": 31,
+      "word_ratio": 0.861,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:16",
+      "source_words": 13,
+      "translation_words": 13,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:18",
+      "source_words": 75,
+      "translation_words": 71,
+      "word_ratio": 0.947,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:23",
+      "source_words": 15,
+      "translation_words": 16,
+      "word_ratio": 1.067,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:25",
+      "source_words": 10,
+      "translation_words": 13,
+      "word_ratio": 1.3,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex5:27",
+      "source_words": 10,
+      "translation_words": 9,
+      "word_ratio": 0.9,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut6:0",
+      "source_words": 622,
+      "translation_words": 557,
+      "word_ratio": 0.895,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut6:2",
+      "source_words": 31,
+      "translation_words": 26,
+      "word_ratio": 0.839,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut6:4",
+      "source_words": 44,
+      "translation_words": 43,
+      "word_ratio": 0.977,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut6:6",
+      "source_words": 24,
+      "translation_words": 21,
+      "word_ratio": 0.875,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut6:8",
+      "source_words": 41,
+      "translation_words": 33,
+      "word_ratio": 0.805,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut6:10",
+      "source_words": 19,
+      "translation_words": 21,
+      "word_ratio": 1.105,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex6:0",
+      "source_words": 18,
+      "translation_words": 16,
+      "word_ratio": 0.889,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex6:2",
+      "source_words": 6,
+      "translation_words": 8,
+      "word_ratio": 1.333,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex6:4",
+      "source_words": 53,
+      "translation_words": 53,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex6:9",
+      "source_words": 26,
+      "translation_words": 25,
+      "word_ratio": 0.962,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex6:18",
+      "source_words": 29,
+      "translation_words": 25,
+      "word_ratio": 0.862,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex6:20",
+      "source_words": 32,
+      "translation_words": 29,
+      "word_ratio": 0.906,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "ex6:22",
+      "source_words": 93,
+      "translation_words": 94,
+      "word_ratio": 1.011,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut_tpus:0",
+      "source_words": 270,
+      "translation_words": 262,
+      "word_ratio": 0.97,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut_tpus:2",
+      "source_words": 80,
+      "translation_words": 71,
+      "word_ratio": 0.887,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut_tpus:4",
+      "source_words": 54,
+      "translation_words": 49,
+      "word_ratio": 0.907,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut_tpus:8",
+      "source_words": 40,
+      "translation_words": 30,
+      "word_ratio": 0.75,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut_tpus:10",
+      "source_words": 63,
+      "translation_words": 60,
+      "word_ratio": 0.952,
+      "errors": []
+    },
+    {
+      "track": "deep_learning_intro",
+      "cell": "tut_tpus:14",
+      "source_words": 85,
+      "translation_words": 86,
+      "word_ratio": 1.012,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut1_intro:0",
+      "source_words": 42,
+      "translation_words": 41,
+      "word_ratio": 0.976,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut1_intro:2",
+      "source_words": 11,
+      "translation_words": 16,
+      "word_ratio": 1.455,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex1_convolutions:0",
+      "source_words": 107,
+      "translation_words": 99,
+      "word_ratio": 0.925,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex1_convolutions:2",
+      "source_words": 44,
+      "translation_words": 30,
+      "word_ratio": 0.682,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex1_convolutions:4",
+      "source_words": 41,
+      "translation_words": 37,
+      "word_ratio": 0.902,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex1_convolutions:6",
+      "source_words": 13,
+      "translation_words": 15,
+      "word_ratio": 1.154,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex1_convolutions:9",
+      "source_words": 122,
+      "translation_words": 92,
+      "word_ratio": 0.754,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex1_convolutions:11",
+      "source_words": 23,
+      "translation_words": 18,
+      "word_ratio": 0.783,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut2_building_models_from_convolutions:0",
+      "source_words": 24,
+      "translation_words": 25,
+      "word_ratio": 1.042,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut2_building_models_from_convolutions:2",
+      "source_words": 21,
+      "translation_words": 16,
+      "word_ratio": 0.762,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut3_programming_tf_and_keras:0",
+      "source_words": 30,
+      "translation_words": 24,
+      "word_ratio": 0.8,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut3_programming_tf_and_keras:2",
+      "source_words": 9,
+      "translation_words": 11,
+      "word_ratio": 1.222,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut3_programming_tf_and_keras:4",
+      "source_words": 9,
+      "translation_words": 11,
+      "word_ratio": 1.222,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut3_programming_tf_and_keras:6",
+      "source_words": 9,
+      "translation_words": 13,
+      "word_ratio": 1.444,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut3_programming_tf_and_keras:8",
+      "source_words": 3,
+      "translation_words": 4,
+      "word_ratio": 1.333,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut3_programming_tf_and_keras:10",
+      "source_words": 13,
+      "translation_words": 11,
+      "word_ratio": 0.846,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:0",
+      "source_words": 78,
+      "translation_words": 71,
+      "word_ratio": 0.91,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:1",
+      "source_words": 71,
+      "translation_words": 58,
+      "word_ratio": 0.817,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:3",
+      "source_words": 29,
+      "translation_words": 27,
+      "word_ratio": 0.931,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:5",
+      "source_words": 4,
+      "translation_words": 5,
+      "word_ratio": 1.25,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:7",
+      "source_words": 25,
+      "translation_words": 24,
+      "word_ratio": 0.96,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:9",
+      "source_words": 221,
+      "translation_words": 184,
+      "word_ratio": 0.833,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:11",
+      "source_words": 44,
+      "translation_words": 40,
+      "word_ratio": 0.909,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:14",
+      "source_words": 100,
+      "translation_words": 90,
+      "word_ratio": 0.9,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:16",
+      "source_words": 13,
+      "translation_words": 15,
+      "word_ratio": 1.154,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:19",
+      "source_words": 114,
+      "translation_words": 87,
+      "word_ratio": 0.763,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:21",
+      "source_words": 13,
+      "translation_words": 15,
+      "word_ratio": 1.154,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:24",
+      "source_words": 29,
+      "translation_words": 21,
+      "word_ratio": 0.724,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex3_programming_tf_and_keras:25",
+      "source_words": 24,
+      "translation_words": 20,
+      "word_ratio": 0.833,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut4_transfer_learning:0",
+      "source_words": 36,
+      "translation_words": 31,
+      "word_ratio": 0.861,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut4_transfer_learning:2",
+      "source_words": 6,
+      "translation_words": 8,
+      "word_ratio": 1.333,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut4_transfer_learning:4",
+      "source_words": 3,
+      "translation_words": 4,
+      "word_ratio": 1.333,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut4_transfer_learning:6",
+      "source_words": 3,
+      "translation_words": 4,
+      "word_ratio": 1.333,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut4_transfer_learning:8",
+      "source_words": 129,
+      "translation_words": 125,
+      "word_ratio": 0.969,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut4_transfer_learning:9",
+      "source_words": 7,
+      "translation_words": 9,
+      "word_ratio": 1.286,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex4_transfer_learning:0",
+      "source_words": 175,
+      "translation_words": 153,
+      "word_ratio": 0.874,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex4_transfer_learning:2",
+      "source_words": 59,
+      "translation_words": 49,
+      "word_ratio": 0.831,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex4_transfer_learning:6",
+      "source_words": 17,
+      "translation_words": 16,
+      "word_ratio": 0.941,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex4_transfer_learning:8",
+      "source_words": 32,
+      "translation_words": 38,
+      "word_ratio": 1.188,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex4_transfer_learning:10",
+      "source_words": 48,
+      "translation_words": 39,
+      "word_ratio": 0.812,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex4_transfer_learning:12",
+      "source_words": 87,
+      "translation_words": 78,
+      "word_ratio": 0.897,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex4_transfer_learning:16",
+      "source_words": 63,
+      "translation_words": 52,
+      "word_ratio": 0.825,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut5_data_augmentation:0",
+      "source_words": 39,
+      "translation_words": 36,
+      "word_ratio": 0.923,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut5_data_augmentation:2",
+      "source_words": 33,
+      "translation_words": 36,
+      "word_ratio": 1.091,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut5_data_augmentation:4",
+      "source_words": 7,
+      "translation_words": 8,
+      "word_ratio": 1.143,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut5_data_augmentation:6",
+      "source_words": 9,
+      "translation_words": 8,
+      "word_ratio": 0.889,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex5_data_augmentation:0",
+      "source_words": 69,
+      "translation_words": 47,
+      "word_ratio": 0.681,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex5_data_augmentation:2",
+      "source_words": 27,
+      "translation_words": 23,
+      "word_ratio": 0.852,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex5_data_augmentation:4",
+      "source_words": 23,
+      "translation_words": 18,
+      "word_ratio": 0.783,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex5_data_augmentation:6",
+      "source_words": 50,
+      "translation_words": 43,
+      "word_ratio": 0.86,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex5_data_augmentation:8",
+      "source_words": 29,
+      "translation_words": 26,
+      "word_ratio": 0.897,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex5_data_augmentation:12",
+      "source_words": 17,
+      "translation_words": 17,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex5_data_augmentation:14",
+      "source_words": 13,
+      "translation_words": 12,
+      "word_ratio": 0.923,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut6_deep_understanding:0",
+      "source_words": 47,
+      "translation_words": 46,
+      "word_ratio": 0.979,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut6_deep_understanding:2",
+      "source_words": 20,
+      "translation_words": 19,
+      "word_ratio": 0.95,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut7_dl_from_scratch:0",
+      "source_words": 37,
+      "translation_words": 32,
+      "word_ratio": 0.865,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut7_dl_from_scratch:2",
+      "source_words": 3,
+      "translation_words": 4,
+      "word_ratio": 1.333,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut7_dl_from_scratch:4",
+      "source_words": 11,
+      "translation_words": 12,
+      "word_ratio": 1.091,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:0",
+      "source_words": 57,
+      "translation_words": 55,
+      "word_ratio": 0.965,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:1",
+      "source_words": 19,
+      "translation_words": 17,
+      "word_ratio": 0.895,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:3",
+      "source_words": 15,
+      "translation_words": 15,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:6",
+      "source_words": 64,
+      "translation_words": 51,
+      "word_ratio": 0.797,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:9",
+      "source_words": 81,
+      "translation_words": 68,
+      "word_ratio": 0.84,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:12",
+      "source_words": 27,
+      "translation_words": 24,
+      "word_ratio": 0.889,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:15",
+      "source_words": 96,
+      "translation_words": 76,
+      "word_ratio": 0.792,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:18",
+      "source_words": 71,
+      "translation_words": 49,
+      "word_ratio": 0.69,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex7_from_scratch:22",
+      "source_words": 24,
+      "translation_words": 20,
+      "word_ratio": 0.833,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut8_dropout_and_strides:0",
+      "source_words": 45,
+      "translation_words": 45,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut8_dropout_and_strides:2",
+      "source_words": 3,
+      "translation_words": 4,
+      "word_ratio": 1.333,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut8_dropout_and_strides:4",
+      "source_words": 12,
+      "translation_words": 12,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex8_dropout_strides:0",
+      "source_words": 58,
+      "translation_words": 53,
+      "word_ratio": 0.914,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex8_dropout_strides:2",
+      "source_words": 47,
+      "translation_words": 41,
+      "word_ratio": 0.872,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex8_dropout_strides:4",
+      "source_words": 55,
+      "translation_words": 37,
+      "word_ratio": 0.673,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex8_dropout_strides:6",
+      "source_words": 9,
+      "translation_words": 11,
+      "word_ratio": 1.222,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex8_dropout_strides:8",
+      "source_words": 94,
+      "translation_words": 79,
+      "word_ratio": 0.84,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex8_dropout_strides:9",
+      "source_words": 100,
+      "translation_words": 97,
+      "word_ratio": 0.97,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:0",
+      "source_words": 97,
+      "translation_words": 86,
+      "word_ratio": 0.887,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:1",
+      "source_words": 12,
+      "translation_words": 9,
+      "word_ratio": 0.75,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:3",
+      "source_words": 67,
+      "translation_words": 55,
+      "word_ratio": 0.821,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:5",
+      "source_words": 94,
+      "translation_words": 84,
+      "word_ratio": 0.894,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:7",
+      "source_words": 93,
+      "translation_words": 78,
+      "word_ratio": 0.839,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:9",
+      "source_words": 29,
+      "translation_words": 25,
+      "word_ratio": 0.862,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:11",
+      "source_words": 31,
+      "translation_words": 27,
+      "word_ratio": 0.871,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:13",
+      "source_words": 30,
+      "translation_words": 25,
+      "word_ratio": 0.833,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:15",
+      "source_words": 33,
+      "translation_words": 26,
+      "word_ratio": 0.788,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:17",
+      "source_words": 20,
+      "translation_words": 15,
+      "word_ratio": 0.75,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:19",
+      "source_words": 32,
+      "translation_words": 26,
+      "word_ratio": 0.812,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:21",
+      "source_words": 21,
+      "translation_words": 19,
+      "word_ratio": 0.905,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:23",
+      "source_words": 23,
+      "translation_words": 20,
+      "word_ratio": 0.87,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:24",
+      "source_words": 117,
+      "translation_words": 101,
+      "word_ratio": 0.863,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:26",
+      "source_words": 22,
+      "translation_words": 21,
+      "word_ratio": 0.955,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:28",
+      "source_words": 20,
+      "translation_words": 21,
+      "word_ratio": 1.05,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:30",
+      "source_words": 21,
+      "translation_words": 18,
+      "word_ratio": 0.857,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:32",
+      "source_words": 15,
+      "translation_words": 15,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:34",
+      "source_words": 59,
+      "translation_words": 47,
+      "word_ratio": 0.797,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:36",
+      "source_words": 57,
+      "translation_words": 46,
+      "word_ratio": 0.807,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:38",
+      "source_words": 46,
+      "translation_words": 34,
+      "word_ratio": 0.739,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:40",
+      "source_words": 68,
+      "translation_words": 55,
+      "word_ratio": 0.809,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:42",
+      "source_words": 19,
+      "translation_words": 19,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:44",
+      "source_words": 21,
+      "translation_words": 21,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:46",
+      "source_words": 18,
+      "translation_words": 13,
+      "word_ratio": 0.722,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "tut_tpus:48",
+      "source_words": 42,
+      "translation_words": 34,
+      "word_ratio": 0.81,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:0",
+      "source_words": 66,
+      "translation_words": 52,
+      "word_ratio": 0.788,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:1",
+      "source_words": 305,
+      "translation_words": 242,
+      "word_ratio": 0.793,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:2",
+      "source_words": 36,
+      "translation_words": 28,
+      "word_ratio": 0.778,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:4",
+      "source_words": 5,
+      "translation_words": 6,
+      "word_ratio": 1.2,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:6",
+      "source_words": 6,
+      "translation_words": 6,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:8",
+      "source_words": 22,
+      "translation_words": 18,
+      "word_ratio": 0.818,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:10",
+      "source_words": 6,
+      "translation_words": 5,
+      "word_ratio": 0.833,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:13",
+      "source_words": 4,
+      "translation_words": 6,
+      "word_ratio": 1.5,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:15",
+      "source_words": 4,
+      "translation_words": 4,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:17",
+      "source_words": 4,
+      "translation_words": 4,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:19",
+      "source_words": 3,
+      "translation_words": 5,
+      "word_ratio": 1.667,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:21",
+      "source_words": 7,
+      "translation_words": 7,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:24",
+      "source_words": 11,
+      "translation_words": 11,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:27",
+      "source_words": 11,
+      "translation_words": 11,
+      "word_ratio": 1.0,
+      "errors": []
+    },
+    {
+      "track": "deep_learning",
+      "cell": "ex_tpus:30",
+      "source_words": 58,
+      "translation_words": 47,
+      "word_ratio": 0.81,
+      "errors": []
+    }
+  ]
+}
