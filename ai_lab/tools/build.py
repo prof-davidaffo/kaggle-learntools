@@ -28,6 +28,7 @@ from feedback import translations as feedback_translations
 from code_translation import translate_notebook
 from colab import generate as generate_colab, launch_url
 from translation_checks import audit_cell
+from course_images import load_images, replace_images, URL_PATTERN
 
 ROOT = Path(__file__).resolve().parents[2]
 LAB = ROOT / 'ai_lab'
@@ -167,7 +168,7 @@ def normalize_notebook_links(nb, entry, entries):
                                      else '](' + CONFIG['site_url'] + 'catalogo.html)'), cell.source)
 
 
-def notebook_content(nb, entry, outdir):
+def notebook_content(nb, entry, outdir, images=None):
     parts = []
     notes = dict(re.findall(r'^\[\^([^\]]+)\]: (.*)$', '\n'.join(cell.source for cell in nb.cells if cell.cell_type == 'markdown'), re.M))
     used_notes = set()
@@ -176,6 +177,8 @@ def notebook_content(nb, entry, outdir):
             continue
         if cell.cell_type == 'markdown':
             source = re.sub(r'^\[\^[^\]]+\]: .*$', '', cell.source, flags=re.M)
+            if images is not None:
+                source = replace_images(source, images)
             for key, definition in notes.items():
                 if f'[^{key}]' in source and key not in used_notes:
                     source += f'\n\n[^{key}]: {definition}\n'
@@ -313,7 +316,7 @@ def derived_pages(entries, output):
     execution_path = LAB/'reports/execution.json'
     report = json.loads(execution_path.read_text()) if execution_path.exists() else {'results': []}
     states = {record['notebook']:record for record in report['results']}
-    lab_text = '# Notebook e laboratori\n\n## Percorso principale: esercizi Kaggle e dataset originali\n\nScarica il [pacchetto studenti completo](downloads/ai-lab-studenti.zip), estrailo e segui la [preparazione dei dataset](dataset.html). Include notebook tradotti, codice learntools originale e strumenti per scaricare o importare gli archivi. Non è necessario sostituire i dati con simulazioni.\n\nLe pagine del [corso completo](catalogo.html) propongono anche download individuali. Il bootstrap locale mantiene i percorsi originali e disattiva il solo invio di eventi all’iframe Kaggle, senza modificare i sorgenti. La compatibilità dei controlli Keras va verificata con le versioni indicate.\n\n## Laboratori aggiuntivi AI Lab\n\nI notebook seguenti sono materiale originale aggiuntivo; non sostituiscono i contenuti Kaggle. Contengono esempi inizialmente completi e attività da svolgere modificando il codice.\n\n'
+    lab_text = '# Notebook e laboratori\n\nI notebook seguenti sono attività originali AI Lab, aggiuntive rispetto ai corsi Kaggle. Contengono esempi completi e attività da svolgere modificando il codice.\n\nPer i notebook dei corsi Kaggle consulta il [programma completo](catalogo.html); per l’installazione e i dati, la [guida all’esecuzione](esecuzione.html).\n\n'
     lab_text += '| Notebook | Dipendenze per i calcoli | Verifica disponibile |\n| --- | --- | --- |\n'
     for path in sorted((LAB/'notebooks').glob('*.ipynb')):
         if path.name == '00-python-essenziale.ipynb':
@@ -325,7 +328,7 @@ def derived_pages(entries, output):
         status = {'passed':'Celle Python eseguite' if report.get('mode')=='python_cells' else 'Kernel Jupyter eseguito',
                   'not_run':'Non eseguito: dipendenze mancanti', 'failed':'Esecuzione fallita'}.get(record.get('status'),'Non eseguito')
         lab_text += f'| [{title}](notebooks/{path.name}) | {deps} | {status} |\n'
-    lab_text += '\nIl notebook 08 usa il file JSON creato dal notebook 07 nella stessa cartella. I laboratori 01–03 ricostruiscono alberi ed ensemble con Python standard per essere eseguibili senza scikit-learn; non riproducono tutte le funzionalità della libreria. La rete del laboratorio 04 è realmente addestrata con NumPy; non è un’esecuzione TensorFlow.\n\n## Notebook dei corsi Kaggle\n\nOgni pagina del [corso completo](catalogo.html) include il download del notebook tradotto. Sono mantenuti codice originale e controlli, con una nota sui dati richiesti. Le versioni Colab preparano i dati e adattano i metadati Keras usati dai controlli. La sessione remota resta da verificare con un account Google. Le soluzioni sono pubbliche.\n\n[Guida a Jupyter e ambienti remoti](esecuzione.html) · [Dettagli delle verifiche](verifiche.html).'
+    lab_text += '\nIl notebook 08 usa il file JSON creato dal notebook 07 nella stessa cartella. I laboratori 01–03 usano Python standard per ricostruire alberi ed ensemble; il laboratorio 04 usa NumPy. [Dettagli delle verifiche](verifiche.html).'
     pages['laboratori.html'] = ('Notebook e laboratori',render_markdown(lab_text),'school')
     checks = '# Stato delle verifiche\n\nQuesta pagina distingue ciò che è stato eseguito da ciò che richiede ancora un ambiente compatibile. Non è una certificazione dei servizi esterni.\n\n'
     checks += f'## Copertura dei sorgenti\n\n{len(entries)} notebook convertiti. La build verifica che ogni cella Markdown abbia una traduzione e che gli hash dei sorgenti corrispondano all’inventario. Riusa il preprocessor Kaggle per espandere le macro senza pulire o modificare gli originali. Le traduzioni sono adattamenti didattici, non trascrizioni integrali dei video esterni.\n\n'
@@ -342,7 +345,7 @@ def derived_pages(entries, output):
     ui_report = LAB/'reports/ui-checks.json'
     if ui_report.is_file():
         checks += '\n## Funzioni dell’interfaccia\n\nVerificati con un DOM locale: ricerca sotto il prefisso del repository, cambio e memorizzazione del tema, apertura/chiusura del menu, focus da tastiera nel contesto mobile, formule KaTeX, messaggi per risorse non disponibili e modulo di inferenza del modello già salvato. Non è un controllo grafico del layout e non esegue addestramento.\n'
-    checks += '\n## Limiti e controlli da completare\n\nGli originali Kaggle non sono stati eseguiti con i dataset remoti. I notebook Colab sono predisposti con caricamento dei dati e adattatore Keras; download, cache e integrità dei file sono controllati localmente. La sessione autenticata Colab non è stata eseguita qui. Invii a competizioni, servizi AutoML e TPU non sono verificati. Le immagini esterne possono non caricarsi senza rete. Formule, font, CSS, ricerca e interfaccia sono risorse locali del sito. La verifica visiva desktop/mobile non è stata completata: il server locale e Chromium sono impediti dai permessi di questo ambiente.\n\nLe esecuzioni con TensorFlow e scikit-learn restano da svolgere in un ambiente compatibile. Il workflow Pages compila e controlla i link prima di rendere disponibile un artefatto. La pubblicazione manuale richiede autorizzazione ed è documentata nel README.\n'
+    checks += '\n## Limiti e controlli da completare\n\nGli originali Kaggle non sono stati eseguiti con i dataset remoti. I notebook Colab sono predisposti con caricamento dei dati e adattatore Keras; download, cache e integrità dei file sono controllati localmente. La sessione autenticata Colab non è stata eseguita qui. Invii a competizioni, servizi AutoML e TPU non sono verificati. Le immagini dei notebook, formule, font, CSS, ricerca e interfaccia sono risorse locali del sito; i video esterni richiedono rete. La verifica visiva desktop/mobile non è stata completata: il server locale e Chromium sono impediti dai permessi di questo ambiente.\n\nLe esecuzioni con TensorFlow e scikit-learn restano da svolgere in un ambiente compatibile. Il workflow Pages compila e controlla i link prima di rendere disponibile un artefatto. La pubblicazione manuale richiede autorizzazione ed è documentata nel README.\n'
     pages['verifiche.html'] = ('Stato delle verifiche',render_markdown(checks),'school')
     return pages
 
@@ -365,7 +368,12 @@ def build(output, development=False):
     output.mkdir(parents=True, exist_ok=True)
     (output/'.nojekyll').write_text('')
     shutil.copytree(LAB/'assets', output/'assets', dirs_exist_ok=True)
-    (output/'assets/syntax.css').write_text(HtmlFormatter(style='friendly').get_style_defs('.highlight'))
+    light_syntax = HtmlFormatter(style='friendly').get_style_defs(['.highlight', '.codehilite'])
+    dark_syntax = HtmlFormatter(style='github-dark').get_style_defs(
+        ['html[data-theme="dark"] .highlight', 'html[data-theme="dark"] .codehilite'])
+    (output/'assets/syntax.css').write_text(light_syntax + '\n' + dark_syntax + '\n')
+    css_versions = {name: hashlib.sha256((output/'assets'/name).read_bytes()).hexdigest()[:12]
+                    for name in ('style.css', 'syntax.css')}
     (output/'notebooks').mkdir(exist_ok=True)
     for path in (LAB/'notebooks').glob('*.ipynb'):
         notebook = nbformat.read(path, as_version=4)
@@ -378,6 +386,8 @@ def build(output, development=False):
     pages = {}
     coverage = []
     translation_audit = []
+    course_images = load_images()
+    referenced_images = set()
     for track in TRACKS:
         translations = read_translations(track)
         expected = {f"{e['stem']}:{i}" for e in entries if e['track']==track
@@ -392,6 +402,7 @@ def build(output, development=False):
                 if cell.cell_type == 'markdown':
                     key = f"{entry['stem']}:{i}"
                     translated = translations[key]
+                    referenced_images.update(URL_PATTERN.findall(translated))
                     audit = audit_cell(cell.source, translated)
                     translation_audit.append({'track': track, 'cell': key, **audit})
                     if audit['errors']:
@@ -405,9 +416,6 @@ def build(output, development=False):
                                       'source_sha256': hashlib.sha256(entry['source'].read_bytes()).hexdigest(),
                                       'execution_status': 'not_verified', 'license': 'Apache-2.0', 'language': 'it'}}
             intro = f"# {entry['title']}\n\n"
-            intro += ('> **Nota AI Lab — ambiente di lettura.** Il testo seguente è la traduzione del notebook Kaggle originale conservato nel repository. '
-                      'I riferimenti a pulsanti, celle nascoste e invii descrivono l’ambiente Kaggle dell’originale; qui le celle di codice sono visibili. '
-                      'Per eseguire i notebook fuori da Kaggle, segui la guida AI Lab all’ambiente.\n\n')
             if not is_core(entry):
                 intro += '> **Nota AI Lab — materiale aggiuntivo.** ' + status_text(entry) + '\n\n'
             nb.cells.insert(0, nbformat.v4.new_markdown_cell(intro, id='ai-lab-context'))
@@ -422,26 +430,28 @@ def build(output, development=False):
             name = entry['track']+'-'+entry['stem']+'.ipynb'
             colab_button = f'<a class="button" href="{launch_url(CONFIG, name)}">Apri in Colab</a>' if is_core(entry) else ''
             content = f'<div class="actions">{colab_button}{local_notebook_button(name)}<a class="button secondary" download href="../../notebooks/{name}">Scarica notebook</a><a class="button secondary" href="../../esecuzione.html">Come eseguirlo</a></div>'
-            content += notebook_content(nb, entry, output)
-            # Provide a source index in addition to the links retained in place.
-            source_text = '\n'.join(c.source for c in nbformat.read(entry['source'], as_version=4).cells if c.cell_type=='markdown')
-            urls = sorted(set(re.findall(r'https?://[^\s<>"\)]+', source_text)))
-            content += '<details><summary>Provenienza e riferimenti del sorgente</summary>'
+            content += notebook_content(nb, entry, output, course_images)
+            # Source links within the translated lesson remain in their original positions.
             source_relative = str(entry['source'].relative_to(ROOT))
             commit = json.loads((LAB/'reports/inventory.json').read_text())['upstream_commit']
-            content += f'<p>Fonte: <a href="{CONFIG["repository"]}/blob/{commit}/{source_relative}">{source_relative}</a>, Kaggle Learn, Apache-2.0. Traduzione italiana AI Lab.</p><ul>'
-            content += ''.join(f'<li><a href="{html.escape(url,quote=True)}">{html.escape(url)}</a></li>' for url in urls)+'</ul></details>'
+            content += f'<p><small>Fonte: <a href="{CONFIG["repository"]}/blob/{commit}/{source_relative}">notebook originale Kaggle</a> · <a href="../../attribuzioni.html">Autori e licenze</a></small></p>'
             normalize_notebook_links(nb, entry, entries)
             for cell in nb.cells:
                 if cell.cell_type == 'code':
                     cell.outputs=[]
                     cell.execution_count=None
+                elif cell.cell_type == 'markdown':
+                    # Data URIs work in both the standalone notebook and Colab,
+                    # including original HTML <img> figures and animated GIFs.
+                    cell.source = replace_images(cell.source, course_images, notebook=True)
             nbformat.validate(nb)
             nbformat.write(nb, output/'notebooks'/name)
             pages[entry['page']] = (label, content, entry['track'])
             coverage.append({'source': source_relative, 'page': entry['page'], 'notebook':name,
                              'markdown_cells': len([k for k in translations if k.startswith(entry['stem']+':')]),
                              'status':'translated_adaptation', 'execution':'not_verified'})
+    if referenced_images != set(course_images):
+        raise ValueError(f'Image archive mismatch: {referenced_images ^ set(course_images)}')
     for source in (LAB/'content/school').glob('*.md'):
         text = source.read_text()
         title = text.splitlines()[0].removeprefix('# ')
@@ -456,7 +466,7 @@ def build(output, development=False):
     for page, (title, body, section) in pages.items():
         dest = output/page
         dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_text(shell(page, title, body, section, entries))
+        dest.write_text(shell(page, title, body, section, entries, css_versions))
     index = [{'title':title, 'url':page, 'text':re.sub('<[^>]+>', ' ', body)} for page,(title,body,_) in pages.items()]
     (output/'search.json').write_text(json.dumps(index, ensure_ascii=False))
     (output/'downloads').mkdir(exist_ok=True)
@@ -493,6 +503,9 @@ def build(output, development=False):
                 bundle.write(path, 'ai-lab-studenti/'+str(path.relative_to(ROOT)))
         for relative in ['LICENSE','ai_lab/LICENSE','ai_lab/NOTICE','ai_lab/datasets.json','ai_lab/tools/datasets.py','ai_lab/tools/feedback.py','ai_lab/localization/it.json','ai_lab/requirements/kaggle-local.txt', 'ai_lab/input/.gitignore', 'ai_lab/runtime/.gitignore']:
             bundle.write(ROOT/relative,'ai-lab-studenti/'+relative)
+        for path in sorted((LAB/'assets/kaggle-images').iterdir()):
+            if path.is_file():
+                bundle.write(path, 'ai-lab-studenti/ai_lab/assets/kaggle-images/'+path.name)
         for path in sorted((LAB/'requirements').glob('*.txt')):
             if path.name != 'kaggle-local.txt':
                 bundle.write(path,'ai-lab-studenti/'+str(path.relative_to(ROOT)))
@@ -513,7 +526,7 @@ def build(output, development=False):
     print(f'Built {len(pages)} pages and {len(list((output/"notebooks").glob("*.ipynb")))} notebooks in {output}')
 
 
-def shell(page, title, body, section, entries):
+def shell(page, title, body, section, entries, css_versions):
     rel = lambda target: relative_link(page, target)
     body = re.sub(r'(<a\b[^>]*\bhref="https://colab\.research\.google\.com/[^"]*")',
                   r'\1 target="_blank" rel="noopener noreferrer"', body)
@@ -547,7 +560,7 @@ def shell(page, title, body, section, entries):
 <meta name="description" content="{html.escape(CONFIG['description'],quote=True)}">
 <link rel="canonical" href="{CONFIG['site_url']}{page}">
 <link rel="icon" href="{rel('assets/favicon.svg')}" type="image/svg+xml">
-<link rel="stylesheet" href="{rel('assets/style.css')}"><link rel="stylesheet" href="{rel('assets/syntax.css')}">
+<link rel="stylesheet" href="{rel('assets/style.css')}?v={css_versions['style.css']}"><link rel="stylesheet" href="{rel('assets/syntax.css')}?v={css_versions['syntax.css']}">
 <link rel="stylesheet" href="{rel('assets/vendor/katex/katex.min.css')}">
 <script defer src="{rel('assets/vendor/katex/katex.min.js')}"></script>
 <script defer src="{rel('assets/vendor/katex/auto-render.min.js')}"></script>

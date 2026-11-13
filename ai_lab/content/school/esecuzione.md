@@ -4,6 +4,8 @@
 
 Per seguire il corso puoi usare Colab dal browser. Non serve installare Python sul computer.
 
+Nelle lezioni tradotte, i riferimenti ai pulsanti e alle celle nascoste descrivono l’interfaccia Kaggle originale; sul sito le celle di codice sono visibili.
+
 Il [capitolo Python](python.html) è subito eseguibile: salva una copia e comincia dalla prima cella di codice. Non richiede preparazione, dataset o controlli `check()`; gli esercizi hanno risultati attesi e soluzioni commentate.
 
 Per le lezioni e gli esercizi di Machine Learning e Deep Learning:
@@ -16,9 +18,7 @@ Per le lezioni e gli esercizi di Machine Learning e Deep Learning:
 
 La preparazione carica i CSV e il codice dei controlli dal repository del corso. Non devi caricare file a mano, collegare Drive ai dati o configurare le credenziali Kaggle. Mantieni il runtime standard; per iniziare non serve selezionare una GPU.
 
-Se Colab interrompe o riavvia la sessione, le variabili in memoria vengono perse. Riesegui la preparazione e le celle precedenti. Il notebook salvato nel tuo Drive conserva il codice: controlla di avere salvato prima di chiudere.
-
-I dati e le librerie della sessione non vengono salvati automaticamente nella tua copia del notebook. La prima cella li prepara nuovamente quando necessario. Le risorse gratuite di Colab hanno limiti variabili: [documentazione Colab](https://research.google.com/colaboratory/faq.html).
+Se Colab interrompe o riavvia la sessione, variabili, dati e librerie della sessione vanno preparati di nuovo: riesegui la cella iniziale e quelle precedenti. La copia nel Drive conserva il codice salvato. Le risorse gratuite hanno limiti variabili: [documentazione Colab](https://research.google.com/colaboratory/faq.html).
 
 ## Jupyter sul computer
 

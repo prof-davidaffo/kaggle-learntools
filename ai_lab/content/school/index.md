@@ -1,4 +1,4 @@
-# Corsi Kaggle: traduzione e riorganizzazione italiana
+# Introduzione al Machine Learning e al Deep Learning
 
 Questo sito propone la **traduzione italiana e la riorganizzazione didattica dei corsi originali di Kaggle Learn**, [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning) e [Intro to Deep Learning](https://www.kaggle.com/learn/intro-to-deep-learning), dedicati al machine learning e al deep learning con Python.
 

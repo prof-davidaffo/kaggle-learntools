@@ -1,4 +1,4 @@
-# Corsi Kaggle — traduzione e riorganizzazione italiana · AI Lab
+# Introduzione al Machine Learning e al Deep Learning · AI Lab
 
 Traduzione italiana e riorganizzazione didattica dei corsi originali Kaggle Learn per la scuola secondaria di secondo grado, a cura del progetto indipendente AI Lab. Il percorso principale conserva integralmente **lezioni, esercizi e dataset originali Kaggle**; la riorganizzazione riguarda presentazione, navigazione e accesso ai materiali. I laboratori AI Lab aggiuntivi sono identificati e separati. Non è una piattaforma ufficiale Kaggle.
 
@@ -9,6 +9,7 @@ Traduzione italiana e riorganizzazione didattica dei corsi originali Kaggle Lear
 - Il capitolo Python usa soltanto la libreria standard, senza preparazione Colab o download di dataset. Spiega i rientri tramite il tasto Tab, sviluppa i concetti prima degli esercizi e include sei esercizi con soluzioni commentate.
 - La revisione didattica assume già noti variabili, selezione, iterazione e funzioni: insiste sulle differenze di Python (tipizzazione dinamica, riferimenti alle liste, `range`, `while` e parametri). Come confronto per la progressione è stato consultato *Hashtag*, vol. 1, di M. Boscaini, A. Montresor e M. Masetti (Hoepli, 2022), modulo F, soprattutto unità F2–F4. Testi ed esempi del capitolo sono originali; il PDF di riferimento non fa parte del sito o del pacchetto studenti.
 - Traduzione integrale delle 307 celle Markdown dei 47 notebook Kaggle: spiegazioni, esempi, domande, consegne, didascalie e approfondimenti sono conservati nello stesso ordine degli originali versionati. Le precedenti sintesi sono state sostituite. I commenti didattici nel codice sono tradotti; istruzioni Python e identificatori restano invariati. Il preprocessor Kaggle è riutilizzato. I video esterni non sono tradotti né ricostruiti.
+- Le 51 immagini e animazioni dei notebook sorgente sono conservate in `assets/kaggle-images/`; `manifest.json` registra URL di origine, dimensione e SHA-256. Le pagine usano i file locali, i notebook scaricabili e Colab incorporano le immagini e il pacchetto studenti include anche i file separati. La build verifica inventario e integrità senza scaricare nulla. Le condizioni specifiche delle immagini restano da verificare separatamente dalla licenza del codice.
 - I due corsi originali completi, con 7 moduli ML e 6 moduli DL, ricerca locale, temi chiaro/scuro, formule KaTeX locali e download. Altri sorgenti recuperati e attività AI Lab restano nei materiali aggiuntivi.
 - Pacchetto studenti ZIP con notebook tradotti, `learntools` originale e strumenti di acquisizione dei dati.
 - I nove CSV principali sono stati importati dagli archivi forniti dal docente in `data/`. Sono presenti in `ai_lab/input`, nel sito generato e nel pacchetto studenti. Il download dal terminale resta impedito dalla rete, ma i file locali sono disponibili.
@@ -190,7 +191,7 @@ Il workflow usa `pages:write` e `id-token:write` solo nel job deploy. I link del
 
 ## Limiti rispetto a Kaggle
 
-Nessun login, certificato, classifica o sincronizzazione con Kaggle. GitHub Pages non addestra Python. Il codice e i dettagli diagnostici dei controlli originali restano in inglese; il feedback didattico dei corsi introduttivi è localizzato da un componente separato. AutoML è materiale storico collegato a servizi esterni a pagamento; TPU e vecchie API sono approfondimenti. Immagini e video possono richiedere rete. Le soluzioni in un repository pubblico sono pubbliche.
+Nessun login, certificato, classifica o sincronizzazione con Kaggle. GitHub Pages non addestra Python. Il codice e i dettagli diagnostici dei controlli originali restano in inglese; il feedback didattico dei corsi introduttivi è localizzato da un componente separato. AutoML è materiale storico collegato a servizi esterni a pagamento; TPU e vecchie API sono approfondimenti. Le immagini dei notebook sono locali; i video esterni possono richiedere rete. Le soluzioni in un repository pubblico sono pubbliche.
 
 ## Licenze e attribuzioni
 

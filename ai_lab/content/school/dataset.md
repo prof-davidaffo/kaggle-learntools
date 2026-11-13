@@ -2,7 +2,7 @@
 
 In **Colab** non devi scaricare né caricare CSV: la cella iniziale dei notebook li prepara automaticamente. Le istruzioni di importazione qui sotto servono per il lavoro locale e la manutenzione.
 
-**I nove CSV originali del percorso principale sono già inclusi nella repository e nel pacchetto studenti.** Sono stati importati dagli archivi Kaggle forniti dal docente, senza modificare i dati. Non serve scaricarli nuovamente per iniziare le lezioni.
+**I nove CSV originali del percorso principale sono già inclusi nel pacchetto studenti.** Sono stati importati dagli archivi Kaggle forniti dal docente, senza modificare i dati.
 
 ## Il pacchetto per gli studenti
 
@@ -71,22 +71,11 @@ python ai_lab/tools/datasets.py melbourne iowa deep-learning
 python ai_lab/tools/datasets.py --check
 ```
 
-Lo strumento richiama la CLI e importa gli ZIP; non raccoglie né salva credenziali. Il download automatico non è stato eseguito in questa sessione perché il terminale non ha accesso a Internet. Questo è un limite dell’ambiente di sviluppo, non dei dataset.
+Lo strumento richiama la CLI e importa gli ZIP; non raccoglie né salva credenziali.
 
 ## Ambiente Python e percorsi
 
-Il bootstrap aggiunto ai notebook trova la fork o il pacchetto, aggiunge `learntools` al percorso Python e imposta come cartella di lavoro **`ai_lab/runtime`**. In questo modo i riferimenti originali `../input/...` puntano a **`ai_lab/input`**. Esegui quella cella prima delle celle originali.
-
-I controlli DL originali leggono anche attributi interni di **Keras 2**. `ai_lab/requirements/kaggle-local.txt` conserva un insieme di dipendenze storiche, separato dagli approfondimenti con Keras moderno. Non implica che sul computer sia installata una particolare versione di Python. Controlla `python --version`: la compatibilità di quei pacchetti va verificata con l’interprete effettivo.
-
-```sh
-python -m venv .venv-kaggle
-source .venv-kaggle/bin/activate
-python -m pip install -r ai_lab/requirements/kaggle-local.txt
-jupyter lab
-```
-
-Il bootstrap disattiva, soltanto nel processo locale, gli eventi verso l’iframe Kaggle e carica il componente di traduzione AI Lab. Etichette, suggerimenti e spiegazioni dei moduli introduttivi sono in italiano; codice delle soluzioni e diagnostica tecnica dei controlli conservano la forma originale. La logica dei checker non viene modificata.
+Per configurare Jupyter ed eseguire i notebook sul computer, segui la [guida all’esecuzione](esecuzione.html). La cella iniziale imposta la cartella di lavoro `ai_lab/runtime`, così i percorsi originali `../input/...` trovano i file in `ai_lab/input`.
 
 ## Approfondimenti con requisiti diversi
 

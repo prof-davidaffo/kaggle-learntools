@@ -18,7 +18,7 @@ Programma, guide ai progetti, notebook scolastici, strumenti e interfaccia sono 
 
 ## Immagini, video e dataset esterni
 
-Le immagini e i riferimenti Kaggle vengono conservati tramite URL, senza attribuire loro automaticamente la licenza del codice. Non sono scaricati e ridistribuiti nel sito; possono richiedere rete o diventare indisponibili. Se una figura non si carica, viene mostrata una spiegazione e il riferimento resta disponibile.
+Le immagini e le animazioni dei notebook sono conservate in copie locali nel sito e nel pacchetto studenti; i notebook scaricabili le incorporano. L’[inventario delle immagini](assets/kaggle-images/manifest.json) riporta l’URL originale, il nome del file, la dimensione e l’impronta SHA-256. La licenza del codice non viene attribuita automaticamente alle immagini: le loro condizioni specifiche restano da verificare.
 
 I video del corso storico sono collegamenti esterni: non sono inclusi né tradotti. I nove CSV del percorso principale sono stati acquisiti dagli archivi forniti dal docente e integrati localmente nel sito e nel pacchetto studenti, senza modifiche ai dati. L’inventario registra provenienza prevista, hash e dimensioni. Melbourne Housing Snapshot dichiara CC BY-NC-SA 4.0 e richiede le relative attribuzioni e condizioni, distinte dalla licenza del codice. Per Iowa, la fonte riconosce il dataset Ames Housing di Dean De Cock; DL Course Data è la raccolta preparata da Ryan Holbrook per le lezioni. Gli ZIP ricevuti per queste due raccolte non contengono licenze: le condizioni specifiche restano da confermare prima della pubblicazione remota, senza attribuire loro Apache-2.0. TFRecord e pesi preaddestrati dell’archivio storico non sono inclusi.
 

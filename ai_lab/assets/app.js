@@ -70,7 +70,7 @@
     element.addEventListener('error', () => {
       const caption = document.createElement('p');
       caption.className = 'notice';
-      caption.textContent = `Immagine esterna non disponibile: ${element.alt || 'figura del sorgente'}. Il collegamento è conservato fra i riferimenti.`;
+      caption.textContent = `Immagine non disponibile: ${element.alt || 'figura del corso'}.`;
       element.replaceWith(caption);
     }, {once: true});
   });
