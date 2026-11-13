@@ -63,7 +63,7 @@ class ItalianPreprocessor(LearnLessonPreprocessor):
 
     def KEEP_GOING(self, **kwargs):
         if not hasattr(self.lesson, 'next'):
-            return '## Corso completato\n\n[Torna al programma](../../catalogo.html).'
+            return '## Corso completato\n\n[Torna all’inizio](../../index.html).'
         target = self.lesson.next
         return f'# Prosegui\n\nSei pronto per **[{target.topic}]({target.tutorial.url})**.'
 
@@ -72,7 +72,7 @@ class ItalianPreprocessor(LearnLessonPreprocessor):
             return self.lesson.exercise.forking_url
         if hasattr(self.lesson, 'next'):
             return self.lesson.next.tutorial.url
-        return '../../catalogo.html'
+        return '../../index.html'
 
     def SUBMIT_TO_COMP(self, **kwargs):
         return ('1. Comincia premendo **Save Version** nell’angolo in alto a destra della finestra. Si aprirà una finestra di dialogo.\n'
@@ -124,7 +124,7 @@ def make_resources(entry, entries):
             url = item['stem'] + '.html'
             setattr(lesson, item['kind'], SimpleNamespace(url=url, forking_url=url))
         if not hasattr(lesson, 'tutorial'):
-            lesson.tutorial = SimpleNamespace(url='../../catalogo.html')
+            lesson.tutorial = SimpleNamespace(url='../../index.html')
         lessons.append(lesson)
     for a, b in zip(lessons, lessons[1:]):
         a.next = b
@@ -138,7 +138,7 @@ def make_resources(entry, entries):
                 topic=TRACKS['deep_learning_intro']['title'],
                 tutorial=SimpleNamespace(url='../deep_learning_intro/tut1.html'))
     return dict(track_meta=SimpleNamespace(lessons=lessons, course_name=TRACKS[entry['track']]['title'],
-                                         course_url='../../catalogo.html'),
+                                         course_url='../../index.html'),
                 lesson=lessons[entry['index']], nb_meta=SimpleNamespace(type=entry['kind']),
                 track_cfg={'testing': False, 'development': False, 'daily': False})
 
@@ -165,7 +165,7 @@ def normalize_notebook_links(nb, entry, entries):
             cell.source = re.sub(r'\]\(([^)]+\.html)\)',
                                  lambda m: m.group(0) if urlparse(m[1]).scheme else (
                                      '](' + CONFIG['site_url'] + 'corsi/' + known[m[1]] + ')' if m[1] in known
-                                     else '](' + CONFIG['site_url'] + 'catalogo.html)'), cell.source)
+                                     else '](' + CONFIG['site_url'] + 'index.html)'), cell.source)
 
 
 def notebook_content(nb, entry, outdir, images=None):
@@ -263,44 +263,6 @@ def derived_pages(entries, output):
                                  lambda match: '](' + CONFIG['site_url'] + match[1] + ')',
                                  cell.source)
     nbformat.write(intro, output/'notebooks/00-python-essenziale.ipynb')
-    catalog = '# Il corso completo\n\nSegui tutti i moduli di **Intro to Machine Learning** e **Intro to Deep Learning**, nello stesso ordine dei corsi Kaggle, con lezioni ed esercizi tradotti in italiano dai sorgenti disponibili.\n\nPrima di iniziare: [Python per il corso](python.html), un’introduzione alla sintassi del linguaggio per chi sa già programmare.\n\n[Inizia dalla prima lezione](corsi/machine_learning/tut1.html) · [Scarica tutti i notebook e i dataset](downloads/ai-lab-studenti.zip).\n\n'
-    for track, setting in TRACKS.items():
-        group = [entry for entry in entries if entry['track'] == track and is_core(entry)]
-        if not group:
-            continue
-        catalog += f'## {setting["title"]}\n\n'
-        if track == 'deep_learning':
-            catalog += 'Archivio del precedente corso: API datate e video esterni non tradotti. È materiale aggiuntivo, distinto da Intro to Deep Learning.\n\n'
-        catalog += '| Modulo | Lezione | Esercizio |\n| --- | --- | --- |\n'
-        for index, (title, _) in enumerate(setting['topics']):
-            subset = [entry for entry in group if entry['index'] == index]
-            if not subset:
-                continue
-            links = {}
-            for entry in subset:
-                label = 'Leggi' if entry['kind'] == 'tutorial' else 'Esercizio'
-                name = f'{entry["track"]}-{entry["stem"]}.ipynb'
-                links[entry['kind']] = f'[{label}]({entry["page"]}) · [Colab]({launch_url(CONFIG, name)})'
-                if CONFIG.get('_development'):
-                    links[entry['kind']] += f' · [Locale]({local_notebook_url(name)})'
-            catalog += f'| {index+1:02d} · {title} | {links.get("tutorial", "Non presente nei sorgenti")} | {links.get("exercise", "Non presente nei sorgenti")} |\n'
-        catalog += '\n'
-    catalog += '## Altri materiali disponibili\n\nGli ulteriori notebook recuperati dalla fork, i materiali storici e le attività originali AI Lab sono conservati nella sezione [Materiali aggiuntivi](aggiuntivi.html).\n\n[Inventario con hash e metadati](inventory.json) · [Ambienti e dataset](esecuzione.html) · [Licenze](attribuzioni.html).\n'
-    pages['catalogo.html'] = ('Il corso completo', render_markdown(catalog), 'school')
-    exercises = '# Esercitazioni in Colab\n\nApri un esercizio, salva una copia nel tuo Drive ed esegui la cella **Preparazione in Colab** prima di iniziare. I dataset vengono caricati automaticamente.\n\n'
-    for track in ('machine_learning', 'deep_learning_intro'):
-        exercises += f'## {TRACKS[track]["title"]}\n\n'
-        for entry in entries:
-            if entry['track'] != track or entry['kind'] != 'exercise' or not is_core(entry):
-                continue
-            name = f'{entry["track"]}-{entry["stem"]}.ipynb'
-            exercises += f'- **{entry["index"]+1}. {entry["title"]}** — [Apri in Colab]({launch_url(CONFIG, name)}) · [Lezione ed esercizio]({entry["page"]})'
-            if CONFIG.get('_development'):
-                exercises += f' · [Apri il notebook locale]({local_notebook_url(name)})'
-            exercises += '\n'
-        exercises += '\n'
-    exercises += '[Istruzioni per Colab](esecuzione.html) · [Ripasso Python in Colab](' + intro_url + ').\n'
-    pages['esercitazioni.html'] = ('Esercitazioni in Colab', render_markdown(exercises), 'school')
     extras = '# Materiali aggiuntivi\n\nQuesti contenuti sono conservati per consultazione e non fanno parte dei tredici moduli dei due corsi introduttivi.\n\n'
     for track, setting in TRACKS.items():
         group = [entry for entry in entries if entry['track'] == track and not is_core(entry)]
@@ -316,7 +278,7 @@ def derived_pages(entries, output):
     execution_path = LAB/'reports/execution.json'
     report = json.loads(execution_path.read_text()) if execution_path.exists() else {'results': []}
     states = {record['notebook']:record for record in report['results']}
-    lab_text = '# Notebook e laboratori\n\nI notebook seguenti sono attività originali AI Lab, aggiuntive rispetto ai corsi Kaggle. Contengono esempi completi e attività da svolgere modificando il codice.\n\nPer i notebook dei corsi Kaggle consulta il [programma completo](catalogo.html); per l’installazione e i dati, la [guida all’esecuzione](esecuzione.html).\n\n'
+    lab_text = '# Notebook e laboratori\n\nI notebook seguenti sono attività originali AI Lab, aggiuntive rispetto ai corsi Kaggle. Contengono esempi completi e attività da svolgere modificando il codice.\n\nPer i notebook dei corsi Kaggle usa il menu delle lezioni; per l’installazione e i dati, la [guida all’esecuzione](esecuzione.html).\n\n'
     lab_text += '| Notebook | Dipendenze per i calcoli | Verifica disponibile |\n| --- | --- | --- |\n'
     for path in sorted((LAB/'notebooks').glob('*.ipynb')):
         if path.name == '00-python-essenziale.ipynb':
@@ -453,6 +415,8 @@ def build(output, development=False):
     if referenced_images != set(course_images):
         raise ValueError(f'Image archive mismatch: {referenced_images ^ set(course_images)}')
     for source in (LAB/'content/school').glob('*.md'):
+        if source.name == 'dataset.md':
+            continue  # Maintenance instructions remain in the repository.
         text = source.read_text()
         title = text.splitlines()[0].removeprefix('# ')
         pages[source.stem+'.html'] = (title, render_markdown(text), 'school')
@@ -467,7 +431,8 @@ def build(output, development=False):
         dest = output/page
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(shell(page, title, body, section, entries, css_versions))
-    index = [{'title':title, 'url':page, 'text':re.sub('<[^>]+>', ' ', body)} for page,(title,body,_) in pages.items()]
+    index = [{'title':title, 'url':page, 'text':re.sub('<[^>]+>', ' ', body)}
+             for page,(title,body,_) in pages.items()]
     (output/'search.json').write_text(json.dumps(index, ensure_ascii=False))
     (output/'downloads').mkdir(exist_ok=True)
     packaged_data = []
@@ -531,7 +496,7 @@ def shell(page, title, body, section, entries, css_versions):
     body = re.sub(r'(<a\b[^>]*\bhref="https://colab\.research\.google\.com/[^"]*")',
                   r'\1 target="_blank" rel="noopener noreferrer"', body)
     nav = ''
-    for key,label in [('index.html','Panoramica'),('python.html','Python per il corso'),('catalogo.html','Programma completo'),('esercitazioni.html','Esercitazioni in Colab'),('dataset.html','Dataset originali'),('esecuzione.html','Come eseguire Python'),('aggiuntivi.html','Materiali aggiuntivi'),('attribuzioni.html','Fonti e licenze')]:
+    for key,label in [('index.html','Introduzione'),('python.html','Python per il corso')]:
         nav += f'<a {"aria-current=page" if key==page else ""} href="{rel(key)}">{label}</a>'
     for track, setting in TRACKS.items():
         group = [e for e in entries if e['track'] == track and is_core(e)]
@@ -542,6 +507,7 @@ def shell(page, title, body, section, entries, css_versions):
             name = ('↳ Esercizio' if entry['kind']=='exercise' else entry['title'])
             nav += f'<a {"aria-current=page" if page==entry["page"] else ""} href="{rel(entry["page"])}">{entry["index"]+1:02d} · {name}</a>'
         nav += '</details>'
+    nav += f'<a {"aria-current=page" if page=="aggiuntivi.html" else ""} href="{rel("aggiuntivi.html")}">Materiali aggiuntivi</a>'
     core_pages = ['python.html'] + [e['page'] for e in entries if is_core(e)]
     ordered = core_pages if page in core_pages else [
         e['page'] for e in entries if e['track'] == section and not is_core(e)]

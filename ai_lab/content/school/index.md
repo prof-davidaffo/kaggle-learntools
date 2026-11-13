@@ -1,42 +1,44 @@
-# Introduzione al Machine Learning e al Deep Learning
+# Introduzione
 
 Questo sito propone la **traduzione italiana e la riorganizzazione didattica dei corsi originali di Kaggle Learn**, [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning) e [Intro to Deep Learning](https://www.kaggle.com/learn/intro-to-deep-learning), dedicati al machine learning e al deep learning con Python.
 
-La traduzione conserva integralmente i contenuti dei notebook originali. La riorganizzazione riguarda la presentazione nel sito, la navigazione e l’accesso a lezioni, esercizi e notebook. Il ripasso Python e i laboratori aggiuntivi sono materiali originali AI Lab, identificati separatamente.
-
 Il sito è curato dal progetto scolastico indipendente **AI Lab** e non è un’edizione ufficiale Kaggle. [Autori, fonti e licenze](attribuzioni.html).
 
-Sono richieste conoscenze di base di programmazione, anche in un linguaggio diverso da Python.
+## Percorso
 
-## Prima di iniziare
+Il corso presuppone conoscenze di base di programmazione. Segui i materiali in questo ordine:
 
-[Python per il corso](python.html) introduce la sintassi e le caratteristiche di Python usate nel corso. È pensato per chi conosce già la programmazione imperativa e incontra Python per la prima volta; comprende esempi ed esercizi con soluzione.
+1. Se non conosci Python, inizia con [Python per il corso](python.html).
+2. Segui [Introduzione al Machine Learning](corsi/machine_learning/tut1.html), completando lezioni ed esercizi.
+3. Dopo aver completato il primo corso, prosegui con [Introduzione al Deep Learning](corsi/deep_learning_intro/tut1.html).
 
-## Intro to Machine Learning
+## Programma
 
-1. Come funzionano i modelli
-2. Esplorazione dei dati
-3. Il primo modello
-4. Validazione
-5. Underfitting e overfitting
-6. Random forest
-7. Competizioni di Machine Learning
+Prima completa **Introduzione al Machine Learning**, poi passa a **Introduzione al Deep Learning**. Le tabelle riassumono tutti i moduli dei due corsi nell’ordine previsto.
 
-[Inizia Machine Learning](corsi/machine_learning/tut1.html).
+### 1. Introduzione al Machine Learning
 
-## Intro to Deep Learning
+| Modulo | Argomenti principali | Esercizio |
+| --- | --- | --- |
+| [1. Come funzionano i modelli](corsi/machine_learning/tut1.html) | Alberi decisionali, addestramento e previsioni | — |
+| [2. Esplorare i dati](corsi/machine_learning/tut2.html) | Caricare e descrivere i dati con pandas | [Esercizio 2](corsi/machine_learning/ex2.html) |
+| [3. Il primo modello](corsi/machine_learning/tut3.html) | Feature, target e albero decisionale | [Esercizio 3](corsi/machine_learning/ex3.html) |
+| [4. Validazione](corsi/machine_learning/tut4.html) | Dati di validazione ed errore assoluto medio | [Esercizio 4](corsi/machine_learning/ex4.html) |
+| [5. Underfitting e overfitting](corsi/machine_learning/tut5.html) | Complessità del modello e confronto sulla validazione | [Esercizio 5](corsi/machine_learning/ex5.html) |
+| [6. Random forest](corsi/machine_learning/tut6.html) | Combinare più alberi per migliorare le previsioni | [Esercizio 6](corsi/machine_learning/ex6.html) |
+| [7. Competizioni di Machine Learning](corsi/machine_learning/tut7.html) | Preparare le previsioni per una competizione | [Esercizio 7](corsi/machine_learning/ex7.html) |
 
-1. Un singolo neurone
-2. Reti neurali profonde
-3. Discesa stocastica del gradiente
-4. Underfitting e overfitting
-5. Dropout e batch normalization
-6. Classificazione binaria
+### 2. Introduzione al Deep Learning
 
-[Inizia Deep Learning](corsi/deep_learning_intro/tut1.html).
+| Modulo | Argomenti principali | Esercizio |
+| --- | --- | --- |
+| [1. Un singolo neurone](corsi/deep_learning_intro/tut1.html) | Unità lineari, pesi, bias e Keras | [Esercizio 1](corsi/deep_learning_intro/ex1.html) |
+| [2. Reti neurali profonde](corsi/deep_learning_intro/tut2.html) | Strati dense e funzioni di attivazione | [Esercizio 2](corsi/deep_learning_intro/ex2.html) |
+| [3. Discesa stocastica del gradiente](corsi/deep_learning_intro/tut3.html) | Funzioni di perdita, ottimizzatori e addestramento | [Esercizio 3](corsi/deep_learning_intro/ex3.html) |
+| [4. Underfitting e overfitting](corsi/deep_learning_intro/tut4.html) | Capacità, curve di apprendimento ed early stopping | [Esercizio 4](corsi/deep_learning_intro/ex4.html) |
+| [5. Dropout e batch normalization](corsi/deep_learning_intro/tut5.html) | Controllare l’overfitting e facilitare l’addestramento | [Esercizio 5](corsi/deep_learning_intro/ex5.html) |
+| [6. Classificazione binaria](corsi/deep_learning_intro/tut6.html) | Probabilità, sigmoid e cross-entropy | [Esercizio 6](corsi/deep_learning_intro/ex6.html) |
 
-## Notebook ed esercizi
+## Come lavorare
 
-[Apri le esercitazioni in Colab](esercitazioni.html). Ogni notebook contiene una cella iniziale per caricare i dataset e i controlli degli esercizi.
-
-[Programma con lezioni ed esercizi](catalogo.html) · [Scarica notebook e dataset](downloads/ai-lab-studenti.zip) · [Istruzioni per Jupyter](esecuzione.html).
+Ogni lezione ed esercizio permette di aprire il notebook in Colab o scaricarlo. Per Colab i dataset vengono preparati nella prima cella; nel pacchetto per l’uso locale sono già inclusi. Consulta le [istruzioni per l’esecuzione](esecuzione.html) quando ti servono.

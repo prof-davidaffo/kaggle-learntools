@@ -85,11 +85,11 @@ def check(directory):
     for track, count in [('machine_learning', 7), ('deep_learning_intro', 6)]:
         topics = {entry['index'] for entry in core_entries if entry['track'] == track}
         if topics != set(range(count)): errors.append('Incomplete original curriculum: '+track)
-    catalog = pages.get((directory/'catalogo.html').resolve())
-    if catalog:
+    home = pages.get((directory/'index.html').resolve())
+    if home:
         for entry in core_entries:
-            if entry['page'] not in catalog.links:
-                errors.append('Original curriculum missing catalog link: '+entry['page'])
+            if entry['page'] not in home.links:
+                errors.append('Original curriculum missing navigation link: '+entry['page'])
     for path, document in pages.items():
         if any('percorso.html' in link or 'incontro-' in link for link in document.links):
             errors.append(f'{path}: obsolete school schedule link')

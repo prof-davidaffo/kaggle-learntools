@@ -10,7 +10,7 @@ Il [capitolo Python](python.html) è subito eseguibile: salva una copia e cominc
 
 Per le lezioni e gli esercizi di Machine Learning e Deep Learning:
 
-1. Apri le [esercitazioni](esercitazioni.html) e scegli **Apri in Colab**. Lo stesso pulsante è presente nelle lezioni e nel [capitolo Python](python.html).
+1. Apri la lezione o l’esercizio dal menu e scegli **Apri in Colab**. Il pulsante è presente anche nel [capitolo Python](python.html).
 2. Accedi con il tuo account Google e salva una copia del notebook nel tuo Drive, così conservi le modifiche.
 3. Esegui la cella **Preparazione in Colab** con **Maiusc + Invio** e attendi il messaggio «Preparazione completata».
 4. Esegui le altre celle dall'alto verso il basso. Negli esercizi sostituisci i segnaposto `____` con il tuo codice.
@@ -21,6 +21,8 @@ La preparazione carica i CSV e il codice dei controlli dal repository del corso.
 Se Colab interrompe o riavvia la sessione, variabili, dati e librerie della sessione vanno preparati di nuovo: riesegui la cella iniziale e quelle precedenti. La copia nel Drive conserva il codice salvato. Le risorse gratuite hanno limiti variabili: [documentazione Colab](https://research.google.com/colaboratory/faq.html).
 
 ## Jupyter sul computer
+
+Il pacchetto include i nove CSV originali necessari alle lezioni: Melbourne, Iowa e DL Course Data. Non occorre scaricarli nuovamente.
 
 Puoi anche scaricare il [pacchetto studenti](downloads/ai-lab-studenti.zip), che contiene notebook, CSV e controlli, ed estrarlo mantenendo la struttura delle cartelle.
 
@@ -45,4 +47,4 @@ I pulsanti Colab coprono il capitolo Python e i due corsi introduttivi completi.
 
 I progetti e i laboratori aggiuntivi indicano le proprie dipendenze. Per quelli moderni puoi usare un ambiente separato con `ai_lab/requirements/lab.txt` e, se richiesto, `ai_lab/requirements/deep-learning.txt`.
 
-[Dataset](dataset.html) · [Verifiche tecniche](verifiche.html).
+[Verifiche tecniche](verifiche.html).

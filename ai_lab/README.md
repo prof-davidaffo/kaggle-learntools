@@ -83,7 +83,7 @@ Il generatore usa Python-Markdown, Pygments e il preprocessor originale di nbcon
 
 ## Dataset originali e notebook Kaggle
 
-La guida pubblicata si trova in `content/school/dataset.md`. Per i moduli principali servono Melbourne, Iowa e DL Course Data. Gli script `setup_data.sh` originali confermano queste sorgenti.
+Le istruzioni per usare i dati si trovano nella guida all’esecuzione; `content/school/dataset.md` conserva i dettagli per la manutenzione. Per i moduli principali servono Melbourne, Iowa e DL Course Data. Gli script `setup_data.sh` originali confermano queste sorgenti.
 
 Con CLI Kaggle configurata e regole delle competizioni accettate:
 
@@ -126,7 +126,7 @@ Dopo la build puoi distribuire `ai_lab/build/downloads/ai-lab-studenti.zip`: con
 
 ## Google Colab
 
-Per gli studenti l’ambiente principale è Colab: dalla pagina **Esercitazioni in Colab** o da una lezione aprono il notebook, salvano una copia nel proprio Drive ed eseguono la preparazione. Non sono richieste installazioni locali o credenziali Kaggle.
+Per gli studenti l’ambiente principale è Colab: dalla pagina della lezione o dell’esercizio aprono il notebook, salvano una copia nel proprio Drive ed eseguono la preparazione. Non sono richieste installazioni locali o credenziali Kaggle.
 
 La build genera `colab/*.ipynb` e `colab/runtime.json`, che vanno **versionati e inviati su GitHub**. La duplicazione dei notebook distribuiti serve ai link Colab basati su file GitHub: non modificare queste copie manualmente. Cambia i sorgenti, rigenera e includi anche `ai_lab/colab` nel commit. La CI segnala copie obsolete.
 

@@ -8,7 +8,7 @@ Riutilizza il dataset **Home Data for ML Course** e le sette feature degli eserc
 
 ## Dati e notebook
 
-[Prepara i dati Iowa](dataset.html), poi [scarica il notebook del progetto](notebooks/progetto-iowa.ipynb). Il CSV è quello originale della competizione, non una simulazione. Account, accesso e condizioni della competizione vanno rispettati; il sito non ridistribuisce il dataset.
+[Prepara i dati Iowa](esecuzione.html), poi [scarica il notebook del progetto](notebooks/progetto-iowa.ipynb). Il CSV è quello originale della competizione, non una simulazione. Il dataset è incluso nel pacchetto studenti; per partecipare alla competizione occorre rispettarne le condizioni.
 
 ## Addestramento
 
