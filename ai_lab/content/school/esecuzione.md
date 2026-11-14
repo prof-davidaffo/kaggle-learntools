@@ -22,6 +22,10 @@ Se Colab interrompe o riavvia la sessione, variabili, dati e librerie della sess
 
 ## Jupyter sul computer
 
+Per usare il pulsante **Apri il notebook locale**, dalla copia del repository esegui `./build.sh` e poi `./jupyter-start.sh`. Lascia Jupyter attivo sulla porta 8888: il pulsante apre una copia del notebook in JupyterLab. La prima esecuzione installa le dipendenze e richiede una connessione Internet.
+
+In alternativa, puoi configurare Jupyter manualmente seguendo le istruzioni qui sotto.
+
 Il pacchetto include i nove CSV originali necessari alle lezioni: Melbourne, Iowa e DL Course Data. Non occorre scaricarli nuovamente.
 
 Puoi anche scaricare il [pacchetto studenti](downloads/ai-lab-studenti.zip), che contiene notebook, CSV e controlli, ed estrarlo mantenendo la struttura delle cartelle.

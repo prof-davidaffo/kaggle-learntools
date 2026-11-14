@@ -362,7 +362,7 @@ Finora hai caricato ed esaminato i dati con il codice seguente. Esegui questa ce
 # Esercizi
 
 ## Passo 1: specificare il target della previsione
-Seleziona la variabile target, che corrisponde al prezzo di vendita. Salvala in una nuova variabile chiamata `y`. Per trovare il nome della colonna necessaria dovrai stampare l’elenco delle colonne.
+Seleziona la variabile target, che corrisponde al prezzo di vendita (`SalePrice`). Salvala in una nuova variabile chiamata `y`. Puoi stampare l’elenco delle colonne per individuare il target nel dataset.
 @@ ex3:7
 ## Passo 2: creare X
 Ora creerai un DataFrame chiamato `X` contenente le feature predittive.
@@ -378,6 +378,8 @@ Usa soltanto le colonne seguenti. Puoi copiare e incollare l’intero elenco per
 - FullBath
 - BedroomAbvGr
 - TotRmsAbvGrd
+
+**Nota AI Lab — nomi dei dati:** superficie del lotto (`LotArea`), anno di costruzione (`YearBuilt`), superficie del primo piano (`1stFlrSF`) e del secondo piano (`2ndFlrSF`), bagni completi (`FullBath`), camere da letto fuori terra (`BedroomAbvGr`) e stanze totali fuori terra, esclusi i bagni (`TotRmsAbvGrd`). Le superfici sono espresse in piedi quadrati.
 
 Dopo aver creato la lista delle feature, usala per costruire il DataFrame con cui addestrerai il modello.
 @@ ex3:11
@@ -531,6 +533,8 @@ Alcune feature genereranno errori per problemi come valori mancanti o tipi di da
 - 'MiscVal'
 - 'MoSold'
 - 'YrSold'
+
+**Nota AI Lab — significato delle colonne:** classe dell’edificio (`MSSubClass`); superficie del lotto (`LotArea`); qualità complessiva (`OverallQual`); stato complessivo (`OverallCond`); anno di costruzione (`YearBuilt`); anno di ristrutturazione o ampliamento (`YearRemodAdd`); superficie del primo piano (`1stFlrSF`), del secondo piano (`2ndFlrSF`), delle finiture di bassa qualità (`LowQualFinSF`) e abitabile fuori terra (`GrLivArea`); bagni completi (`FullBath`) e mezzi bagni (`HalfBath`); camere da letto (`BedroomAbvGr`), cucine (`KitchenAbvGr`) e stanze totali esclusi i bagni (`TotRmsAbvGrd`) fuori terra; camini (`Fireplaces`); superficie della terrazza in legno (`WoodDeckSF`), del portico aperto (`OpenPorchSF`), chiuso (`EnclosedPorch`), per tre stagioni (`3SsnPorch`) e con zanzariere (`ScreenPorch`); superficie della piscina (`PoolArea`); valore delle altre dotazioni (`MiscVal`); mese (`MoSold`) e anno di vendita (`YrSold`). Le superfici sono in piedi quadrati.
 
 Osserva l’elenco e rifletti su ciò che potrebbe influenzare i prezzi delle case. Per conoscere meglio ogni feature, consulta la descrizione dei dati nella **[pagina della competizione](https://www.kaggle.com/c/home-data-for-ml-course/data)**.
 

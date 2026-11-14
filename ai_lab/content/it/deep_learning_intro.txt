@@ -235,7 +235,7 @@ Nota che possiamo specificare perdita e ottimizzatore usando soltanto una string
 
 Ora sappiamo tutto ciò che serve per iniziare ad addestrare modelli di deep learning. Vediamolo in azione! Useremo il dataset *Red Wine Quality*.
 
-Questo dataset contiene misure fisico-chimiche relative a circa 1.600 vini rossi portoghesi. Per ogni vino è inclusa anche una valutazione della qualità ottenuta da degustazioni alla cieca. Quanto bene possiamo prevedere la qualità percepita di un vino a partire da queste misure?
+Questo dataset contiene misure fisico-chimiche relative a circa 1.600 vini rossi portoghesi. Per ogni vino è inclusa anche una valutazione della qualità (`quality`) ottenuta da degustazioni alla cieca. Quanto bene possiamo prevedere la qualità percepita di un vino a partire da queste misure?
 
 Abbiamo raccolto tutta la preparazione dei dati nella prossima cella nascosta. Non è essenziale per ciò che segue, quindi puoi saltarla. Per ora, però, nota che abbiamo riscalato ogni feature nell’intervallo $[0, 1]$. Come approfondiremo nella lezione 5, le reti neurali tendono a funzionare meglio quando gli ingressi hanno una scala comune.
 @@ tut3:3
@@ -543,7 +543,7 @@ Nella lezione abbiamo conosciuto gli elementi costitutivi delle reti neurali: le
 
 Prima di iniziare, esegui la cella seguente per preparare tutto.
 @@ ex1:2
-Il dataset *Red Wine Quality* contiene misure fisico-chimiche di circa 1.600 vini rossi portoghesi. Per ogni vino è inclusa anche una valutazione della qualità ottenuta da degustazioni alla cieca.
+Il dataset *Red Wine Quality* contiene misure fisico-chimiche di circa 1.600 vini rossi portoghesi. Per ogni vino è inclusa anche una valutazione della qualità (`quality`) ottenuta da degustazioni alla cieca.
 
 Per prima cosa, esegui la prossima cella per visualizzare le prime righe del dataset.
 @@ ex1:4
@@ -583,7 +583,7 @@ Nella lezione abbiamo visto come costruire reti profonde sovrapponendo strati in
 
 In questi esercizi costruirai una rete con più strati nascosti e poi esplorerai alcune funzioni di attivazione oltre alla ReLU. Esegui la prossima cella per preparare tutto!
 @@ ex2:2
-Nel dataset *Concrete*, il compito è prevedere la resistenza alla compressione del calcestruzzo prodotto secondo varie ricette.
+Nel dataset *Concrete*, il compito è prevedere la resistenza alla compressione (`CompressiveStrength`) del calcestruzzo prodotto secondo varie ricette.
 
 Esegui la prossima cella senza modifiche per caricare il dataset.
 @@ ex2:4
@@ -628,7 +628,7 @@ In questo esercizio addestrerai una rete neurale sul dataset *Fuel Economy* e po
 
 Quando sei pronto, esegui la prossima cella per preparare tutto!
 @@ ex3:2
-Nel dataset *Fuel Economy*, il compito è prevedere l’efficienza nei consumi di un’automobile a partire da feature come il tipo di motore o l’anno di produzione.
+Nel dataset *Fuel Economy*, il compito è prevedere l’efficienza nei consumi (`FE`) di un’automobile a partire da caratteristiche del veicolo, come il tipo di motore o l’anno di produzione. Nel CSV disponibile compaiono, per esempio, cilindrata (`EngDispl`) e numero di cilindri (`NumCyl`); non è presente una colonna per l’anno.
 
 Per prima cosa, carica il dataset eseguendo la cella seguente.
 @@ ex3:4
@@ -685,7 +685,7 @@ In questo esercizio imparerai a migliorare i risultati dell’addestramento incl
 
 Quando sei pronto, esegui la prossima cella per preparare tutto!
 @@ ex4:2
-Per prima cosa carica il dataset *Spotify*. Il tuo compito sarà prevedere la popolarità di una canzone sulla base di varie caratteristiche audio, come `'tempo'`, `'danceability'` e `'mode'`.
+Per prima cosa carica il dataset *Spotify*. Il tuo compito sarà prevedere la popolarità di una canzone (`track_popularity`) sulla base di varie caratteristiche audio, come il tempo (`tempo`), la ballabilità (`danceability`) e il modo musicale (`mode`).
 @@ ex4:4
 Cominciamo dalla rete più semplice, un modello lineare. Questo modello ha una capacità ridotta.
 
@@ -763,7 +763,7 @@ L’aggiunta della batch normalization è stata utile?
 @@ ex6:0
 # Introduzione
 
-In questo esercizio costruirai un classificatore binario per prevedere le cancellazioni delle prenotazioni alberghiere.
+In questo esercizio costruirai un classificatore binario per prevedere le cancellazioni delle prenotazioni alberghiere (`is_canceled`).
 @@ ex6:2
 Per prima cosa carica il dataset *Hotel Cancellations*.
 @@ ex6:4

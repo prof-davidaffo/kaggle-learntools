@@ -241,9 +241,7 @@ def local_notebook_url(filename):
 
 
 def local_notebook_button(filename):
-    if not CONFIG.get('_development'):
-        return ''
-    return f'<a class="button secondary" href="{local_notebook_url(filename)}">Apri il notebook locale</a>'
+    return f'<a class="button secondary" href="{local_notebook_url(filename)}" target="_blank" rel="noopener noreferrer" title="Richiede Jupyter avviato sul tuo computer">Apri il notebook locale</a>'
 
 
 def derived_pages(entries, output):
@@ -252,9 +250,10 @@ def derived_pages(entries, output):
     translate_notebook(intro)
     intro_url = launch_url(CONFIG, '00-python-essenziale.ipynb')
     intro_html = f'<div class="actions"><a class="button" href="{intro_url}">Apri in Colab</a>{local_notebook_button("00-python-essenziale.ipynb")}<a class="button secondary" download href="notebooks/00-python-essenziale.ipynb">Scarica notebook</a></div>'
+    intro_html += ('<p>Per aprire il notebook locale occorre avviare Jupyter sul proprio computer: '
+                   '<a href="esecuzione.html">istruzioni per Jupyter</a>.</p>')
     if CONFIG.get('_development'):
-        intro_html += ('<p>Anteprima locale: il pulsante Colab apre la versione pubblicata su GitHub. '
-                       'Avvia Jupyter con <code>./jupyter-start.sh</code> per aprire i notebook locali.</p>')
+        intro_html += '<p>Anteprima locale: il pulsante Colab apre la versione pubblicata su GitHub.</p>'
     intro_html += notebook_content(intro, {'track': 'python', 'stem': 'intro'}, output)
     pages['python.html'] = ('Python per il corso', intro_html, 'school')
     for cell in intro.cells:
@@ -392,6 +391,7 @@ def build(output, development=False):
             name = entry['track']+'-'+entry['stem']+'.ipynb'
             colab_button = f'<a class="button" href="{launch_url(CONFIG, name)}">Apri in Colab</a>' if is_core(entry) else ''
             content = f'<div class="actions">{colab_button}{local_notebook_button(name)}<a class="button secondary" download href="../../notebooks/{name}">Scarica notebook</a><a class="button secondary" href="../../esecuzione.html">Come eseguirlo</a></div>'
+            content += '<p>Per aprire il notebook locale occorre avviare Jupyter sul proprio computer: <a href="../../esecuzione.html">istruzioni per Jupyter</a>.</p>'
             content += notebook_content(nb, entry, output, course_images)
             # Source links within the translated lesson remain in their original positions.
             source_relative = str(entry['source'].relative_to(ROOT))
@@ -542,7 +542,7 @@ def shell(page, title, body, section, entries, css_versions):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, default=LAB/'build')
-    parser.add_argument('--dev', action='store_true', help='Add links for the local development environment')
+    parser.add_argument('--dev', action='store_true', help='Show local development information')
     args = parser.parse_args()
     destination = args.output.resolve()
     if destination in (ROOT, LAB) or ROOT.is_relative_to(destination):

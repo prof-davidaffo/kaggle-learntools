@@ -8,7 +8,7 @@ case "${1:-}" in
     --dev) build_mode=(--dev) ;;
     --help|-h)
         echo 'Uso: ./build.sh [--dev]'
-        echo '--dev aggiunge il collegamento al notebook Jupyter locale.'
+        echo '--dev aggiunge informazioni per l’anteprima locale.'
         echo "Per scegliere l'interprete: PYTHON=python3.12 ./build.sh"
         exit 0 ;;
     *) echo 'Uso: ./build.sh [--dev]' >&2; exit 1 ;;

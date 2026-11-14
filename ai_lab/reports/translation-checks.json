@@ -170,8 +170,8 @@
       "track": "machine_learning",
       "cell": "ex3:7",
       "source_words": 104,
-      "translation_words": 90,
-      "word_ratio": 0.865,
+      "translation_words": 140,
+      "word_ratio": 1.346,
       "errors": []
     },
     {
@@ -498,8 +498,8 @@
       "track": "machine_learning",
       "cell": "ex7:13",
       "source_words": 345,
-      "translation_words": 310,
-      "word_ratio": 0.899,
+      "translation_words": 426,
+      "word_ratio": 1.235,
       "errors": []
     },
     {
@@ -842,8 +842,8 @@
       "track": "deep_learning_intro",
       "cell": "ex1:2",
       "source_words": 41,
-      "translation_words": 43,
-      "word_ratio": 1.049,
+      "translation_words": 44,
+      "word_ratio": 1.073,
       "errors": []
     },
     {
@@ -930,8 +930,8 @@
       "track": "deep_learning_intro",
       "cell": "ex2:2",
       "source_words": 30,
-      "translation_words": 27,
-      "word_ratio": 0.9,
+      "translation_words": 28,
+      "word_ratio": 0.933,
       "errors": []
     },
     {
@@ -986,8 +986,8 @@
       "track": "deep_learning_intro",
       "cell": "tut3:1",
       "source_words": 134,
-      "translation_words": 122,
-      "word_ratio": 0.91,
+      "translation_words": 123,
+      "word_ratio": 0.918,
       "errors": []
     },
     {
@@ -1058,8 +1058,8 @@
       "track": "deep_learning_intro",
       "cell": "ex3:2",
       "source_words": 38,
-      "translation_words": 36,
-      "word_ratio": 0.947,
+      "translation_words": 59,
+      "word_ratio": 1.553,
       "errors": []
     },
     {
@@ -1186,8 +1186,8 @@
       "track": "deep_learning_intro",
       "cell": "ex4:2",
       "source_words": 26,
-      "translation_words": 28,
-      "word_ratio": 1.077,
+      "translation_words": 36,
+      "word_ratio": 1.385,
       "errors": []
     },
     {
@@ -1434,8 +1434,8 @@
       "track": "deep_learning_intro",
       "cell": "ex6:0",
       "source_words": 18,
-      "translation_words": 16,
-      "word_ratio": 0.889,
+      "translation_words": 17,
+      "word_ratio": 0.944,
       "errors": []
     },
     {
