@@ -7,7 +7,7 @@ venv_python="$venv_dir/bin/python"
 requirements="$project_dir/ai_lab/requirements/jupyter.txt"
 
 if [[ ! -f "$project_dir/ai_lab/build/notebooks/00-python-essenziale.ipynb" ]]; then
-    echo 'Notebook non presente. Esegui prima ./build.sh --dev.' >&2
+    echo 'Notebook non presente. Esegui prima ./build.sh.' >&2
     exit 1
 fi
 
@@ -24,6 +24,7 @@ fi
 
 echo 'Preparazione dipendenze Jupyter e dei notebook…'
 "$venv_python" -m pip install -r "$requirements"
+
 
 if "$venv_python" -c 'import sys; sys.exit(sys.version_info >= (3, 14))'; then
     echo 'Preparazione TensorFlow per il deep learning…'
