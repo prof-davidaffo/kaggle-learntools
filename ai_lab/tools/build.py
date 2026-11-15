@@ -28,7 +28,7 @@ from feedback import translations as feedback_translations
 from code_translation import translate_notebook
 from colab import generate as generate_colab, launch_url
 from translation_checks import audit_cell
-from course_images import load_images, replace_images, URL_PATTERN
+from course_images import load_images, replace_images, attach_images, URL_PATTERN
 
 ROOT = Path(__file__).resolve().parents[2]
 LAB = ROOT / 'ai_lab'
@@ -403,9 +403,7 @@ def build(output, development=False):
                     cell.outputs=[]
                     cell.execution_count=None
                 elif cell.cell_type == 'markdown':
-                    # Data URIs work in both the standalone notebook and Colab,
-                    # including original HTML <img> figures and animated GIFs.
-                    cell.source = replace_images(cell.source, course_images, notebook=True)
+                    attach_images(cell, course_images)
             nbformat.validate(nb)
             nbformat.write(nb, output/'notebooks'/name)
             pages[entry['page']] = (label, content, entry['track'])

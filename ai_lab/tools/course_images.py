@@ -38,3 +38,18 @@ def replace_images(source, images, *, notebook=False):
             raise ValueError(f'Image missing from local archive: {url}')
         return images[url]['data_uri'] if notebook else '../../assets/kaggle-images/' + images[url]['file']
     return URL_PATTERN.sub(replace, source)
+
+
+def attach_images(cell, images):
+    """Keep image data out of the editable Markdown while embedding it."""
+    def replace(match):
+        url = match.group()
+        if url not in images:
+            raise ValueError(f'Image missing from local archive: {url}')
+        item = images[url]
+        mime, data = item['data_uri'][5:].split(';base64,', 1)
+        if 'attachments' not in cell:
+            cell['attachments'] = {}
+        cell['attachments'][item['file']] = {mime: data}
+        return 'attachment:' + item['file']
+    cell.source = URL_PATTERN.sub(replace, cell.source)

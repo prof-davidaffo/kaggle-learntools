@@ -111,7 +111,10 @@ def check(directory):
                 continue
             for url in URL_PATTERN.findall(source):
                 cell = cells.get('cell-'+index)
-                if cell is None or image_archive[url]['data_uri'] not in cell.source:
+                item = image_archive[url]
+                mime, data = item['data_uri'][5:].split(';base64,', 1)
+                if (cell is None or 'attachment:' + item['file'] not in cell.source
+                        or cell.get('attachments', {}).get(item['file'], {}).get(mime) != data):
                     errors.append(f'{notebook_name} cell {index}: missing embedded image {url}')
     colab_names = {'00-python-essenziale.ipynb'} | {
         f'{entry["track"]}-{entry["stem"]}.ipynb' for entry in core_entries}
@@ -134,8 +137,9 @@ def check(directory):
         if local_code != colab_code: errors.append('Colab version changed lesson code: '+name)
         colab_cells = {cell.id: cell for cell in colab_notebook.cells}
         for cell in local_notebook.cells:
-            if cell.cell_type == 'markdown' and 'data:image/' in cell.source:
-                if cell.id not in colab_cells or colab_cells[cell.id].source != cell.source:
+            if cell.cell_type == 'markdown' and cell.get('attachments'):
+                if (cell.id not in colab_cells or colab_cells[cell.id].source != cell.source
+                        or colab_cells[cell.id].get('attachments') != cell.attachments):
                     errors.append(f'Colab embedded image differs: {name}/{cell.id}')
     for document in pages.values():
         for link in document.links:
