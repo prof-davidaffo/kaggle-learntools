@@ -494,7 +494,7 @@ def shell(page, title, body, section, entries, css_versions):
     body = re.sub(r'(<a\b[^>]*\bhref="https://colab\.research\.google\.com/[^"]*")',
                   r'\1 target="_blank" rel="noopener noreferrer"', body)
     nav = ''
-    for key,label in [('index.html','Introduzione'),('python.html','Python per il corso')]:
+    for key,label in [('index.html','Introduzione'),('introduzione-ia.html','Alla scoperta dell’IA'),('microsoft-intro-ml.html','Microsoft · Introduzione al ML'),('microsoft-storia-ml.html','Microsoft · Storia del ML'),('python.html','Python per il corso')]:
         nav += f'<a {"aria-current=page" if key==page else ""} href="{rel(key)}">{label}</a>'
     for track, setting in TRACKS.items():
         group = [e for e in entries if e['track'] == track and is_core(e)]
@@ -506,7 +506,7 @@ def shell(page, title, body, section, entries, css_versions):
             nav += f'<a {"aria-current=page" if page==entry["page"] else ""} href="{rel(entry["page"])}">{entry["index"]+1:02d} · {name}</a>'
         nav += '</details>'
     nav += f'<a {"aria-current=page" if page=="aggiuntivi.html" else ""} href="{rel("aggiuntivi.html")}">Materiali aggiuntivi</a>'
-    core_pages = ['python.html'] + [e['page'] for e in entries if is_core(e)]
+    core_pages = ['introduzione-ia.html', 'microsoft-intro-ml.html', 'microsoft-storia-ml.html', 'python.html'] + [e['page'] for e in entries if is_core(e)]
     ordered = core_pages if page in core_pages else [
         e['page'] for e in entries if e['track'] == section and not is_core(e)]
     pager = ''

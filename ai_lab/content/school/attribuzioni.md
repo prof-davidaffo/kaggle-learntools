@@ -12,6 +12,10 @@ I metadati originali attribuiscono il corso Machine Learning a **Dan Becker**, c
 
 Le traduzioni italiane AI Lab riportano integralmente i testi disponibili nei notebook sorgente, conservando spiegazioni, esempi, domande, figure e riferimenti nell’ordine originale. Il riferimento è la versione registrata nell’inventario. Le note sull’ambiente locale o Colab sono aggiunte separate e identificate come AI Lab. Sono tradotti anche i commenti didattici; istruzioni Python, identificatori e API restano invariati. I video esterni non sono tradotti.
 
+## Introduzione all’IA
+
+La pagina [Alla scoperta dell’IA](introduzione-ia.html) è un percorso originale AI Lab, ispirato alle lezioni introduttive di [Microsoft ML for Beginners](https://github.com/microsoft/ML-For-Beginners). La linea del tempo illustrata in inglese è di **Tomomi Imura**, tratta dalla [lezione originale sulla storia](https://github.com/microsoft/ML-For-Beginners/blob/main/1-Introduction/2-history-of-ML/README.md); e le altre due illustrazioni della stessa autrice sono riprodotte senza modifiche dal repository Microsoft, con [licenza CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), come specificato nella [cartella originale degli sketchnote](https://github.com/microsoft/ML-For-Beginners/tree/main/sketchnotes). L’infografica di Jen Looper è conservata nella lezione Microsoft, con [licenza MIT del repository](assets/intro/LICENSE-Microsoft.txt); lo schema a cerchi è originale AI Lab. Le due lezioni complete sono traduzioni adattate dal progetto Microsoft, licenza MIT; conservano l’avviso della traduzione automatica originale e le note AI Lab distinguono il nostro percorso. Le altre fonti sono collegate nella pagina e non sono riprodotte.
+
 ## Materiale originale AI Lab
 
 Programma, guide ai progetti, notebook scolastici, strumenti e interfaccia sono nuovi materiali del progetto e sono distribuiti con **Apache-2.0**, come indicato in `ai_lab/LICENSE`. I dataset sintetici sono generati dal codice originale AI Lab e non rappresentano persone, immobili o specie reali.

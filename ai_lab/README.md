@@ -5,6 +5,7 @@ Traduzione italiana e riorganizzazione didattica dei corsi originali Kaggle Lear
 ## Stato e materiali
 
 - 47 notebook sorgente recuperati: 18 ML, 13 Intro to Deep Learning e 16 del precedente corso di computer vision.
+- Sezione introduttiva «Alla scoperta dell’IA»: applicazioni, storia, dati, limiti e attività, con fonti e illustrazione originale attribuita.
 - Capitolo introduttivo «Python per il corso», per chi conosce già la programmazione imperativa: sintassi Python ed esercizi con soluzione. La pagina `python.html` viene generata dal notebook sorgente `notebooks/00-python-essenziale.ipynb`: modifica quel file per aggiornare entrambi. Nel pacchetto studenti si trova in `ai_lab/notebooks/preparazione/`.
 - Il capitolo Python usa soltanto la libreria standard, senza preparazione Colab o download di dataset. Spiega i rientri tramite il tasto Tab, sviluppa i concetti prima degli esercizi e include sei esercizi con soluzioni commentate.
 - La revisione didattica assume già noti variabili, selezione, iterazione e funzioni: insiste sulle differenze di Python (tipizzazione dinamica, riferimenti alle liste, `range`, `while` e parametri). Come confronto per la progressione è stato consultato *Hashtag*, vol. 1, di M. Boscaini, A. Montresor e M. Masetti (Hoepli, 2022), modulo F, soprattutto unità F2–F4. Testi ed esempi del capitolo sono originali; il PDF di riferimento non fa parte del sito o del pacchetto studenti.

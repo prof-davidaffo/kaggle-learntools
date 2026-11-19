@@ -8,9 +8,10 @@ Il sito è curato dal progetto scolastico indipendente **AI Lab** e non è un’
 
 Il corso presuppone conoscenze di base di programmazione. Segui i materiali in questo ordine:
 
-1. Se non conosci Python, inizia con [Python per il corso](python.html).
-2. Segui [Introduzione al Machine Learning](corsi/machine_learning/tut1.html), completando lezioni ed esercizi.
-3. Dopo aver completato il primo corso, prosegui con [Introduzione al Deep Learning](corsi/deep_learning_intro/tut1.html).
+1. Inizia con [Alla scoperta dell’IA](introduzione-ia.html): storia, idee, esempi e limiti.
+2. Se non conosci Python, continua con [Python per il corso](python.html).
+3. Segui [Introduzione al Machine Learning](corsi/machine_learning/tut1.html), completando lezioni ed esercizi.
+4. Dopo aver completato il primo corso, prosegui con [Introduzione al Deep Learning](corsi/deep_learning_intro/tut1.html).
 
 ## Programma
 
